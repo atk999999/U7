@@ -1,0 +1,1097 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#1a0c17"><title>Huyết Dự · Huyết Kim Tuyến V3 — Tụ lực vô hạn</title><style>
+:root{color-scheme:dark;--ink:#ffe9ef;--muted:#b38c9b;--accent:#ff5577}
+*{box-sizing:border-box}html{background:#09070e}body{margin:0;padding:16px 10px 30px;background:radial-gradient(ellipse at 50% -5%,#3b1729 0,#1a0c17 41%,#09070e 85%);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);min-height:100dvh}
+.wrap{max-width:890px;margin:auto}.titlebar{text-align:center;margin:0 0 15px}.eyebrow{font-size:10px;letter-spacing:.25em;font-weight:800;color:#ff839b}.titlebar h1{font-size:clamp(28px,6.3vw,44px);font-weight:900;letter-spacing:.11em;line-height:1.1;margin:5px 0 8px;background:linear-gradient(180deg,#fff5f3 0,#ffd4d8 32%,#ff7289 70%,#b22246 100%);background-clip:text;-webkit-background-clip:text;color:transparent}.subtitle{color:#bd9eac;font-size:12px;margin:0}
+.arena{position:relative;border-radius:12px;border:1px solid #6c3549;box-shadow:0 13px 36px #000a,0 0 28px #bb17401f;overflow:hidden;background:#161019}.arena canvas{display:block;width:100%;height:auto;aspect-ratio:240/135;image-rendering:pixelated}.arena .tag{position:absolute;top:10px;left:10px;background:#180b17c8;padding:4px 7px;border:1px solid #8e4562;border-radius:5px;font-size:10px;font-weight:750;letter-spacing:.07em;color:#ffc6d0}.arena .tag.right{right:10px;left:auto;border-color:#61384e;color:#d3a6b6}
+.score{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.stat{border:1px solid #543043;background:linear-gradient(150deg,#2c1424,#170e1a);border-radius:9px;padding:10px 5px;text-align:center;min-width:0}.stat small{display:block;font-size:10px;letter-spacing:.025em;color:#b993a4;margin-bottom:5px;white-space:nowrap}.stat strong{display:block;font-size:clamp(13px,2.8vw,21px);font-weight:800;font-variant-numeric:tabular-nums;color:#ffcad4}.stat strong[data-phase=ready]{color:#b3f4d3}.stat strong[data-phase=charge]{color:#fff1d5}
+.progress{margin:10px 2px 0}.progress label{display:flex;justify-content:space-between;align-items:baseline;color:#cba7b6;font-size:10px;font-weight:700;margin:0 0 5px}.track{width:100%;height:7px;background:#311722;border-radius:9px;overflow:hidden;border:1px solid #4d2637}.track>div{height:100%;width:0;transition:width .12s linear}.track .charge{background:linear-gradient(90deg,#5d1024,#bd2146,#ff6f8b,#ffcfcc)}.track .cool{background:linear-gradient(90deg,#8a2544,#f86c85)}.resource-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:11px 2px 2px}.resource-grid>div{min-width:0}.resource-grid label{display:flex;justify-content:space-between;gap:6px;font-size:10px;font-weight:750;color:#d6b0bd;margin-bottom:5px}.resource-grid label b{white-space:nowrap;color:#ff859f;font-size:10px}.track .hp{background:linear-gradient(90deg,#82182a,#d73446,#ff6f7b)}.track .mana{background:linear-gradient(90deg,#33458d,#588ef0,#91d4ff)}
+.hit-status{text-align:center;margin:8px 2px -2px;border-radius:7px;padding:5px 8px;background:#401523;border:1px solid #9f415d;color:#ffd0da;font-size:11px;font-weight:850;letter-spacing:.07em}.message{min-height:38px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:700;color:#fbdbe3;padding:8px 7px;line-height:1.5}.buttons{display:grid;grid-template-columns:1.35fr 1fr;gap:8px}button{appearance:none;border-radius:10px;min-height:51px;padding:9px 8px;font:800 clamp(11px,2.55vw,14px) system-ui;color:#ffe9ef;border:1px solid #794155;background:linear-gradient(155deg,#3c1c31,#251222);cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}button:active{filter:brightness(1.18);transform:translateY(1px)}button:disabled{opacity:.65;cursor:default}button.primary{background:linear-gradient(130deg,#e14b70,#971935 65%,#71102a);border-color:#ff97ad;color:#fff4f7;box-shadow:0 4px 20px #c7224a26}.secondary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.secondary button{min-height:39px;font-size:11px;background:#271623;border-color:#563147}.description{background:#190f1b;border:1px solid #463041;border-radius:10px;margin-top:12px;padding:12px;color:#baa1ae;font-size:12px;line-height:1.75}.description strong{color:#ffd4dc}.description p{margin:0 0 6px}.description p:last-child{margin-bottom:0}.credits{text-align:center;font-size:10px;color:#98788a;margin:12px auto 0}.error{margin-top:8px;border-radius:8px;border:1px solid #d96b7d;background:#641f35;color:#ffe9ed;padding:10px;font-size:12px}
+@media(max-width:540px){body{padding:10px 6px 26px}.score{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.stat{padding:8px 3px}.stat strong{font-size:18px}.buttons{grid-template-columns:1fr}.buttons button.primary{min-height:55px}.secondary{grid-template-columns:1fr 1fr}.arena .tag{font-size:8px}.titlebar{margin-bottom:10px}}
+</style>
+<!-- Bundled portions of PixelFX core (Painter/color/math/font).
+MIT License
+
+Copyright (c) 2026 Patch
+Copyright (c) 2026 Hugo Duprez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-->
+</head><body><main class="wrap"><header class="titlebar"><div class="eyebrow">HUYẾT DỰ · HUYẾT PHÁP · SKILL 02</div><h1>HUYẾT KIM TUYẾN</h1><p class="subtitle">Huyết khí đổi lấy sát chiêu · Tụ lực vô hạn · Xuyên huyết bạo · Hồi chiêu 8 giây</p></header>
+<section class="arena"><canvas id="scene" width="240" height="135" aria-label="Bản thử kỹ năng Huyết Kim Tuyến được vẽ bằng PixelFX"></canvas><div class="tag">PIXELFX · HUYẾT QUANG</div><div class="tag right">100% CODE · OFFLINE</div></section>
+<section class="score"><div class="stat"><small>TRẠNG THÁI</small><strong id="sState">SẴN SÀNG</strong></div><div class="stat"><small>TỤ LỰC</small><strong id="sCharge">0.0s · ∞</strong></div><div class="stat"><small>HẠT HUYẾT QUANG</small><strong id="sMotes">0</strong></div><div class="stat"><small>HỒI CHIÊU</small><strong id="sCool">0.0s</strong></div></section>
+<div class="progress"><label><span>TỤ LỰC · CÁC HẠT QUANG HỘI TỤ VỀ ĐẦU NGÓN TAY</span><span>KHÔNG GIỚI HẠN</span></label><div class="track"><div class="charge" id="chargeFill"></div></div></div>
+<div class="progress"><label><span>HỒI CHIÊU</span><span>8 GIÂY</span></label><div class="track"><div class="cool" id="coolFill"></div></div></div>
+<div class="resource-grid"><div><label><span>SINH MỆNH · <span id="hpText">1000 / 1000</span></span><b>−6 máu/s</b></label><div class="track"><div class="hp" id="hpFill"></div></div></div><div><label><span>LINH LỰC · <span id="manaText">1000 / 1000</span></span><b>−12 mana/s</b></label><div class="track"><div class="mana" id="manaFill"></div></div></div></div>
+<div class="hit-status" id="hitStatus" hidden>HUYẾT ẤN · MÁU RƠI <span id="hitTime">6.0</span>s</div>
+<div class="message" id="notice" role="status">Giữ nút tụ lực · Thả tay để phóng hàng loạt Kim Tuyến đỏ.</div>
+<div class="buttons"><button class="primary" type="button" id="cast">GIỮ ĐỂ TỤ LỰC · THẢ ĐỂ PHÓNG</button><button type="button" id="move">CHO KẺ ĐỊCH DI CHUYỂN</button></div><div class="secondary"><button type="button" id="reset">LÀM MỚI DEMO</button><button type="button" id="auto">MỤC TIÊU DI CHUYỂN: TẮT</button></div>
+<div class="description"><p><strong>Diễn hoạt V2:</strong> Huyết Dự dùng <strong>sinh mệnh và mana</strong> đổi lấy uy lực: mất <strong>6 máu + 12 mana mỗi giây</strong> khi giữ tụ lực. Không có giới hạn thời gian; huyết quang hội tụ về <strong>đầu ngón tay</strong>, càng giữ càng nhiều hạt và càng mạnh. Hết mana hoặc sinh mệnh còn 1 thì tự phóng. Có giới hạn số hạt <em>hiển thị đồng thời</em> để tránh giật trên điện thoại.</p><p>Khi thả, huyết tinh hóa thành <strong>nhiều sợi Kim Tuyến</strong> tùy thời gian tụ lực, mang lõi trắng hồng, viền đỏ thẫm, đuôi ánh sáng kéo dài; từng sợi uốn cong truy kích mục tiêu, khi trúng tạo <strong>dấu xuyên đỏ, các sợi huyết quang ghim lại trên thân địch, bọt máu và giọt máu nhỏ xuống đất trong 6 giây</strong>. Cú cuối kích hoạt bạo huyết nhiều lớp. <strong>Hồi chiêu 8 giây</strong> sau đòn cuối. Toàn bộ hiệu ứng sử dụng họa công pixel và bộ đệm ánh sáng của thư viện PixelFX gốc, chạy không cần mạng.</p></div>
+<div id="error" class="error" hidden></div><div class="credits">PIXELFX ENGINE · Color + Light buffers · Huyết pháp độc lập · Không chỉnh sửa game gốc</div><span id="sHit" hidden>0</span></main>
+<script>window.PFX = (function(){
+ const M={};const C={};
+M["src/core/math.js"]=function(module,exports,require){"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rng = exports.Rng = exports.rand = exports.ease = exports.angleTo = exports.dist = exports.pingpong = exports.bump = exports.smooth = exports.seg = exports.wrap = exports.fract = exports.remap = exports.invLerp = exports.lerp = exports.clamp = exports.TAU = void 0;
+exports.hash = hash;
+exports.noise = noise;
+exports.noise2 = noise2;
+exports.fbm = fbm;
+exports.tileNoise = tileNoise;
+exports.tileFbm = tileFbm;
+exports.loopNoise = loopNoise;
+exports.TAU = Math.PI * 2;
+const clamp = (x, a = 0, b = 1) => (x < a ? a : x > b ? b : x);
+exports.clamp = clamp;
+const lerp = (a, b, t) => a + (b - a) * t;
+exports.lerp = lerp;
+const invLerp = (a, b, x) => (b === a ? 0 : (x - a) / (b - a));
+exports.invLerp = invLerp;
+const remap = (x, a0, a1, b0, b1) => (0, exports.lerp)(b0, b1, (0, exports.invLerp)(a0, a1, x));
+exports.remap = remap;
+const fract = (x) => x - Math.floor(x);
+exports.fract = fract;
+const wrap = (x, m) => ((x % m) + m) % m;
+exports.wrap = wrap;
+const seg = (t, t0, t1) => (0, exports.clamp)((t - t0) / (t1 - t0));
+exports.seg = seg;
+const smooth = (e0, e1, x) => {
+    const t = (0, exports.seg)(x, e0, e1);
+    return t * t * (3 - 2 * t);
+};
+exports.smooth = smooth;
+const bump = (t, t0, t1) => (t <= t0 || t >= t1 ? 0 : Math.sin(Math.PI * (0, exports.seg)(t, t0, t1)));
+exports.bump = bump;
+const pingpong = (x) => 1 - Math.abs((0, exports.wrap)(x, 2) - 1);
+exports.pingpong = pingpong;
+const dist = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
+exports.dist = dist;
+const angleTo = (x0, y0, x1, y1) => Math.atan2(y1 - y0, x1 - x0);
+exports.angleTo = angleTo;
+exports.ease = {
+    linear: (t) => t,
+    inQuad: (t) => t * t,
+    outQuad: (t) => 1 - (1 - t) * (1 - t),
+    inOutQuad: (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2),
+    inCubic: (t) => t * t * t,
+    outCubic: (t) => 1 - Math.pow(1 - t, 3),
+    inOutCubic: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+    inQuart: (t) => t * t * t * t,
+    outQuart: (t) => 1 - Math.pow(1 - t, 4),
+    inExpo: (t) => (t <= 0 ? 0 : Math.pow(2, 10 * t - 10)),
+    outExpo: (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+    inSine: (t) => 1 - Math.cos((t * Math.PI) / 2),
+    outSine: (t) => Math.sin((t * Math.PI) / 2),
+    inOutSine: (t) => -(Math.cos(Math.PI * t) - 1) / 2,
+    inBack: (t, s = 1.70158) => (t <= 0 ? 0 : t >= 1 ? 1 : (s + 1) * t * t * t - s * t * t),
+    outBack: (t, s = 1.70158) => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2)),
+    outElastic: (t) => (t <= 0 ? 0 : t >= 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * ((2 * Math.PI) / 3)) + 1),
+    outBounce: (t) => {
+        const n = 7.5625, d = 2.75;
+        if (t < 1 / d)
+            return n * t * t;
+        if (t < 2 / d)
+            return n * (t -= 1.5 / d) * t + 0.75;
+        if (t < 2.5 / d)
+            return n * (t -= 2.25 / d) * t + 0.9375;
+        return n * (t -= 2.625 / d) * t + 0.984375;
+    },
+};
+function hash(...ns) {
+    let h = 0x9e3779b9;
+    for (const n of ns) {
+        h = Math.imul(h ^ (n | 0), 0x85ebca6b);
+        h ^= h >>> 13;
+        h = Math.imul(h, 0xc2b2ae35);
+        h ^= h >>> 16;
+    }
+    return h >>> 0;
+}
+const rand = (...ns) => hash(...ns) / 4294967296;
+exports.rand = rand;
+class Rng {
+    constructor(seed = 1) {
+        this.s = seed >>> 0 || 1;
+    }
+    next() {
+        let t = (this.s = (this.s + 0x6d2b79f5) >>> 0);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    range(a, b) {
+        return a + (b - a) * this.next();
+    }
+    int(a, b) {
+        return Math.floor(this.range(a, b + 1));
+    }
+    chance(p) {
+        return this.next() < p;
+    }
+    sign() {
+        return this.next() < 0.5 ? -1 : 1;
+    }
+    pick(list) {
+        return list[Math.floor(this.next() * list.length)];
+    }
+    gauss() {
+        return (this.next() + this.next() + this.next() + this.next() - 2) * 1.732;
+    }
+}
+exports.Rng = Rng;
+const rng = (...ns) => new Rng(hash(...ns));
+exports.rng = rng;
+function noise(x, seed = 0) {
+    const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f);
+    return (0, exports.lerp)((0, exports.rand)(i, seed), (0, exports.rand)(i + 1, seed), u) * 2 - 1;
+}
+function noise2(x, y, seed = 0) {
+    const ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+    const ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
+    const a = (0, exports.rand)(ix, iy, seed), b = (0, exports.rand)(ix + 1, iy, seed), c = (0, exports.rand)(ix, iy + 1, seed), d = (0, exports.rand)(ix + 1, iy + 1, seed);
+    return (0, exports.lerp)((0, exports.lerp)(a, b, ux), (0, exports.lerp)(c, d, ux), uy) * 2 - 1;
+}
+function fbm(x, y, seed = 0, octaves = 3) {
+    let s = 0, a = 0.5, n = 0;
+    for (let o = 0; o < octaves; o++) {
+        s += noise2(x, y, seed + o * 101) * a;
+        n += a;
+        x *= 2.03;
+        y *= 2.03;
+        a *= 0.5;
+    }
+    return s / n;
+}
+function tileNoise(x, y, px = 0, py = 0, seed = 0) {
+    const ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+    const ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
+    const x0 = px ? (0, exports.wrap)(ix, px) : ix, x1 = px ? (0, exports.wrap)(ix + 1, px) : ix + 1;
+    const y0 = py ? (0, exports.wrap)(iy, py) : iy, y1 = py ? (0, exports.wrap)(iy + 1, py) : iy + 1;
+    const a = (0, exports.rand)(x0, y0, seed), b = (0, exports.rand)(x1, y0, seed), c = (0, exports.rand)(x0, y1, seed), d = (0, exports.rand)(x1, y1, seed);
+    return (0, exports.lerp)((0, exports.lerp)(a, b, ux), (0, exports.lerp)(c, d, ux), uy) * 2 - 1;
+}
+function tileFbm(x, y, px = 0, py = 0, seed = 0, octaves = 3) {
+    let s = 0, a = 0.5, n = 0, k = 1;
+    for (let o = 0; o < octaves; o++) {
+        s += tileNoise(x * k, y * k, px * k, py * k, seed + o * 101) * a;
+        n += a;
+        a *= 0.5;
+        k *= 2;
+    }
+    return s / n;
+}
+function loopNoise(phase, radius = 1, seed = 0) {
+    const a = phase * exports.TAU;
+    return noise2(Math.cos(a) * radius + 50, Math.sin(a) * radius + 50, seed);
+}
+
+};
+M["src/core/color.js"]=function(module,exports,require){"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PATCH = exports.INK = exports.BLACK = exports.WHITE = exports.RAMP = exports.PAL = exports.at = exports.ramp = exports.luma = exports.scale = exports.toHex = exports.blue = exports.green = exports.red = exports.rgb = void 0;
+exports.hex = hex;
+exports.mix = mix;
+exports.fit = fit;
+exports.blend = blend;
+const math_js_1 = require("./math.js");
+const rgb = (r, g, b) => (255 << 24) | ((b & 255) << 16) | ((g & 255) << 8) | (r & 255);
+exports.rgb = rgb;
+const red = (c) => c & 255;
+exports.red = red;
+const green = (c) => (c >>> 8) & 255;
+exports.green = green;
+const blue = (c) => (c >>> 16) & 255;
+exports.blue = blue;
+function hex(h) {
+    if (typeof h === "number")
+        return h;
+    let s = h.replace("#", "");
+    if (s.length === 3)
+        s = s[0] + s[0] + s[1] + s[1] + s[2] + s[2];
+    const v = parseInt(s.slice(0, 6), 16);
+    return (0, exports.rgb)((v >> 16) & 255, (v >> 8) & 255, v & 255);
+}
+const toHex = (c) => "#" + [(0, exports.red)(c), (0, exports.green)(c), (0, exports.blue)(c)].map((v) => v.toString(16).padStart(2, "0")).join("");
+exports.toHex = toHex;
+function mix(a, b, t) {
+    t = (0, math_js_1.clamp)(t);
+    return (0, exports.rgb)((0, exports.red)(a) + ((0, exports.red)(b) - (0, exports.red)(a)) * t, (0, exports.green)(a) + ((0, exports.green)(b) - (0, exports.green)(a)) * t, (0, exports.blue)(a) + ((0, exports.blue)(b) - (0, exports.blue)(a)) * t);
+}
+const scale = (c, k) => (0, exports.rgb)(Math.min(255, (0, exports.red)(c) * k), Math.min(255, (0, exports.green)(c) * k), Math.min(255, (0, exports.blue)(c) * k));
+exports.scale = scale;
+const luma = (c) => (0.299 * (0, exports.red)(c) + 0.587 * (0, exports.green)(c) + 0.114 * (0, exports.blue)(c)) / 255;
+exports.luma = luma;
+const ramp = (list) => list.map(hex);
+exports.ramp = ramp;
+function fit(r, n) {
+    r = r.map(hex);
+    if (r.length === n)
+        return r;
+    return Array.from({ length: n }, (_, i) => r[Math.round((i * (r.length - 1)) / Math.max(1, n - 1))]);
+}
+const at = (r, t) => r[(0, math_js_1.clamp)(Math.floor(t * r.length), 0, r.length - 1)];
+exports.at = at;
+function blend(r, t) {
+    const x = (0, math_js_1.clamp)(t) * (r.length - 1), i = Math.min(r.length - 2, Math.floor(x));
+    return mix(r[i], r[i + 1], x - i);
+}
+exports.PAL = {
+    fire: ["#1f0b10", "#4a1118", "#8c1d1c", "#cc3a1a", "#f2701f", "#ffae35", "#ffe27a", "#fff8d6"],
+    ember: ["#1a0a0e", "#3d1012", "#701a14", "#a8301a", "#e0561e", "#ff8a2a", "#ffc46a"],
+    lava: ["#14060a", "#380a10", "#6e1210", "#ac2410", "#e8501a", "#ff8c2a", "#ffd25a"],
+    smoke: ["#0e0c12", "#1d1a22", "#2e2a35", "#433e4b", "#5c5664", "#7b7484", "#a39cab"],
+    dust: ["#1c1610", "#33281c", "#4f3f2c", "#6e5a40", "#927a58", "#b89f78", "#dcc8a2"],
+    ice: ["#0c1430", "#162c5c", "#1f4f94", "#2f7fcc", "#58b4ec", "#9bdcff", "#d8f4ff", "#ffffff"],
+    water: ["#081830", "#0e2e5a", "#14508c", "#1c76bc", "#36a2e0", "#78ccf4", "#c4ecff", "#ffffff"],
+    electric: ["#0a0f2e", "#172a78", "#2550d0", "#3f8cff", "#7cc8ff", "#c8f0ff", "#ffffff"],
+    volt: ["#24160a", "#5e3a0c", "#a8680f", "#e8a218", "#ffd23c", "#fff08a", "#ffffff"],
+    poison: ["#0d1a0c", "#173a14", "#265e18", "#3f8a1e", "#6cb82a", "#a8e04a", "#e0ff8a"],
+    holy: ["#2a1c08", "#5a3e10", "#9a6c18", "#d8a428", "#ffd84a", "#fff09a", "#fffbe6", "#ffffff"],
+    heal: ["#08201a", "#0f3f2c", "#17663e", "#24924e", "#3ec466", "#7ee88a", "#c8ffc4", "#ffffff"],
+    arcane: ["#140a26", "#2b1252", "#481c88", "#6b2cc0", "#9a48ec", "#c684ff", "#ecc8ff", "#ffffff"],
+    shadow: ["#050308", "#0f0a18", "#1c1230", "#2c1a4a", "#432468", "#5e3290", "#8048b8", "#a970e0"],
+    blood: ["#14040a", "#3a0a14", "#6a101c", "#a01824", "#d42a30", "#ff5a50", "#ff9a8a"],
+    earth: ["#140e0a", "#2a1e14", "#47321e", "#69492a", "#8e6638", "#b88a52", "#dcb47c"],
+    stone: ["#0e0e12", "#1c1c24", "#2c2c38", "#42424f", "#5c5c6b", "#7d7d8c", "#a4a4b2", "#d0d0da"],
+    gold: ["#1e1206", "#4a2c08", "#86520c", "#c48412", "#f0b424", "#ffe066", "#fff6c4", "#ffffff"],
+    leaf: ["#0c1a0e", "#163418", "#225224", "#357530", "#4f9a3a", "#7cc048", "#b4e070", "#e4ffb0"],
+    wood: ["#160c06", "#2e1a0c", "#4a2c14", "#6a421e", "#8e5c2c", "#b47c40", "#d8a464"],
+    metal: ["#0c0e14", "#1c2230", "#2e3648", "#4a5468", "#6e7a90", "#9aa6ba", "#d0d8e6", "#ffffff"],
+    bone: ["#1a1814", "#3a352c", "#5e5648", "#8a806c", "#b8ad96", "#e4dcc8", "#fffaf0"],
+    neon: ["#1a0516", "#3d0a33", "#701560", "#b0228f", "#f53cd1", "#ff86e6", "#ffd2f6", "#ffffff"],
+    cyber: ["#041418", "#08303a", "#0c5260", "#108088", "#18b4b0", "#4ce8d8", "#b4fff0", "#ffffff"],
+    matrix: ["#020a04", "#05200c", "#0a3c16", "#106624", "#1a9a34", "#3cd650", "#a4ffa8", "#e8ffe8"],
+    candy: ["#ff4a5a", "#ff9a2a", "#ffe03c", "#5ad84a", "#3cc8ff", "#7a6cff", "#f53cd1"],
+    night: ["#07060d", "#0c0a18", "#131026", "#1b1734", "#241f44", "#2f2956"],
+};
+exports.RAMP = Object.fromEntries(Object.entries(exports.PAL).map(([k, v]) => [k, (0, exports.ramp)(v)]));
+exports.WHITE = hex("#ffffff");
+exports.BLACK = hex("#000000");
+exports.INK = hex("#0b0a10");
+exports.PATCH = hex("#f53cd1");
+
+};
+M["src/core/font.js"]=function(module,exports,require){"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FONTS = void 0;
+exports.textWidth = textWidth;
+exports.rasterText = rasterText;
+const MINI = {
+    A: ".#.|#.#|###|#.#|#.#", B: "##.|#.#|##.|#.#|##.", C: ".##|#..|#..|#..|.##", D: "##.|#.#|#.#|#.#|##.",
+    E: "###|#..|##.|#..|###", F: "###|#..|##.|#..|#..", G: ".##|#..|#.#|#.#|.##", H: "#.#|#.#|###|#.#|#.#",
+    I: "###|.#.|.#.|.#.|###", J: "..#|..#|..#|#.#|.#.", K: "#.#|#.#|##.|#.#|#.#", L: "#..|#..|#..|#..|###",
+    M: "#.#|###|###|#.#|#.#", N: "##.|#.#|#.#|#.#|#.#", O: ".#.|#.#|#.#|#.#|.#.", P: "##.|#.#|##.|#..|#..",
+    Q: ".#.|#.#|#.#|##.|.##", R: "##.|#.#|##.|#.#|#.#", S: ".##|#..|.#.|..#|##.", T: "###|.#.|.#.|.#.|.#.",
+    U: "#.#|#.#|#.#|#.#|###", V: "#.#|#.#|#.#|#.#|.#.", W: "#.#|#.#|###|###|#.#", X: "#.#|#.#|.#.|#.#|#.#",
+    Y: "#.#|#.#|.#.|.#.|.#.", Z: "###|..#|.#.|#..|###",
+    0: "###|#.#|#.#|#.#|###", 1: ".#.|##.|.#.|.#.|###", 2: "##.|..#|.#.|#..|###", 3: "##.|..#|.#.|..#|##.",
+    4: "#.#|#.#|###|..#|..#", 5: "###|#..|##.|..#|##.", 6: ".##|#..|###|#.#|###", 7: "###|..#|.#.|.#.|.#.",
+    8: "###|#.#|###|#.#|###", 9: "###|#.#|###|..#|##.",
+    "+": "...|.#.|###|.#.|...", "-": "...|...|###|...|...", "!": "#|#|#|.|#", "?": "##.|..#|.#.|...|.#.",
+    ".": ".|.|.|.|#", ",": "..|..|..|.#|#.", ":": ".|#|.|#|.", "/": "..#|..#|.#.|#..|#..",
+    "%": "#.#|..#|.#.|#..|#.#", x: "...|#.#|.#.|#.#|...", "*": "#.#|.#.|#.#|...|...", "'": "#|#|.|.|.",
+    "(": ".#|#.|#.|#.|.#", ")": "#.|.#|.#|.#|#.", "<": "..#|.#.|#..|.#.|..#", ">": "#..|.#.|..#|.#.|#..",
+    "=": "...|###|...|###|...", _: "...|...|...|...|###", "#": "#.#|###|#.#|###|#.#",
+};
+const BIG = {
+    A: ".###.|#...#|#...#|#####|#...#|#...#|#...#", B: "####.|#...#|#...#|####.|#...#|#...#|####.",
+    C: ".###.|#...#|#....|#....|#....|#...#|.###.", D: "####.|#...#|#...#|#...#|#...#|#...#|####.",
+    E: "#####|#....|#....|####.|#....|#....|#####", F: "#####|#....|#....|####.|#....|#....|#....",
+    G: ".###.|#...#|#....|#.###|#...#|#...#|.####", H: "#...#|#...#|#...#|#####|#...#|#...#|#...#",
+    I: "###|.#.|.#.|.#.|.#.|.#.|###", J: "..###|...#.|...#.|...#.|...#.|#..#.|.##..",
+    K: "#...#|#..#.|#.#..|##...|#.#..|#..#.|#...#", L: "#....|#....|#....|#....|#....|#....|#####",
+    M: "#...#|##.##|#.#.#|#.#.#|#...#|#...#|#...#", N: "#...#|#...#|##..#|#.#.#|#..##|#...#|#...#",
+    O: ".###.|#...#|#...#|#...#|#...#|#...#|.###.", P: "####.|#...#|#...#|####.|#....|#....|#....",
+    Q: ".###.|#...#|#...#|#...#|#.#.#|#..#.|.##.#", R: "####.|#...#|#...#|####.|#.#..|#..#.|#...#",
+    S: ".####|#....|#....|.###.|....#|....#|####.", T: "#####|..#..|..#..|..#..|..#..|..#..|..#..",
+    U: "#...#|#...#|#...#|#...#|#...#|#...#|.###.", V: "#...#|#...#|#...#|#...#|#...#|.#.#.|..#..",
+    W: "#...#|#...#|#...#|#.#.#|#.#.#|#.#.#|.#.#.", X: "#...#|#...#|.#.#.|..#..|.#.#.|#...#|#...#",
+    Y: "#...#|#...#|.#.#.|..#..|..#..|..#..|..#..", Z: "#####|....#|...#.|..#..|.#...|#....|#####",
+    0: ".###.|#...#|#..##|#.#.#|##..#|#...#|.###.", 1: ".#.|##.|.#.|.#.|.#.|.#.|###",
+    2: ".###.|#...#|....#|...#.|..#..|.#...|#####", 3: "#####|...#.|..#..|...#.|....#|#...#|.###.",
+    4: "...#.|..##.|.#.#.|#..#.|#####|...#.|...#.", 5: "#####|#....|####.|....#|....#|#...#|.###.",
+    6: "..##.|.#...|#....|####.|#...#|#...#|.###.", 7: "#####|....#|...#.|..#..|.#...|.#...|.#...",
+    8: ".###.|#...#|#...#|.###.|#...#|#...#|.###.", 9: ".###.|#...#|#...#|.####|....#|...#.|.##..",
+    "!": "#|#|#|#|#|.|#", "?": ".###.|#...#|....#|...#.|..#..|.....|..#..", "+": ".....|..#..|..#..|#####|..#..|..#..|.....",
+    "-": "....|....|....|####|....|....|....", ".": ".|.|.|.|.|.|#", ",": "..|..|..|..|..|.#|#.", ":": ".|.|#|.|.|#|.",
+    "/": "....#|....#|...#.|..#..|.#...|#....|#....", "%": "##...|##..#|...#.|..#..|.#...|#..##|...##",
+    x: ".....|.....|#...#|.#.#.|..#..|.#.#.|#...#", "*": ".....|..#..|#.#.#|.###.|#.#.#|..#..|.....", "'": "#|#|.|.|.|.|.",
+    "<": "...#|..#.|.#..|#...|.#..|..#.|...#", ">": "#...|.#..|..#.|...#|..#.|.#..|#...", "=": "....|....|####|....|####|....|....",
+    "(": "..#|.#.|#..|#..|#..|.#.|..#", ")": "#..|.#.|..#|..#|..#|.#.|#..", "#": ".#.#.|.#.#.|#####|.#.#.|#####|.#.#.|.#.#.",
+};
+function build(table, h) {
+    const out = {};
+    for (const [ch, src] of Object.entries(table)) {
+        const rows = src.split("|");
+        out[ch] = { w: rows[0].length, rows: rows.map((r) => [...r].map((c) => c === "#")) };
+        if (rows.length !== h)
+            throw new Error(`glyph ${ch} has ${rows.length} rows, expected ${h}`);
+    }
+    return out;
+}
+exports.FONTS = {
+    mini: { h: 5, space: 2, gap: 1, glyphs: build(MINI, 5) },
+    big: { h: 7, space: 3, gap: 1, glyphs: build(BIG, 7) },
+};
+function textWidth(str, font = "mini") {
+    const F = exports.FONTS[font];
+    let w = 0;
+    for (const ch of String(str)) {
+        const g = F.glyphs[ch] ?? F.glyphs[ch.toUpperCase()];
+        w += (g ? g.w : F.space) + F.gap;
+    }
+    return Math.max(0, w - F.gap);
+}
+function rasterText(str, font, plot) {
+    const F = exports.FONTS[font];
+    let x = 0;
+    for (const ch of String(str)) {
+        const g = F.glyphs[ch] ?? F.glyphs[ch.toUpperCase()];
+        if (!g) {
+            x += F.space + F.gap;
+            continue;
+        }
+        for (let r = 0; r < F.h; r++)
+            for (let c = 0; c < g.w; c++)
+                if (g.rows[r][c])
+                    plot(x + c, r);
+        x += g.w + F.gap;
+    }
+}
+
+};
+M["src/core/painter.js"]=function(module,exports,require){"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Painter = void 0;
+const math_js_1 = require("./math.js");
+const color_js_1 = require("./color.js");
+const font_js_1 = require("./font.js");
+const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);
+const OUT = { c: 0, a: 1, l: 0, k: 0 };
+const sprites = new WeakMap();
+const call = (v, ...args) => (typeof v === "function" ? v(...args) : v);
+class Painter {
+    constructor(frame) {
+        this.frame = frame;
+        this.reset();
+    }
+    reset() {
+        const f = this.frame;
+        this.w = f.w;
+        this.h = f.h;
+        this.ox = f.ox | 0;
+        this.oy = f.oy | 0;
+        this.C = f.color;
+        this.L = f.light;
+        this.tx = 0;
+        this.ty = 0;
+        this.fx = 1;
+        this.cs = 1;
+        this.sn = 0;
+        this.fade = 1;
+        this.lightK = 1;
+        this.layer = "front";
+        return this;
+    }
+    place(x, y, flip = false, angle = 0) {
+        this.tx = x;
+        this.ty = y;
+        this.fx = flip ? -1 : 1;
+        this.cs = Math.cos(angle);
+        this.sn = Math.sin(angle);
+        return this;
+    }
+    toX(x, y) { return this.tx + x * this.fx * this.cs - y * this.sn; }
+    toY(x, y) { return this.ty + x * this.fx * this.sn + y * this.cs; }
+    fromX(sx, sy) { const dx = sx - this.tx, dy = sy - this.ty; return (dx * this.cs + dy * this.sn) * this.fx; }
+    fromY(sx, sy) { const dx = sx - this.tx, dy = sy - this.ty; return -dx * this.sn + dy * this.cs; }
+    cellX(x, y) { return Math.floor(this.toX(Math.floor(x) + 0.5, Math.floor(y) + 0.5)); }
+    cellY(x, y) { return Math.floor(this.toY(Math.floor(x) + 0.5, Math.floor(y) + 0.5)); }
+    put(sx, sy, c, a = 1) {
+        if (!c)
+            return;
+        a *= this.fade;
+        if (a < 1 && a <= BAYER[((sy & 3) << 2) | (sx & 3)])
+            return;
+        const x = sx - this.ox, y = sy - this.oy;
+        if (x < 0 || y < 0 || x >= this.w || y >= this.h)
+            return;
+        this.C[y * this.w + x] = c;
+    }
+    add(sx, sy, c, k = 1) {
+        k *= this.fade * this.lightK;
+        if (k <= 0.004)
+            return;
+        const x = sx - this.ox, y = sy - this.oy;
+        if (x < 0 || y < 0 || x >= this.w || y >= this.h)
+            return;
+        const i = y * this.w + x, d = this.L[i];
+        const r = Math.min(255, (d & 255) + (c & 255) * k) | 0;
+        const g = Math.min(255, ((d >>> 8) & 255) + ((c >>> 8) & 255) * k) | 0;
+        const b = Math.min(255, ((d >>> 16) & 255) + ((c >>> 16) & 255) * k) | 0;
+        this.L[i] = (255 << 24) | (b << 16) | (g << 8) | r;
+    }
+    blendPx(sx, sy, c, a) {
+        a *= this.fade;
+        if (!c || a <= 0.004)
+            return;
+        const x = sx - this.ox, y = sy - this.oy;
+        if (x < 0 || y < 0 || x >= this.w || y >= this.h)
+            return;
+        const i = y * this.w + x, d = this.C[i], da = (d >>> 24) / 255, oa = a + da * (1 - a), k = a / oa;
+        const ch = (s) => ((((c >>> s) & 255) * k + ((d >>> s) & 255) * (1 - k)) & 255);
+        this.C[i] = (((oa * 255) & 255) << 24) | (ch(16) << 16) | (ch(8) << 8) | ch(0);
+    }
+    blend(x, y, c, a) { this.blendPx(this.cellX(x, y), this.cellY(x, y), c, a); }
+    disc(cx, cy, r, c, a) {
+        if (r < 0.5)
+            return this.blend(cx, cy, call(c, 0, 0), call(a, 0, 0));
+        this.each(cx - r, cy - r, cx + r, cy + r, (x, y, sx, sy) => {
+            const dx = x - cx, dy = y - cy, d2 = dx * dx + dy * dy;
+            if (d2 > r * r)
+                return;
+            const d = Math.sqrt(d2) / r, ang = Math.atan2(dy, dx);
+            this.blendPx(sx, sy, call(c, d, ang), call(a, d, ang));
+        });
+    }
+    get(x, y) {
+        const sx = this.cellX(x, y) - this.ox, sy = this.cellY(x, y) - this.oy;
+        return sx < 0 || sy < 0 || sx >= this.w || sy >= this.h ? 0 : this.C[sy * this.w + sx];
+    }
+    px(x, y, c) { this.put(this.cellX(x, y), this.cellY(x, y), c, 1); }
+    dot(x, y, c, a = 1) { if (a > 0)
+        this.put(this.cellX(x, y), this.cellY(x, y), c, a); }
+    light(x, y, c, k = 1) { this.add(this.cellX(x, y), this.cellY(x, y), c, k); }
+    each(x0, y0, x1, y1, fn) {
+        let ax = Infinity, bx = -Infinity, ay = Infinity, by = -Infinity;
+        for (let k = 0; k < 4; k++) {
+            const x = k & 1 ? x1 : x0, y = k & 2 ? y1 : y0, sx = this.toX(x, y), sy = this.toY(x, y);
+            if (sx < ax)
+                ax = sx;
+            if (sx > bx)
+                bx = sx;
+            if (sy < ay)
+                ay = sy;
+            if (sy > by)
+                by = sy;
+        }
+        const sx0 = Math.max(Math.floor(ax), this.ox), sx1 = Math.min(Math.ceil(bx), this.ox + this.w - 1);
+        const sy0 = Math.max(Math.floor(ay), this.oy), sy1 = Math.min(Math.ceil(by), this.oy + this.h - 1);
+        for (let sy = sy0; sy <= sy1; sy++)
+            for (let sx = sx0; sx <= sx1; sx++) {
+                const cx = sx + 0.5, cy = sy + 0.5;
+                fn(this.fromX(cx, cy), this.fromY(cx, cy), sx, sy);
+            }
+    }
+    shade(x0, y0, x1, y1, fn) {
+        const o = OUT;
+        this.each(x0, y0, x1, y1, (lx, ly, sx, sy) => {
+            o.c = 0;
+            o.a = 1;
+            o.l = 0;
+            o.k = 0;
+            const c = fn(lx, ly, o) || o.c;
+            if (c)
+                this.put(sx, sy, c, o.a);
+            if (o.k > 0)
+                this.add(sx, sy, o.l || c, o.k);
+        });
+    }
+    line(x0, y0, x1, y1, c, a = 1) {
+        let sx = this.cellX(x0, y0), sy = this.cellY(x0, y0);
+        const ex = this.cellX(x1, y1), ey = this.cellY(x1, y1);
+        const dx = Math.abs(ex - sx), dy = -Math.abs(ey - sy), stepx = sx < ex ? 1 : -1, stepy = sy < ey ? 1 : -1;
+        const n = Math.max(dx, -dy) || 1, fc = typeof c === "function", fa = typeof a === "function";
+        let err = dx + dy, i = 0;
+        for (;;) {
+            const u = i++ / n;
+            this.put(sx, sy, fc ? c(u) : c, fa ? a(u) : a);
+            if (sx === ex && sy === ey)
+                break;
+            const e2 = 2 * err;
+            if (e2 >= dy) {
+                err += dy;
+                sx += stepx;
+            }
+            if (e2 <= dx) {
+                err += dx;
+                sy += stepy;
+            }
+        }
+    }
+    polyline(pts, c, a = 1) {
+        for (let i = 1; i < pts.length; i++)
+            this.line(pts[i - 1][0], pts[i - 1][1], pts[i][0], pts[i][1], c, a);
+    }
+    beam(x0, y0, x1, y1, width, c, a = 1) {
+        const r = width / 2, dx = x1 - x0, dy = y1 - y0, L2 = dx * dx + dy * dy || 1e-9;
+        this.shade(Math.min(x0, x1) - r, Math.min(y0, y1) - r, Math.max(x0, x1) + r, Math.max(y0, y1) + r, (x, y, o) => {
+            const u = (0, math_js_1.clamp)(((x - x0) * dx + (y - y0) * dy) / L2), px = x0 + dx * u - x, py = y0 + dy * u - y;
+            const d2 = px * px + py * py;
+            if (d2 > r * r)
+                return;
+            const v = Math.sqrt(d2) / r;
+            o.c = call(c, u, v);
+            o.a = call(a, u, v);
+        });
+    }
+    circle(cx, cy, r, c, a = 1) {
+        if (r < 0.6)
+            return this.dot(cx, cy, call(c, 0, 0), call(a, 0, 0));
+        this.shade(cx - r, cy - r, cx + r, cy + r, (x, y, o) => {
+            const dx = x - cx, dy = y - cy, d2 = dx * dx + dy * dy;
+            if (d2 > r * r)
+                return;
+            const d = Math.sqrt(d2) / r, ang = Math.atan2(dy, dx);
+            o.c = call(c, d, ang);
+            o.a = call(a, d, ang);
+        });
+    }
+    ellipse(cx, cy, rx, ry, c, a = 1) {
+        if (rx <= 0 || ry <= 0)
+            return;
+        this.shade(cx - rx, cy - ry, cx + rx, cy + ry, (x, y, o) => {
+            const dx = (x - cx) / rx, dy = (y - cy) / ry, d2 = dx * dx + dy * dy;
+            if (d2 > 1)
+                return;
+            const d = Math.sqrt(d2), ang = Math.atan2(dy, dx);
+            o.c = call(c, d, ang);
+            o.a = call(a, d, ang);
+        });
+    }
+    ring(cx, cy, r, w, c, a = 1) {
+        const r0 = Math.max(0, r - w);
+        this.shade(cx - r, cy - r, cx + r, cy + r, (x, y, o) => {
+            const dx = x - cx, dy = y - cy, d2 = dx * dx + dy * dy;
+            if (d2 > r * r || d2 < r0 * r0)
+                return;
+            const v = w > 0 ? (Math.sqrt(d2) - r0) / (r - r0 || 1) : 1, ang = Math.atan2(dy, dx);
+            o.c = call(c, v, ang);
+            o.a = call(a, v, ang);
+        });
+    }
+    arc(cx, cy, r, w, a0, a1, c, a = 1) {
+        const span = a1 - a0, wf = typeof w === "function";
+        this.shade(cx - r, cy - r, cx + r, cy + r, (x, y, o) => {
+            const dx = x - cx, dy = y - cy, d = Math.sqrt(dx * dx + dy * dy);
+            if (d > r)
+                return;
+            let ang = Math.atan2(dy, dx) - a0;
+            ang -= Math.floor(ang / (Math.PI * 2)) * Math.PI * 2;
+            if (ang > span)
+                return;
+            const u = ang / span, ww = wf ? w(u) : w;
+            if (ww <= 0 || d < r - ww)
+                return;
+            const v = (d - (r - ww)) / ww;
+            o.c = call(c, u, v);
+            o.a = call(a, u, v);
+        });
+    }
+    rect(x, y, w, h, c, a = 1) {
+        if (this.sn === 0) {
+            const X0 = Math.round(x), Y0 = Math.round(y), X1 = Math.round(x + w), Y1 = Math.round(y + h);
+            for (let yy = Y0; yy < Y1; yy++)
+                for (let xx = X0; xx < X1; xx++)
+                    this.put(this.cellX(xx, yy), this.cellY(xx, yy), c, a);
+            return;
+        }
+        this.shade(x, y, x + w, y + h, (lx, ly, o) => {
+            if (lx < x || ly < y || lx >= x + w || ly >= y + h)
+                return;
+            o.c = c;
+            o.a = a;
+        });
+    }
+    poly(pts, c, a = 1) {
+        let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+        for (const [x, y] of pts) {
+            if (x < x0)
+                x0 = x;
+            if (x > x1)
+                x1 = x;
+            if (y < y0)
+                y0 = y;
+            if (y > y1)
+                y1 = y;
+        }
+        const n = pts.length;
+        this.shade(x0, y0, x1, y1, (x, y, o) => {
+            let inside = false;
+            for (let i = 0, j = n - 1; i < n; j = i++) {
+                const [xi, yi] = pts[i], [xj, yj] = pts[j];
+                if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi)
+                    inside = !inside;
+            }
+            if (!inside)
+                return;
+            o.c = call(c, x, y);
+            o.a = call(a, x, y);
+        });
+    }
+    tri(x0, y0, x1, y1, x2, y2, c, a = 1) { this.poly([[x0, y0], [x1, y1], [x2, y2]], c, a); }
+    glow(x, y, r, c, k = 0.5) {
+        if (r < 1 || k <= 0.004)
+            return;
+        const cx = this.toX(x, y), cy = this.toY(x, y);
+        const x0 = Math.floor(cx - r), x1 = Math.ceil(cx + r), y0 = Math.floor(cy - r), y1 = Math.ceil(cy + r);
+        for (let sy = y0; sy <= y1; sy++) {
+            const dy = (sy + 0.5 - cy) / r;
+            for (let sx = x0; sx <= x1; sx++) {
+                const dx = (sx + 0.5 - cx) / r, d = dx * dx + dy * dy;
+                if (d >= 1)
+                    continue;
+                const f = 1 - Math.sqrt(d);
+                this.add(sx, sy, c, f * f * k);
+            }
+        }
+    }
+    glowLine(x0, y0, x1, y1, r, c, k = 0.5) {
+        if (r < 1 || k <= 0.004)
+            return;
+        const ax = this.toX(x0, y0), ay = this.toY(x0, y0), bx = this.toX(x1, y1), by = this.toY(x1, y1);
+        const dx = bx - ax, dy = by - ay, L2 = dx * dx + dy * dy || 1e-9;
+        const X0 = Math.floor(Math.min(ax, bx) - r), X1 = Math.ceil(Math.max(ax, bx) + r);
+        const Y0 = Math.floor(Math.min(ay, by) - r), Y1 = Math.ceil(Math.max(ay, by) + r);
+        for (let sy = Y0; sy <= Y1; sy++)
+            for (let sx = X0; sx <= X1; sx++) {
+                const px = sx + 0.5, py = sy + 0.5, u = (0, math_js_1.clamp)(((px - ax) * dx + (py - ay) * dy) / L2);
+                const ex = ax + dx * u - px, ey = ay + dy * u - py, d = Math.sqrt(ex * ex + ey * ey) / r;
+                if (d >= 1)
+                    continue;
+                const f = 1 - d;
+                this.add(sx, sy, c, f * f * k);
+            }
+    }
+    glowRing(x, y, R, r, c, k = 0.5) {
+        if (r < 1 || k <= 0.004)
+            return;
+        const cx = this.toX(x, y), cy = this.toY(x, y), E = R + r;
+        for (let sy = Math.floor(cy - E); sy <= Math.ceil(cy + E); sy++)
+            for (let sx = Math.floor(cx - E); sx <= Math.ceil(cx + E); sx++) {
+                const d = Math.abs(Math.hypot(sx + 0.5 - cx, sy + 0.5 - cy) - R) / r;
+                if (d >= 1)
+                    continue;
+                const f = 1 - d;
+                this.add(sx, sy, c, f * f * k);
+            }
+    }
+    sprite(rows, pal, x, y, opts = {}) {
+        let s = sprites.get(rows);
+        if (!s)
+            sprites.set(rows, (s = rows.map((r) => [...r])));
+        const k = opts.scale ?? 1, a = opts.a ?? 1, W = s[0]?.length ?? 0, cache = {};
+        for (let r = 0; r < s.length; r++)
+            for (let q = 0; q < s[r].length; q++) {
+                const ch = s[r][q];
+                if (ch === "." || ch === " ")
+                    continue;
+                let c = opts.tint;
+                if (c === undefined) {
+                    c = cache[ch];
+                    if (c === undefined)
+                        c = cache[ch] = pal[ch] === undefined ? 0 : (0, color_js_1.hex)(pal[ch]);
+                }
+                if (!c)
+                    continue;
+                const col = opts.flip ? W - 1 - q : q, row = opts.flipY ? s.length - 1 - r : r;
+                if (k === 1)
+                    this.dot(x + col, y + row, c, a);
+                else
+                    this.rect(x + col * k, y + row * k, k, k, c, a);
+            }
+    }
+    text(str, x, y, c, opts = {}) {
+        const font = opts.font ?? "mini", k = opts.scale ?? 1, a = opts.a ?? 1, w = (0, font_js_1.textWidth)(str, font) * k;
+        const left = Math.round(opts.align === "center" ? x - w / 2 : opts.align === "right" ? x - w : x), top = Math.round(y);
+        const ol = opts.outline, sh = opts.shadow;
+        if (ol !== undefined)
+            (0, font_js_1.rasterText)(str, font, (gx, gy) => this.rect(left + gx * k - 1, top + gy * k - 1, k + 2, k + 2, ol, a));
+        if (sh !== undefined)
+            (0, font_js_1.rasterText)(str, font, (gx, gy) => this.rect(left + gx * k + 1, top + gy * k + 1, k, k, sh, a));
+        (0, font_js_1.rasterText)(str, font, (gx, gy) => this.rect(left + gx * k, top + gy * k, k, k, call(c, gx, gy), a));
+    }
+    measure(str, opts = {}) {
+        const k = opts.scale ?? 1;
+        return [(0, font_js_1.textWidth)(str, opts.font ?? "mini") * k, font_js_1.FONTS[opts.font ?? "mini"].h * k];
+    }
+    mask(m, x, y, c, a = 1) {
+        for (let my = 0; my < m.h; my++)
+            for (let mx = 0; mx < m.w; mx++)
+                if (m.data[my * m.w + mx])
+                    this.dot(x + mx, y + my, call(c, mx, my), call(a, mx, my));
+    }
+    outline(m, x, y, c, a = 1) {
+        const at = (mx, my) => mx >= 0 && my >= 0 && mx < m.w && my < m.h && m.data[my * m.w + mx];
+        for (let my = -1; my <= m.h; my++)
+            for (let mx = -1; mx <= m.w; mx++)
+                if (!at(mx, my) && (at(mx - 1, my) || at(mx + 1, my) || at(mx, my - 1) || at(mx, my + 1)))
+                    this.dot(x + mx, y + my, call(c, mx, my), call(a, mx, my));
+    }
+}
+exports.Painter = Painter;
+
+};
+
+function R(id){if(C[id])return C[id].exports;const m=C[id]={exports:{}};if(!M[id])throw new Error('Missing PixelFX '+id);const local=(x)=>{const seg=id.split('/').slice(0,-1);for(const k of x.split('/')){if(k==='..')seg.pop();else if(k!=='.')seg.push(k)}return R(seg.join('/'))};M[id](m,m.exports,local);return m.exports;}
+const {Painter}=R('src/core/painter.js');const {hex,rgb}=R('src/core/color.js');
+const cache=new WeakMap();
+function createFrame(w,h){return {w,h,ox:0,oy:0,color:new Uint32Array(w*h),light:new Uint32Array(w*h)}}
+function clearFrame(f){f.color.fill(0);f.light.fill(0);return f}
+function painterFor(f){let p=cache.get(f);if(!p)cache.set(f,p=new Painter(f));return p.reset()}
+function composite(f,out){const C=f.color,L=f.light;for(let i=0,n=f.w*f.h;i<n;i++){
+ const c=C[i],l=L[i]&0xffffff,ca=c>>>24;let r=c&255,g=(c>>>8)&255,b=(c>>>16)&255,a=ca;
+ if(l){const lr=l&255,lg=(l>>>8)&255,lb=(l>>>16)&255;
+ if(a<255){const pa=a/255,pr=r*pa+lr,pg=g*pa+lg,pb=b*pa+lb;
+ const na=Math.min(1,Math.max(pa,Math.max(lr,lg,lb)/255));if(na>0){r=Math.min(255,pr/na);g=Math.min(255,pg/na);b=Math.min(255,pb/na);a=na*255;}}
+ else{r=Math.min(255,r+lr);g=Math.min(255,g+lg);b=Math.min(255,b+lb);}}
+ const j=i*4;out[j]=r;out[j+1]=g;out[j+2]=b;out[j+3]=a;
+}return out}
+return {createFrame,clearFrame,painterFor,composite,hex,rgb};
+})();</script><script>(()=>{'use strict';
+const W=240,H=135, TAU=Math.PI*2;
+const cv=document.getElementById('scene'), ctx=cv.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;
+const bg=document.createElement('canvas');bg.width=W;bg.height=H;const b=bg.getContext('2d');
+const fxCanvas=document.createElement('canvas');fxCanvas.width=W;fxCanvas.height=H;const fxCtx=fxCanvas.getContext('2d');
+const f=PFX.createFrame(W,H), fimg=fxCtx.createImageData(W,H),Hc=PFX.hex;
+const COLOR={ink:Hc('#320715'),deep:Hc('#640c27'),wine:Hc('#941334'),body:Hc('#ce274c'),scarlet:Hc('#ed4464'),hot:Hc('#ff7894'),pearl:Hc('#ffc2cb'),white:Hc('#fff2ec'),smoke:Hc('#53122b'),floor:Hc('#a42c48')};
+const $=id=>document.getElementById(id);
+const UI={state:$('sState'),charge:$('sCharge'),motes:$('sMotes'),cool:$('sCool'),hit:$('sHit'),barCharge:$('chargeFill'),barCool:$('coolFill'),hp:$('hpText'),mana:$('manaText'),barHp:$('hpFill'),barMana:$('manaFill'),hitStatus:$('hitStatus'),hitTime:$('hitTime'),notice:$('notice'),cast:$('cast'),move:$('move'),reset:$('reset'),auto:$('auto'),error:$('error')};
+const HERO={x:57,y:107},PALM={x:83,y:70},enemy={x:194,y:103,v:0,auto:false,flash:0,lean:0};
+const COOLDOWN=8, HP_DRAIN=6, MANA_DRAIN=12, MAX_RENDER_MOTES=96, MAX_RENDER_SHOTS=120;
+const MAX_HP=1000,MAX_MANA=1000;
+let hp=MAX_HP,mana=MAX_MANA;
+let phase='ready',charge=0,cool=0,last=0,elapsed=0,hits=0,heldId=null,shake=0,redPulse=0;
+let motes=[],shots=[],sparks=[],wisps=[],impactRings=[],glyphs=[],bloodDrops=[],wounds=[];let bleedTimer=0,afterPulse=0,groundBlood=0,displayedPower=0,visualCount=0;
+let frame=0;const rnd=(a,b)=>a+(b-a)*Math.random(),clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),smooth=q=>q*q*(3-2*q);
+function msg(v){UI.notice.textContent=v}
+function reset(){phase='ready';charge=0;cool=0;elapsed=0;hits=0;shake=0;redPulse=0;heldId=null;hp=MAX_HP;mana=MAX_MANA;enemy.x=194;enemy.v=0;enemy.flash=0;enemy.lean=0;motes=[];shots=[];sparks=[];wisps=[];impactRings=[];glyphs=[];bloodDrops=[];wounds=[];bleedTimer=0;afterPulse=0;groundBlood=0;displayedPower=0;visualCount=0;msg('Giữ để tụ lực không giới hạn · −6 máu và −12 mana mỗi giây · Thả để phóng.');showStats();}
+function newMote(){const lane=Math.floor(rnd(0,3)),life=rnd(.72,1.28);return {lane,life,age:rnd(0,life),size:rnd(.6,1.35),seed:rnd(0,99),st:rnd(-5,5)};}
+function desiredCount(){return Math.min(MAX_RENDER_MOTES,4+Math.floor(charge*7));} function strength(){return 1+charge*.23;}
+function begin(e){if(phase!=='ready')return; if(hp<=1 || mana<=0){msg('Không đủ máu hoặc mana để tiếp tục tụ lực. Nhấn LÀM MỚI DEMO để hồi phục.');return;}if(e&&e.pointerId!=null){heldId=e.pointerId;try{UI.cast.setPointerCapture(e.pointerId)}catch(_){}}phase='charge';charge=0;elapsed=0;redPulse=.5;motes=Array.from({length:4},newMote);shots=[];displayedPower=0;visualCount=4;msg('Huyết Dự kết ấn · Huyết quang theo dòng chảy tụ về đầu ngón tay.');showStats();}
+function end(e){if(phase!=='charge')return;if(e?.pointerId!=null&&heldId!=null&&e.pointerId!==heldId)return;heldId=null;phase='release';elapsed=0;shots=[];const n=Math.max(4,Math.min(MAX_RENDER_SHOTS,4+Math.floor(charge*8)));for(let i=0;i<n;i++){
+ const spread=(i/(n-1)-.5), band=i%3,delay=Math.min(2.4,.008*i+Math.floor(i/10)*.026);
+ shots.push({delay,time:0,duration:rnd(.45,.7)+delay*.22,dx:rnd(-2,2),dy:rnd(-2.6,2.6),bend:spread*27+(band-1)*8,hitOffset:spread*17,trail:[],dead:false,final:i===n-1});
+}
+redPulse=1;msg(`Huyết Kim Tuyến phóng ra — ${n} tia huyết quang, tụ lực ${charge.toFixed(1)} giây!`);showStats();}
+function softReset(){phase='ready';cool=0;charge=0;shots=[];motes=[];msg('Hồi chiêu xong. Tiếp tục tụ lực nếu còn máu và mana.');}
+function makeWisp(x,y,vx,vy,life=1){if(wisps.length>=54)wisps.shift();wisps.push({x,y,vx,vy,life,max:life,r:rnd(2,4.8),rot:rnd(-.9,.9)});}
+function spark(x,y,n=10,power=1){for(let i=0;i<n;i++){const a=rnd(-Math.PI,Math.PI),spd=rnd(15,48)*power;if(sparks.length>=135)sparks.shift();sparks.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,age:0,life:rnd(.25,.72),kind:Math.random()<.17?'pearl':'red',size:Math.random()<.15?2:1});}}
+function dropBlood(x,y,power=1){
+ if(bloodDrops.length>=92)bloodDrops.shift();
+ bloodDrops.push({x,y,vx:rnd(-7,7)*power,vy:rnd(-4,7)*power,life:rnd(.65,1.45),size:rnd(.65,1.5),floor:false});
+}
+function impact(x,y,final){
+ hits++;enemy.flash=final?.4:.10;enemy.lean=final?.94:.27;shake=final?2.0:Math.max(shake,.35);
+ const power=Math.min(3.4,strength()); bleedTimer=6; afterPulse=final?.85:Math.max(afterPulse,.21);
+ impactRings.push({x,y,r:1,life:final?.9:.38,max:final?.9:.38,final});if(impactRings.length>12)impactRings.shift();
+ spark(x,y,final?Math.min(56,28+Math.floor(power*8)):6,final?1.1+Math.min(power*.22,.72):.72);
+ for(let i=0;i<(final?13:3);i++)makeWisp(x+rnd(-5,5),y+rnd(-7,7),rnd(-9,8),rnd(-11,5),rnd(.28,.86));
+ if(final || hits%4===0){
+   for(let j=0;j<(final?18:4);j++)dropBlood(x+rnd(-7,7),y+rnd(-10,12),final?1.5:1);
+ }
+ if(wounds.length<9 || final){
+   wounds.push({y:rnd(-47,-10),x:rnd(-8,9),angle:rnd(-.9,.9),life:6,max:6,seed:rnd(0,100)});
+   if(wounds.length>9)wounds.shift();
+ }
+ if(final){groundBlood=7;msg('HUYẾT TUYẾN XUYÊN THÂN! Máu rơi và huyết ấn lưu lại 6 giây.');}
+}
+function bezier(a,b,c,d,q){const v=1-q;return v*v*v*a+3*v*v*q*b+3*v*q*q*c+q*q*q*d;}
+function inFlow(m,q){q=clamp(q);
+ const z=m.seed*11.3,st=m.st;
+ let a,b,c,d;
+ if(m.lane===0){a=[rndSeed(z,81,105),rndSeed(z+1,17,36)];b=[rndSeed(z+2,73,88),rndSeed(z+3,32,46)];c=[rndSeed(z+4,80,88),rndSeed(z+5,49,57)];d=[PALM.x+st*.22,PALM.y+st*.28];}
+ else if(m.lane===1){a=[rndSeed(z,124,148),rndSeed(z+1,37,61)];b=[rndSeed(z+2,127,146),rndSeed(z+3,49,63)];c=[rndSeed(z+4,105,118),rndSeed(z+5,59,68)];d=[PALM.x+st*.3,PALM.y+st*.24];}
+ else{a=[rndSeed(z,107,143),rndSeed(z+1,98,118)];b=[rndSeed(z+2,120,137),rndSeed(z+3,90,103)];c=[rndSeed(z+4,97,106),rndSeed(z+5,77,83)];d=[PALM.x+st*.28,PALM.y+st*.16];}
+ return {x:bezier(a[0],b[0],c[0],d[0],q),y:bezier(a[1],b[1],c[1],d[1],q)};}
+function rndSeed(seed,lo,hi){const x=Math.sin(seed*12.9898+78.233)*43758.5453;return lo+(x-Math.floor(x))*(hi-lo);}
+function onMove(){enemy.v=(Math.random()>.5?1:-1)*rnd(25,42);msg('Địch bắt đầu di chuyển để kiểm tra độ truy kích của Kim Tuyến.');}
+function step(dt){frame++;shake=Math.max(0,shake-8*dt);redPulse=Math.max(0,redPulse-2.5*dt);enemy.flash=Math.max(0,enemy.flash-1.9*dt);enemy.lean*=Math.pow(.06,dt);
+ let speedLimit=enemy.auto?40:25;if(enemy.auto){enemy.v+=rnd(-20,20)*dt;enemy.v=clamp(enemy.v,-speedLimit,speedLimit)}else enemy.v*=Math.pow(.04,dt);enemy.x=clamp(enemy.x+enemy.v*dt,171,211);if(enemy.x<=171)enemy.v=Math.abs(enemy.v);if(enemy.x>=211)enemy.v=-Math.abs(enemy.v);
+ if(phase==='charge'){
+  // Unlimited charge duration: resources, not a hard-coded timer, determine when to stop.
+  const canHP=(hp-1)/HP_DRAIN,canMP=mana/MANA_DRAIN;
+  const actualDt=Math.max(0,Math.min(dt,canHP,canMP));
+  charge+=actualDt; elapsed+=actualDt; hp=Math.max(1,hp-HP_DRAIN*actualDt);mana=Math.max(0,mana-MANA_DRAIN*actualDt);
+  const targetCount=desiredCount();while(motes.length<targetCount)motes.push(newMote());
+  for(const m of motes){m.age+=dt;if(m.age>=m.life){m.age-=m.life;m.st=rnd(-5,5);} }
+  const freq=4+Math.min(26,Math.log1p(charge)*7);if(Math.random()<freq*dt)makeWisp(PALM.x+rnd(-6,6),PALM.y+rnd(-4,5),rnd(-8,7),rnd(-13,-3),rnd(.32,.9)); if(actualDt<dt-1e-5 || hp<=1.001 || mana<=.001){end();msg('Huyết khí cạn kiệt: Kim Tuyến tự động xuất thủ!');}
+ }else if(phase==='release'){
+   elapsed+=dt;let living=0;
+   for(const s of shots){if(s.dead)continue;s.time+=dt;if(s.time<s.delay){living++;continue;}
+    const q=clamp((s.time-s.delay)/s.duration),v=smooth(q);
+    const startX=PALM.x+s.dx,startY=PALM.y+s.dy;
+    const tx=enemy.x+rndSeed(s.bend*3, -1.6,1.6),ty=enemy.y-18+s.hitOffset*.55;
+    const x=bezier(startX,115+s.bend*.18,enemy.x-46,tx,v);
+    const y=bezier(startY,49-s.bend*.63,ty-29+s.bend*.22,ty,v);
+    s.trail.unshift({x,y});if(s.trail.length>13)s.trail.pop();
+    if(q>=1){s.dead=true;impact(x,y,s.final);continue;}
+    living++;
+   }
+   if(living===0){phase='cooldown';cool=COOLDOWN;msg('Huyết Kim Tuyến đã kết thúc · Hồi chiêu 8 giây.');}
+ }else if(phase==='cooldown'){cool-=dt;if(cool<=0)softReset();}
+ bleedTimer=Math.max(0,bleedTimer-dt);afterPulse=Math.max(0,afterPulse-dt);groundBlood=Math.max(0,groundBlood-dt);
+ if(bleedTimer>0){
+  for(const w of wounds)w.life=Math.min(w.life,bleedTimer);
+  if(Math.random()<dt*(7+Math.min(11,charge*.65))){
+   dropBlood(enemy.x+rnd(-8,8),enemy.y+rnd(-48,-10),1);
+  }
+  if(Math.random()<dt*12){makeWisp(enemy.x+rnd(-10,10),enemy.y+rnd(-43,-18),rnd(-4,5),rnd(-13,-3),rnd(.22,.45));}
+ }else{wounds=[];}
+ for(const d of bloodDrops){d.x+=d.vx*dt;d.y+=d.vy*dt;d.vy+=33*dt;d.life-=dt;
+  if(d.y>=enemy.y+5 && !d.floor){d.floor=true;d.y=enemy.y+5;d.vy=0;d.vx=0;groundBlood=Math.max(groundBlood,.7);}
+ }
+ bloodDrops=bloodDrops.filter(d=>d.life>0);
+ for(const w of wisps){w.x+=w.vx*dt;w.y+=w.vy*dt;w.vx*=Math.pow(.15,dt);w.vy-=3*dt;w.life-=dt;}
+ wisps=wisps.filter(w=>w.life>0);
+ for(const v of sparks){v.age+=dt;v.x+=v.vx*dt;v.y+=v.vy*dt;v.vx*=Math.pow(.34,dt);v.vy+=36*dt;}
+ sparks=sparks.filter(v=>v.age<v.life);
+ for(const r of impactRings){r.r+=(r.final?40:25)*dt;r.life-=dt;}
+ impactRings=impactRings.filter(r=>r.life>0);
+ showStats();}
+function showStats(){UI.state.textContent={ready:'SẴN SÀNG',charge:'NGƯNG QUANG',release:'HỒNG TUYẾN',cooldown:'HỒI CHIÊU'}[phase];UI.state.dataset.phase=phase;
+ UI.charge.textContent=charge.toFixed(1)+'s · ∞';UI.motes.textContent=phase==='charge'?String(4+Math.floor(charge*7)):phase==='release'?String(shots.filter(x=>!x.dead).length):String(0);
+ UI.cool.textContent=phase==='cooldown'?cool.toFixed(1)+'s':'0.0s';UI.hit.textContent=String(hits);
+ UI.barCharge.style.width=(100*(1-Math.exp(-charge/10)))+'%';UI.barCool.style.width=(phase==='cooldown'?(1-cool/8)*100:0)+'%'; UI.hp.textContent=Math.ceil(hp)+' / '+MAX_HP;UI.mana.textContent=Math.ceil(mana)+' / '+MAX_MANA;UI.barHp.style.width=(hp/MAX_HP*100)+'%';UI.barMana.style.width=(mana/MAX_MANA*100)+'%'; UI.hitStatus.hidden=bleedTimer<=0;UI.hitTime.textContent=bleedTimer.toFixed(1); UI.cast.disabled=phase==='release'||phase==='cooldown';
+ UI.cast.textContent=phase==='charge'?'ĐANG NGƯNG TỤ · THẢ ĐỂ BẮN':phase==='cooldown'?'ĐANG HỒI CHIÊU':phase==='release'?'HUYẾT KIM TUYẾN XUẤT THỦ':'GIỮ ĐỂ TỤ LỰC · THẢ ĐỂ PHÓNG';}
+function stageBg(){const g=b.createLinearGradient(0,0,0,H);g.addColorStop(0,'#20111e');g.addColorStop(.48,'#261321');g.addColorStop(.79,'#190e18');g.addColorStop(1,'#0c0b14');b.fillStyle=g;b.fillRect(0,0,W,H);
+ let moon=b.createRadialGradient(181,32,0,181,32,60);moon.addColorStop(0,'rgba(160,57,86,.21)');moon.addColorStop(1,'rgba(160,57,86,0)');b.fillStyle=moon;b.fillRect(121,-28,120,120);
+ b.fillStyle='#492038';b.beginPath();b.arc(184,31,14,0,TAU);b.fill();b.fillStyle='#58253b';b.beginPath();b.arc(180,27,8,0,TAU);b.fill();
+ // Distant broken palace silhouette; contrast is low so the blood FX owns the frame.
+ for(let i=0;i<4;i++){const x=[6,22,221,236][i],h=[54,36,41,58][i];b.fillStyle='#1d1421';b.fillRect(x-5,91-h,10,h+8);b.fillStyle='#392038';b.fillRect(x-6,88-h,12,4);b.fillStyle='#45243b';b.fillRect(x-7,84-h,14,2);b.fillStyle='#6c3145';b.fillRect(x-5,92-h,2,h*.4);}
+ b.fillStyle='#261824';b.beginPath();b.moveTo(0,90);for(let x=0;x<=W;x+=9){b.lineTo(x,74+Math.sin(x*.08)*6+Math.sin(x*.18)*3);}b.lineTo(W,112);b.lineTo(0,112);b.fill();
+ b.fillStyle='#241a24';b.fillRect(0,106,W,29);for(let i=0;i<5;i++){let y=108+i*i*1.2;b.fillStyle=i%2?'#30202d':'#382330';b.fillRect(0,Math.round(y),W,1)}for(let i=0;i<17;i++){let x=i*17;b.fillStyle='#392538';b.fillRect(x+2,112+(i%4)*3,14,1)}
+ b.strokeStyle='#493040';b.lineWidth=1;b.beginPath();b.ellipse(191,113,39,9,0,0,TAU);b.stroke();b.strokeStyle='#312637';b.beginPath();b.ellipse(191,113,31,6,0,0,TAU);b.stroke();
+ // A few static ember-stars, kept sparse.
+ for(let i=0;i<31;i++){let x=Math.floor(rndSeed(i*.93,4,237)),y=Math.floor(rndSeed(i*1.19,5,70));b.fillStyle=i%6===0?'#674353':'#4a3144';b.fillRect(x,y,1,1)}
+}stageBg();
+function drawPlayer(){const x=HERO.x,y=HERO.y;
+ // cast shadow
+ ctx.fillStyle='#0b0b13';ctx.beginPath();ctx.ellipse(x,y+3,15,3.5,0,0,TAU);ctx.fill();
+ // lower split robes
+ px(x-10,y-25,22,21,'#160d1b');px(x-11,y-16,9,17,'#361022');px(x+1,y-15,12,16,'#310e21');px(x-9,y-10,4,10,'#6c1b36');px(x+6,y-12,3,12,'#521527');
+ // boots
+ px(x-8,y,6,4,'#17121c');px(x+4,y,6,4,'#17121c');
+ // chest and mantle
+ px(x-9,y-45,19,24,'#1a101c');px(x-7,y-42,14,22,'#411226');px(x-9,y-42,4,18,'#6d1735');px(x+6,y-41,5,18,'#250d1d');
+ px(x-1,y-38,2,20,'#8f2142');px(x-2,y-27,4,3,'#e7a0a4');
+ // head / shoulder / red hair
+ px(x-5,y-56,11,12,'#291725');px(x-4,y-54,8,9,'#b7887d');px(x-6,y-58,12,5,'#100d18');px(x-7,y-54,4,11,'#18101b');px(x+4,y-55,4,10,'#180e18');
+ px(x+1,y-50,2,1,'#ffcdcc');px(x+3,y-49,2,1,'#e04c6d');
+ // left arm/ritual sign
+ px(x-12,y-42,5,17,'#401126');px(x-15,y-33,5,11,'#68192f');px(x-15,y-27,4,5,'#ae7878');
+ // extended casting arm: distinct hand near the blood focus
+ px(x+8,y-41,8,6,'#4f162b');px(x+12,y-47,7,8,'#6a1933');
+ px(x+17,y-48,6,4,'#b98b87');px(x+22,y-49,2,2,'#ffe4cd');
+ // slight hand glow while charging
+ if(phase==='charge'||phase==='release'){ctx.fillStyle='rgba(255,75,106,.20)';ctx.fillRect(x+17,y-49,8,5)}
+}
+function drawEnemy(){const x=Math.round(enemy.x),y=enemy.y;ctx.save();ctx.translate(x,y);ctx.rotate(enemy.lean*.06);
+ ctx.fillStyle='#090d16';ctx.beginPath();ctx.ellipse(0,6,12,3.1,0,0,TAU);ctx.fill();
+ // dark warrior target with cyan-grey metal plating
+ px(-7,-23,6,25,'#19151f');px(2,-24,7,26,'#1c1722');px(-8,-15,4,12,'#3d2936');
+ px(-9,-42,19,23,'#161622');px(-7,-40,15,19,'#33313a');px(-5,-37,10,9,'#454350');px(-1,-37,2,8,'#7f7179');
+ px(-12,-39,5,16,'#39313b');px(8,-38,5,16,'#292330');
+ px(-7,-55,15,14,'#15131f');px(-5,-52,11,9,'#554450');px(-7,-57,15,5,'#22212b');
+ px(-4,-49,3,2,'#c0445e');px(2,-49,3,2,'#ba394d');
+ px(-10,-20,6,3,'#54404a');px(4,-20,6,3,'#54404a');
+ if(enemy.flash>0){ctx.fillStyle=`rgba(255,220,229,${enemy.flash*.62})`;ctx.fillRect(-9,-54,19,36)}ctx.restore();}
+function px(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
+function drawFx(p){
+ // PixelFX. All live ritual and attack effects are drawn with the library's Painter:
+ // hard palette-colored pixels in f.color and soft additive light in f.light.
+ p.place(0,0);
+ if(phase==='charge')drawChargeFX(p);
+ if(phase==='release')drawLaunchFX(p);
+ drawWispFX(p);drawSparkFX(p);drawHitFX(p);
+}
+function drawChargeFX(p){const power=Math.min(1,charge/12),fx=PALM.x,fy=PALM.y;
+ // Three purposeful blood currents. Energy flows TO the palm rather than circling the whole body.
+ const streams=[
+  [88,21,73,28,83,49],
+  [142,47,128,39,110,61],
+  [128,110,133,92,104,79],
+ ];
+ for(let i=0;i<streams.length;i++){
+  const [ax,ay,bx,by,cx,cy]=streams[i];const fade=(.24+.26*power);
+  let lastX=ax,lastY=ay;
+  for(let j=1;j<=44;j++){
+    const q=j/44,x=bezier(ax,bx,cx,fx,q),y=bezier(ay,by,cy,fy,q);
+    if(j%2===0){ p.line(lastX,lastY,x,y,COLOR.wine,fade*(.4+.6*q));}
+    if(j%8===0 && power>.35) p.glow(x,y,2.5,COLOR.deep,.08*power);
+    lastX=x;lastY=y;
+  }
+  for(let z=0;z<2+Math.floor(power*2);z++){
+    const t=(elapsed*(.48+power*.27)+z*.28+i*.13)%1;
+    const r=Math.min(1,t+.04),x=bezier(ax,bx,cx,fx,t),y=bezier(ay,by,cy,fy,t),nx=bezier(ax,bx,cx,fx,r),ny=bezier(ay,by,cy,fy,r);
+    p.line(x,y,nx,ny,COLOR.hot,.42+.38*power);
+    p.dot(nx,ny,COLOR.pearl,.75);if(z===0)p.glow(nx,ny,3,COLOR.body,.12+.12*power);
+  }
+ }
+ // Fresh motes with varying widths and tapered comet tails.
+ for(let i=0;i<motes.length;i++){
+  const m=motes[i],q=m.age/m.life,head=inFlow(m,q),ta=inFlow(m,Math.max(0,q-.17)),tb=inFlow(m,Math.max(0,q-.09)),tc=inFlow(m,Math.max(0,q-.035));
+  const fade=Math.max(0,Math.min(1,q*7,(1-q)*6));if(fade<=0)continue;
+  const k=fade*(.75+.25*power);
+  p.line(ta.x,ta.y,tb.x,tb.y,COLOR.wine,.58*k);
+  p.line(tb.x,tb.y,tc.x,tc.y,COLOR.body,.93*k);
+  p.line(tc.x,tc.y,head.x,head.y,i%7===0?COLOR.pearl:COLOR.hot,k);
+  p.dot(head.x,head.y,i%6===0?COLOR.white:COLOR.pearl,k);
+  if(i%3===0) p.glow(head.x,head.y,2.8+m.size,COLOR.scarlet,.21*k);
+ }
+ // Faceted blood talisman above the caster's outstretched fingertips.
+ const r=3.3+Math.min(6.8,Math.log1p(charge)*2.3);
+ p.glow(fx,fy,r*3.4,COLOR.scarlet,.15+.22*power);
+ p.glow(fx,fy,r*1.55,COLOR.hot,.18+.16*power);
+ p.poly([[fx,fy-r*2.15],[fx+r*.83,fy-r*.10],[fx+r*.50,fy+r*.45],[fx,fy+r*1.68],[fx-r*.72,fy+r*.13],[fx-r*.86,fy-r*.20]],COLOR.deep);
+ p.poly([[fx,fy-r*1.85],[fx+r*.56,fy-r*.03],[fx,fy+r*1.44],[fx-r*.57,fy]],COLOR.body);
+ p.poly([[fx-1,fy-r*1.65],[fx+r*.35,fy-r*.17],[fx-1,fy+r*.70]],COLOR.hot);
+ p.line(fx,fy-r*1.45,fx,fy+r*.7,COLOR.pearl);
+ p.px(fx-1,fy-2,COLOR.white);
+ // Four angular rune fragments: separate marks, not an orbit ring.
+ if(charge>.3){const k=.42+.48*power,beat=.72+.28*Math.sin(elapsed*9);
+  const marks=[[-14,-8,-10,-13,-6,-12],[13,-8,17,-4,15,0],[-13,10,-10,14,-5,10],[12,11,16,8,17,14]];
+  for(let j=0;j<marks.length;j++){
+   const [x0,y0,x1,y1,x2,y2]=marks[j];p.line(fx+x0,fy+y0,fx+x1,fy+y1,COLOR.scarlet,k*beat);
+   p.line(fx+x1,fy+y1,fx+x2,fy+y2,COLOR.hot,k*(j%2?.85:1));
+   if(j%2===0)p.dot(fx+x1,fy+y1,COLOR.pearl,.6*k);
+  }
+ }
+ if(power>.67){for(let k=0;k<3;k++){
+   const a=(elapsed*2.3+k*TAU/3),dd=r+7+Math.sin(a*2)*2;
+   const xx=fx+Math.cos(a)*dd,yy=fy+Math.sin(a)*dd*.63;
+   p.line(xx-2,yy-1,xx,yy,COLOR.hot,.33+power*.27);
+ }}
+}
+function drawLaunchFX(p){const fx=PALM.x,fy=PALM.y;
+ if(elapsed<.22){const v=1-elapsed/.22;
+  p.glow(fx,fy,16*v+3,COLOR.hot,.35*v);
+  for(let i=0;i<7;i++){const a=i*TAU/7+charge*.1;const r=3+20*(1-v);
+    p.line(fx+Math.cos(a)*r,fy+Math.sin(a)*r*.58,fx+Math.cos(a)*(r+4),fy+Math.sin(a)*(r+4)*.58,COLOR.pearl,v*.7);}
+ }
+ for(const s of shots){if(s.dead||!s.trail.length)continue;
+  let n=s.trail.length;const h=s.trail[0];
+  for(let j=n-1;j>0;j--){const a=s.trail[j],bb=s.trail[j-1],k=(1-j/n);
+    p.line(a.x,a.y,bb.x,bb.y,COLOR.deep,.4*k);
+    if(j<n*.78)p.line(a.x,a.y,bb.x,bb.y,COLOR.body,.52*k);
+    if(j<n*.43)p.line(a.x,a.y,bb.x,bb.y,COLOR.hot,.62*k);
+    if(j<n*.12 && s.final)p.line(a.x,a.y,bb.x,bb.y,COLOR.pearl,.28*k);
+  }
+  p.line(h.x-2,h.y-1,h.x,h.y,COLOR.hot,.8);
+  p.px(h.x,h.y,COLOR.white);
+  if(frame%3===0||s.final)p.glow(h.x,h.y,4.1,COLOR.scarlet,.26);
+ }
+}
+function drawWispFX(p){for(const w of wisps){const k=w.life/w.max;
+  p.disc(w.x,w.y,w.r*(1+.2*(1-k)),COLOR.smoke, .10*k);
+  if(k>.55)p.dot(w.x-1,w.y-1,COLOR.wine,.18*k);
+ }}
+function drawSparkFX(p){for(const s of sparks){const v=1-s.age/s.life,c=s.kind==='pearl'?COLOR.pearl:COLOR.scarlet;
+  const l=clamp(Math.hypot(s.vx,s.vy)*.045,1,6);
+  p.line(s.x-s.vx*.025,s.y-s.vy*.025,s.x,s.y,c,v);
+  if(v>.45) p.px(s.x,s.y,s.kind==='pearl'?COLOR.white:COLOR.hot);
+  if(s.kind==='pearl'&&v>.4)p.glow(s.x,s.y,2,COLOR.body,.18*v);
+ }}
+function drawHitFX(p){
+ // Residual piercing threads, crimson sigils, flowing blood and layered impact bloom.
+ if(bleedTimer>0){
+  const visible=Math.min(1,bleedTimer*1.5),tm=frame*.044;
+  // PixelFX sigil: a fractured hexagonal blood seal, pulsing around the struck enemy.
+  // Several independent planes keep the silhouette legible instead of hiding it under a red cloud.
+  const scx=enemy.x,scy=enemy.y-29,cr=16+Math.sin(tm*2.4)*1.4;
+  p.glow(scx,scy,cr+11,COLOR.scarlet,.07*visible);
+  for(let j=0;j<6;j++){
+    const a=j*TAU/6+tm*.32,b=(j+1)*TAU/6+tm*.32;
+    const ax=scx+Math.cos(a)*cr,ay=scy+Math.sin(a)*cr*1.15;
+    const bx=scx+Math.cos(b)*cr,by=scy+Math.sin(b)*cr*1.15;
+    p.line(ax,ay,bx,by,j%2?COLOR.wine:COLOR.body,.22*visible);
+    if(j%2===0){p.line(ax-1,ay,ax+1,ay,COLOR.hot,.42*visible);}
+  }
+  for(let j=0;j<3;j++){
+    const a=tm*.47+j*TAU/3,rr=9.5;
+    const xx=scx+Math.cos(a)*rr,yy=scy+Math.sin(a)*rr;
+    p.line(xx-2,yy+2,xx+2,yy-2,COLOR.scarlet,.3*visible);
+  }
+  // Dark red string silhouettes crossing the target's body, not hiding the sprite.
+  for(let i=0;i<4;i++){
+   const off=i-1.5,xx=enemy.x+off*3.1, yy=enemy.y-40+i*7;
+   p.line(xx-10,yy-3,xx+10,yy+4,COLOR.deep,.42*visible);
+   p.line(xx-7,yy-4,xx+7,yy+3,i%2?COLOR.hot:COLOR.scarlet,.37*visible);
+  }
+  for(const w of wounds){
+    const wx=enemy.x+w.x,wy=enemy.y+w.y,k=Math.min(1,w.life*1.9);
+    p.line(wx-3,wy-2,wx+3,wy+2,COLOR.wine,.48*k);
+    p.line(wx-2,wy+2,wx+2,wy-2,COLOR.hot,.75*k);
+    p.dot(wx,wy,COLOR.pearl,.85*k);
+    if((frame+Math.floor(w.seed))%7===0)p.glow(wx,wy,3.5,COLOR.scarlet,.14*k);
+  }
+  // Thin vertical blood trails following the body, fading after 6 seconds.
+  for(let k=0;k<3;k++){
+    const yy=enemy.y-39+((tm*9+k*14)%32);
+    const xx=enemy.x-7+k*7;
+    p.line(xx,yy,xx+.4,yy+4,COLOR.wine,.39*visible);
+    p.dot(xx,yy+4,COLOR.hot,.38*visible);
+  }
+ }
+ if(groundBlood>0){
+  const k=Math.min(.8,groundBlood/4);
+  p.disc(enemy.x,enemy.y+5,13,COLOR.deep,.15*k);
+  for(let i=0;i<9;i++){
+   const a=i*2.4,rx=enemy.x+Math.cos(a)*(8+i%3*2.5),ry=enemy.y+5+Math.sin(a)*2;
+   p.line(rx-1,ry,rx+2,ry,COLOR.wine,.21*k);
+  }
+ }
+ for(const d of bloodDrops){
+  const a=Math.min(1,d.life*2);
+  if(d.floor){p.line(d.x-1,d.y,d.x+2,d.y,COLOR.wine,.4*a);}
+  else{p.line(d.x,d.y-2,d.x,d.y+1,COLOR.body,.7*a);p.px(d.x,d.y+1,COLOR.hot);}
+ }
+ if(afterPulse>0){
+   const vv=afterPulse/.85;
+   const r=5+(1-vv)*35;
+   p.glow(enemy.x,enemy.y-28,12+r*.7,COLOR.scarlet,.2*vv);
+   for(let i=0;i<8;i++){
+     const a=i*Math.PI/4+vv*.4,xx=enemy.x+Math.cos(a)*r,yy=enemy.y-27+Math.sin(a)*r*.72;
+     p.line(xx-Math.cos(a)*5,yy-Math.sin(a)*3,xx+Math.cos(a)*3,yy+Math.sin(a)*2,i%2?COLOR.hot:COLOR.body,.7*vv);
+     if(i%2===0)p.glow(xx,yy,2,COLOR.scarlet,.14*vv);
+   }
+ }
+ for(const a of impactRings){const fade=a.life/a.max;
+  const R=a.r,rx=R,ry=R*.65;
+  for(let j=0;j<6;j++){const th=j*TAU/6+elapsed*.5;
+    const ix=a.x+Math.cos(th)*rx,iy=a.y+Math.sin(th)*ry;
+    const jx=a.x+Math.cos(th+.25)*(rx+2),jy=a.y+Math.sin(th+.25)*(ry+1);
+    p.line(ix,iy,jx,jy,j%2?COLOR.scarlet:COLOR.hot,fade*.75);
+  }
+  if(a.final){p.glow(a.x,a.y,12+R,COLOR.scarlet,.13*fade);
+    if(fade>.55){p.line(a.x-12,a.y-9,a.x+12,a.y+9,COLOR.hot,fade*.45);p.line(a.x+12,a.y-9,a.x-12,a.y+9,COLOR.pearl,fade*.45);}}
+ }}
+function paint(){ctx.clearRect(0,0,W,H);ctx.save();if(shake>0)ctx.translate(rnd(-shake,shake),rnd(-shake*.5,shake*.5));ctx.drawImage(bg,0,0);drawEnemy();drawPlayer();
+ PFX.clearFrame(f);const p=PFX.painterFor(f);drawFx(p);PFX.composite(f,fimg.data);fxCtx.putImageData(fimg,0,0);ctx.drawImage(fxCanvas,0,0);
+ // local hit flash only, not fullscreen wash.
+ if(enemy.flash>.1){ctx.fillStyle=`rgba(255,35,80,${enemy.flash*.05})`;ctx.fillRect(enemy.x-24,enemy.y-62,48,55)}ctx.restore();}
+function loop(ts){const dt=Math.min(.034, (ts-last||16)/1000);last=ts;try{step(dt);paint();}catch(e){UI.error.hidden=false;UI.error.textContent='Lỗi kỹ năng: '+e.message;console.error(e);}requestAnimationFrame(loop);}
+function pointerDown(e){e.preventDefault();begin(e)}function pointerUp(e){end(e)}
+UI.cast.addEventListener('pointerdown',pointerDown);UI.cast.addEventListener('pointerup',pointerUp);UI.cast.addEventListener('pointercancel',pointerUp);UI.cast.addEventListener('lostpointercapture',pointerUp);document.addEventListener('pointerup',pointerUp);window.addEventListener('blur',()=>{if(phase==='charge')end()});
+UI.cast.addEventListener('keydown',e=>{if((e.code==='Space'||e.code==='Enter')&&!e.repeat){e.preventDefault();begin()}});UI.cast.addEventListener('keyup',e=>{if(e.code==='Space'||e.code==='Enter'){e.preventDefault();end()}});
+UI.reset.addEventListener('click',reset);UI.move.addEventListener('click',onMove);UI.auto.addEventListener('click',()=>{enemy.auto=!enemy.auto;UI.auto.textContent='MỤC TIÊU DI CHUYỂN: '+(enemy.auto?'BẬT':'TẮT')});
+window.__skillTest={begin,release:end,step,paint,reset,state:()=>({phase,charge,cool,motes:motes.length,shots:shots.length,hits,hp,mana,bleedTimer,wounds:wounds.length}),forceCharge:s=>{if(phase==='ready')begin();charge=Math.max(0,s); hp=Math.max(1,MAX_HP-HP_DRAIN*charge);mana=Math.max(0,MAX_MANA-MANA_DRAIN*charge);while(motes.length<desiredCount())motes.push(newMote())}};
+reset();requestAnimationFrame(loop);
+})();
+</script></body></html>

@@ -1,0 +1,7 @@
+PK LOẠN CHIẾN 0.1.41 — VÒNG 1
+
+Nhấn Bắt đầu → chọn Diệp Tu → Xuất chiến. Sau 5 giây Huyết Dự Kim Đan giáng lâm, camera giới thiệu boss rồi trận chiến bắt đầu. Boss có AI và 5 kỹ năng. Tấn công boss khi đang tụ Huyết Bạo để ngắt; Thổ Thuẫn có thể đỡ vụ nổ. Thắng khi hạ boss, thua khi hết HP.
+
+Thủy Kiếm dùng 60 MP, kết ấn 5 giây, gây làm chậm khi kiếm trúng. Giữ nguyên hình ảnh của cả hai nhân vật.
+
+Đã kiểm tra logic và vòng lặp game bằng môi trường mô phỏng; chưa kiểm thử trực tiếp cảm ứng và âm thanh trên điện thoại.

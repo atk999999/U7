@@ -1,0 +1,221 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><title>Huyết Dự — Skill 01 · Huyết Thủ Trảo Hồn V4 · Huyết Tích 8s</title><style>
+:root{color-scheme:dark;--ink:#ffe9ee;--muted:#c9aab0}*{box-sizing:border-box}html,body{margin:0;background:#12080b;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}body{padding:14px 10px 28px;background:radial-gradient(ellipse at 50% -14%,#4a121d 0,#1d0b10 40%,#0d0709 82%)}.wrap{max-width:900px;margin:auto}.top{text-align:center;margin:3px auto 14px}.eyebrow{font-size:10px;letter-spacing:.24em;font-weight:800;color:#ffadb9}.top h1{margin:4px 0 6px;font-size:clamp(27px,7vw,48px);line-height:1.06;letter-spacing:.12em;background:linear-gradient(#fff1f4,#ffc4cf 28%,#ff798e 60%,#b0152f 100%);-webkit-background-clip:text;background-clip:text;color:transparent}.subtitle{margin:0;color:#d4b0b9;font-size:12px}.frame{position:relative;border:1px solid #5d2a35;border-radius:14px;overflow:hidden;background:#12090d;box-shadow:0 14px 40px #0009,0 0 24px #ff506414}.screen{display:block;width:100%;height:auto;aspect-ratio:480/270;image-rendering:pixelated}.badge{position:absolute;top:9px;right:9px;padding:3px 8px;border-radius:999px;border:1px solid #8c4553;background:#241217c9;font-size:9px;font-weight:800;letter-spacing:.06em;color:#ffe0e7}.badge.left{left:9px;right:auto;color:#ffb7c2}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:10px}.stat{background:linear-gradient(165deg,#261319,#140c10);border:1px solid #4a2730;border-radius:11px;padding:9px 5px;text-align:center}.stat .k{font-size:10px;color:#c39ba5;margin-bottom:5px;white-space:nowrap}.stat .v{font-size:clamp(14px,2.9vw,20px);font-weight:900;letter-spacing:-.03em;color:#fff3f5;font-variant-numeric:tabular-nums}.stat .v.ready{color:#c5ffd5}.stat .v.cast{color:#ffd5df}.stat .v.cd{color:#ffb1c3}.bar-wrap{font-size:10px;font-weight:700;color:#d8b4bc;margin-top:10px}.bar{height:7px;background:#331b22;border-radius:999px;overflow:hidden;margin-top:4px}.fill{height:100%;width:0;transition:width .1s linear}.blood{background:linear-gradient(90deg,#5e0f1f,#b81936,#ff6b7f)}.cdbar{background:linear-gradient(90deg,#ff9aa8,#c31835)}.msg{min-height:38px;display:flex;justify-content:center;align-items:center;text-align:center;font-size:12px;font-weight:700;color:#ffe7ec;padding:6px 4px}.controls{display:grid;grid-template-columns:1.2fr 1fr;gap:8px}.controls button,.tools button{min-height:54px;padding:8px 7px;border-radius:11px;border:1px solid #7d4250;background:linear-gradient(#3b1720,#251017);color:#ffedf1;font-size:clamp(12px,2.6vw,15px);font-weight:900;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}.controls button.primary{background:linear-gradient(#c22a45,#7f1026);border-color:#ffc0cb;color:#fff}.controls button:disabled,.tools button:disabled{opacity:.55;cursor:default}.controls button:active,.tools button:active{transform:translateY(1px)}.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.description{margin-top:12px;padding:10px 12px;border:1px solid #4a2730;border-radius:10px;background:#181015;color:#dab6be;font-size:12px;line-height:1.72}.description b{color:#ffeef2}footer{text-align:center;color:#8f7279;font-size:10px;margin-top:12px}.error{display:none;margin-top:8px;border:1px solid #a54b52;background:#4f2128;color:#fff;padding:8px;border-radius:8px;font-size:11px}.error.show{display:block}@media(max-width:540px){body{padding:9px 6px 22px}.grid{grid-template-columns:repeat(2,1fr)}.controls{grid-template-columns:1fr}.controls button,.tools button{min-height:50px}.tools{grid-template-columns:1fr 1fr}}.bleed-row{margin-top:10px;border:1px solid #7b283b;border-radius:9px;padding:7px 9px;background:#270c15}.bleed-row[hidden]{display:none}.bleed-head{display:flex;align-items:center;justify-content:space-between;gap:4px;color:#ff9eae;font-weight:850;font-size:10px}.bleed-head strong{color:#ffe7eb;font-variant-numeric:tabular-nums;font-size:13px}.bleed-track{height:5px;margin-top:6px;background:#441b25;overflow:hidden;border-radius:99px}.bleed-track>div{height:100%;width:100%;background:linear-gradient(90deg,#8b0d24,#ff344c,#ffa7ad);transition:width .075s linear}
+</style></head><body><main class="wrap"><header class="top"><div class="eyebrow">PIXELFX · HUYẾT DỰ · KỸ NĂNG 01</div><h1>HUYẾT THỦ TRẢO HỒN</h1><p class="subtitle">Kết ấn triệu hồi bàn tay máu lao tới kẻ địch · Khí đỏ, máu bắn, giọt máu rơi · Hồi chiêu 5 giây</p></header><section class="frame"><canvas class="screen" id="arena" width="480" height="270"></canvas><span class="badge left">HUYẾT PHÁP</span><span class="badge">OFFLINE · PIXELFX · HUYẾT TRẢO V3</span></section><section class="grid"><div class="stat"><div class="k">TRẠNG THÁI</div><div class="v ready" id="state">SẴN SÀNG</div></div><div class="stat"><div class="k">HỒI CHIÊU</div><div class="v" id="cdTxt">0.0 / 5.0s</div></div><div class="stat"><div class="k">SỐ LẦN TRÚNG</div><div class="v" id="hitsTxt">0</div></div><div class="stat"><div class="k">HIỆU ỨNG</div><div class="v" id="fxTxt">KHÍ HUYẾT</div></div></section><div class="bar-wrap">TIẾN TRÌNH HỒI CHIÊU<div class="bar"><div class="fill cdbar" id="cdBar"></div></div></div><div class="bar-wrap">MẬT ĐỘ HUYẾT KHÍ<div class="bar"><div class="fill blood" id="bloodBar"></div></div></div><div class="bleed-row" id="bleedRow" hidden><div class="bleed-head"><span>HUYẾT TÍCH · MỤC TIÊU ĐANG CHẢY MÁU</span><strong id="bleedTime">8.0s</strong></div><div class="bleed-track"><div id="bleedFill"></div></div></div><div class="msg" id="message">Nhấn thi triển để kết ấn và triệu hồi bàn tay huyết.</div><div class="controls"><button class="primary" id="castBtn" type="button">THI TRIỂN BÀN TAY HUYẾT</button><button id="moveBtn" type="button">CHO MỤC TIÊU DI CHUYỂN</button></div><div class="tools"><button id="resetBtn" type="button">LÀM MỚI DEMO</button><button id="autoBtn" type="button">MỤC TIÊU TỰ ĐỘNG: TẮT</button></div><div class="error" id="error"></div><div class="description"><b>Cơ chế:</b> Huyết Dự <b>kết ấn</b>, triệu hồi một <b>huyết thủ khổng lồ với năm móng vuốt</b> từ huyết khí và phóng thẳng về phía địch. Trong lúc thi triển xuất hiện <b>khí đỏ</b>, <b>tia huyết khí</b>, <b>máu loang</b> và <b>giọt máu rơi</b>. Khi chạm mục tiêu, bàn tay siết lại tạo <b>vụ bạo huyết</b> và mưa máu ngắn. Mục tiêu trúng đòn bị <b>Huyết Tích trong đúng 8 giây</b>: các vệt máu chảy dọc thân, giọt máu liên tục rơi xuống và để lại vũng máu nhỏ trên mặt đất. Trúng lần nữa khi đang chảy máu sẽ <b>làm mới 8 giây</b>. Skill có <b>hồi chiêu 5 giây</b>. Đây là file HTML độc lập, không dùng ảnh ngoài và không sửa game gốc.</div><footer>Blood hand · crimson aura · blood droplets · red mist · impact burst · HTML độc lập</footer></main><script>(()=>{'use strict';const cvs=document.getElementById('arena'),ctx=cvs.getContext('2d');const W=cvs.width,H=cvs.height,$=id=>document.getElementById(id);const ui={state:$('state'),cdTxt:$('cdTxt'),hitsTxt:$('hitsTxt'),fxTxt:$('fxTxt'),cdBar:$('cdBar'),bloodBar:$('bloodBar'),message:$('message'),castBtn:$('castBtn'),moveBtn:$('moveBtn'),resetBtn:$('resetBtn'),autoBtn:$('autoBtn'),error:$('error'),bleedRow:$('bleedRow'),bleedTime:$('bleedTime'),bleedFill:$('bleedFill')};const player={x:132,y:184};const target={x:388,y:182,vx:0,auto:false,free:true,flash:0,bled:0,bleedTime:0,bleedSpawn:0};let phase='ready',cd=0,castTime=0,hits=0,last=0;let hand=null,particles=[],drops=[],shock=[],sealSpin=0,bloodDensity=0,bloodPools=[];function msg(s){ui.message.textContent=s}function reset(){phase='ready';cd=0;castTime=0;hits=0;target.x=388;target.vx=0;target.flash=0;target.bled=0;target.bleedTime=0;target.bleedSpawn=0;hand=null;particles=[];drops=[];shock=[];bloodPools=[];sealSpin=0;bloodDensity=0;msg('Nhấn thi triển để kết ấn và triệu hồi bàn tay huyết.');upd()}function cast(){if(phase!=='ready')return;phase='cast';castTime=0;hand=null;shock=[];bloodDensity=.15;msg('Huyết Dự kết ấn... huyết khí hội tụ thành bàn tay máu.');upd()}function spawnHand(){phase='hand';const dx=target.x-player.x,dy=(target.y-12)-(player.y-20),d=Math.hypot(dx,dy)||1;hand={x:player.x+47,y:player.y-24,vx:dx/d*260,vy:dy/d*260,rot:0,life:0,grab:0,size:1};for(let i=0;i<14;i++)emit('mist',player.x+6,player.y-24,1);msg('Bàn tay huyết đã xuất hiện và lao tới mục tiêu!');}function impact(){if(!hand)return;phase='impact';hits++;target.flash=.28;target.bled=1;target.bleedTime=8;target.bleedSpawn=0;hand.grab=.4;bloodDensity=1;for(let i=0;i<34;i++)emit('blood',target.x,target.y-12,1.65);for(let i=0;i<18;i++)emit('mist',target.x,target.y-14,1.2);for(let i=0;i<14;i++)spawnDrop(target.x+(Math.random()-.5)*12,target.y-8+(Math.random()-.5)*8,1.2);shock=[{r:15,life:.55,max:.55,col:'rgba(255,150,165,'},{r:24,life:.75,max:.75,col:'rgba(170,20,40,'}];msg('Huyết thủ chụp trúng! Mục tiêu chịu HUYẾT TÍCH, liên tục rơi máu trong 8 giây.');}function beginCd(){phase='cooldown';cd=5;hand=null;castTime=0;sealSpin=0;msg('Bàn Tay Huyết đã kết thúc. Đang hồi chiêu 5 giây.');upd()}function moveTarget(){target.vx=(Math.random()<.5?-1:1)*(44+Math.random()*46);msg('Mục tiêu bắt đầu di chuyển.')}function emit(type,x,y,scale=1){if(type==='mist'){particles.push({type,x,y,vx:(Math.random()-.5)*20*scale,vy:(Math.random()-.5)*18*scale-8,life:.35+Math.random()*.55,max:1,size:6+Math.random()*12*scale,col:Math.random()<.35?'rgba(255,84,112,':'rgba(140,13,36,'});return;}particles.push({type,x,y,vx:(Math.random()-.5)*34*scale,vy:(Math.random()-.5)*34*scale-(type==='blood'?10:0),life:.35+Math.random()*.7,max:1,size:1+Math.random()*2.8*scale,col:type==='blood'?(Math.random()<.22?'#ffb6bf':Math.random()<.5?'#ff5d78':'#8a1227'):'#fff'});}function spawnDrop(x,y,scale=1){drops.push({x,y,vx:(Math.random()-.5)*8*scale,vy:16+Math.random()*28*scale,life:.65+Math.random()*.8,max:1,size:2+Math.random()*3*scale,splash:false});}
+function spawnBleedingDrop(){
+  // The blood emission point follows the enemy (including if they move).
+  const anchors=[[0,-26],[-6,-21],[5,-18],[-4,-9],[6,-4],[0,2]];
+  const a=anchors[Math.floor(Math.random()*anchors.length)];
+  const xx=target.x+a[0]+(Math.random()-.5)*3;
+  const yy=target.y+a[1]+(Math.random()-.5)*4;
+  drops.push({x:xx,y:yy,vx:(Math.random()-.5)*19+target.vx*.12,vy:12+Math.random()*20,
+    life:1.65,max:1.65,size:1.8+Math.random()*1.65,splash:false,bleed:true});
+  if(Math.random()<.32)emit('blood',xx,yy,.32);
+}
+function bleedTick(dt){
+  if(target.bleedTime>0){
+    const seconds=Math.min(dt,target.bleedTime);
+    target.bleedTime=Math.max(0,target.bleedTime-dt);
+    target.bleedSpawn+=seconds;
+    // ~10 streams per second; deterministic sampling independent of frame rate.
+    while(target.bleedSpawn>=.105){target.bleedSpawn-=.105;
+      spawnBleedingDrop(); if(Math.random()<.27)spawnBleedingDrop();
+    }
+    if(target.bleedTime===0){target.bleedSpawn=0;if(phase==='ready'||phase==='cooldown')msg('Huyết Tích đã chấm dứt sau 8 giây.');}
+  }
+  bloodPools=bloodPools.filter(p=>(p.life-=dt)>0);
+}
+function addPool(x){
+  if(bloodPools.length>38)bloodPools.shift();
+  bloodPools.push({x,y:207+Math.random()*2,r:1.6+Math.random()*2.6,life:4.4,max:4.4});
+}
+function upd(){ui.state.textContent=phase==='ready'?'SẴN SÀNG':phase==='cast'?'KẾT ẤN':phase==='hand'?'HUYẾT THỦ LAO TỚI':phase==='impact'?'HUYẾT BẠO': 'HỒI CHIÊU';ui.state.className='v '+(phase==='ready'?'ready':phase==='cooldown'?'cd':'cast');ui.cdTxt.textContent=phase==='cooldown'?`${(5-cd).toFixed(1)} / 5.0s`:`0.0 / 5.0s`;ui.hitsTxt.textContent=String(hits);ui.fxTxt.textContent=target.bleedTime>0?'HUYẾT TÍCH':phase==='cast'?'HỘI TỤ':phase==='hand'?'TRUY KÍCH':phase==='impact'?'BẠO HUYẾT':'KHÍ HUYẾT';ui.bleedRow.hidden=target.bleedTime<=0;ui.bleedTime.textContent=target.bleedTime.toFixed(1)+'s';ui.bleedFill.style.width=(target.bleedTime/8*100).toFixed(2)+'%';ui.cdBar.style.width=`${phase==='cooldown'?(1-cd/5)*100:0}%`;ui.bloodBar.style.width=`${Math.min(100, bloodDensity*100)}%`;ui.castBtn.disabled=phase!=='ready';}
+function step(dt){const lim=target.auto?82:60;if(target.auto&&phase!=='impact'){target.vx+=(Math.random()-.5)*15*dt;target.vx=Math.max(-lim,Math.min(lim,target.vx));}else target.vx*=Math.pow(.06,dt);target.x+=target.vx*dt;if(target.x<330){target.x=330;target.vx=Math.abs(target.vx)}if(target.x>420){target.x=420;target.vx=-Math.abs(target.vx)}target.flash=Math.max(0,target.flash-dt);target.bled=Math.max(0,target.bled-dt*.65);bloodDensity=Math.max(.08,bloodDensity-dt*.22);sealSpin+=dt*2.2;bleedTick(dt);
+if(phase==='cast'){castTime+=dt;bloodDensity=Math.min(1,.15+castTime*.7);for(let i=0;i<3;i++)emit('mist',player.x+(Math.random()-.5)*12,player.y-26+(Math.random()-.5)*12,.6);if(Math.random()<dt*22)spawnDrop(player.x+(Math.random()-.5)*18,player.y-35, .7);if(castTime>=.7)spawnHand();}
+else if(phase==='hand'&&hand){hand.life+=dt;hand.x+=hand.vx*dt;hand.y+=hand.vy*dt;hand.rot=Math.atan2(hand.vy,hand.vx)+Math.PI/2;bloodDensity=Math.min(1,.45+hand.life*.5);for(let i=0;i<3;i++)emit('mist',hand.x+(Math.random()-.5)*30,hand.y+(Math.random()-.5)*30,.6);if(Math.random()<dt*36)spawnDrop(hand.x+(Math.random()-.5)*30,hand.y+20,.75);const hit=Math.abs(hand.x-(target.x-65))<17&&Math.abs(hand.y-(target.y-12))<26;if(hit)impact();else if(hand.x>W+30||hand.y<-40||hand.y>H+40){beginCd();}}
+else if(phase==='impact'){if(hand){hand.grab=Math.max(0,hand.grab-dt);hand.x+=((target.x-65)-hand.x)*dt*8;hand.y+=((target.y-12)-hand.y)*dt*8;}if(Math.random()<dt*28){emit('blood',target.x+(Math.random()-.5)*16,target.y-16+(Math.random()-.5)*16,1.05);spawnDrop(target.x+(Math.random()-.5)*14,target.y-6,1.05);}shock=shock.filter(s=>(s.life-=dt)>0);shock.forEach(s=>s.r+=65*dt);if(target.bled<=.18)beginCd();}
+else if(phase==='cooldown'){cd=Math.max(0,cd-dt);bloodDensity=Math.max(.08,bloodDensity-dt*.35);if(cd<=0){phase='ready';msg('Bàn Tay Huyết đã hồi xong, có thể thi triển lại.');}}
+particles=particles.filter(p=>(p.life-=dt)>0);particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;if(p.type==='mist'){p.vx*=Math.pow(.06,dt);p.vy-=4*dt;}else{p.vx*=Math.pow(.18,dt);p.vy+=18*dt;}});drops=drops.filter(d=>(d.life-=dt)>0);drops.forEach(d=>{d.x+=d.vx*dt;d.y+=d.vy*dt;d.vy+=52*dt;if(!d.splash&&d.y>206){d.splash=true;addPool(d.x);for(let i=0;i<(d.bleed?2:4);i++)emit('blood',d.x,204,d.bleed?.21:.42);d.vy=0;d.vx=0;d.life=Math.min(d.life,.09);}});upd();}
+function draw(){ctx.clearRect(0,0,W,H);drawBg();drawBloodPools();drawTarget();drawBleedingOverlay();drawPlayer();if(phase==='cast')drawSeal();if(hand)drawHand(hand);drawParticles();drawDrops();drawShock();drawHud();}
+function drawBg(){const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#341019');g.addColorStop(.5,'#160a0f');g.addColorStop(1,'#0d0709');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.fillStyle='#240d13';for(let i=0;i<7;i++)ctx.fillRect(0,28+i*29,W,1);ctx.fillStyle='#180d12';ctx.fillRect(0,204,W,66);for(let i=0;i<W;i+=20){ctx.fillStyle=i%40===0?'#241018':'#1a0c12';ctx.fillRect(i,204,20,66);}for(let i=0;i<8;i++){const x=i*62+14;glow(x,44+(i%2)*12,16,'rgba(255,50,80,.04)');}}
+function drawPlayer(){shadow(player.x,player.y+18,18,5,'rgba(0,0,0,.28)');rect(player.x-4,player.y-44,8,8,'#f0d8c0');rect(player.x-6,player.y-36,12,16,'#321c28');rect(player.x-8,player.y-20,16,18,'#551521');rect(player.x-13,player.y-34,6,18,'#6e1a2c');rect(player.x+7,player.y-34,6,18,'#6e1a2c');rect(player.x-8,player.y-2,6,18,'#43121d');rect(player.x+2,player.y-2,6,18,'#43121d');rect(player.x-6,player.y-47,12,4,'#140d11');if(phase!=='ready')glow(player.x,player.y-18,22,'rgba(255,62,95,.11)');}
+function drawTarget(){shadow(target.x,target.y+18,16,5,'rgba(0,0,0,.22)');ctx.fillStyle=target.flash>0?'#ffd0d8':'#6b4a2f';ctx.fillRect(target.x-10,target.y-40,20,42);ctx.fillStyle='#885f3d';ctx.fillRect(target.x-15,target.y-44,30,8);ctx.fillRect(target.x-18,target.y+4,36,6);ctx.fillStyle='#c6a678';ctx.fillRect(target.x-3,target.y+10,6,12);if(target.bled>0){glow(target.x,target.y-10,18,'rgba(255,70,100,'+(0.08+target.bled*.12)+')');ctx.strokeStyle='rgba(255,110,130,'+(0.15+target.bled*.4)+')';ctx.beginPath();ctx.arc(target.x,target.y-12,12+target.bled*12,0,Math.PI*2);ctx.stroke();}}
+function drawBloodPools(){
+  bloodPools.forEach(p=>{
+    const a=Math.min(.56,p.life/p.max*.56);
+    ctx.fillStyle='rgba(112,9,26,'+a+')';
+    ctx.beginPath();ctx.ellipse(p.x,p.y,p.r*2.8,p.r*.66,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(243,50,73,'+a*.38+')';
+    ctx.fillRect(p.x-p.r*.8,p.y-.4,p.r*1.4,.7);
+  });
+}
+function drawBleedingOverlay(){
+  if(target.bleedTime<=0)return;
+  const tt=performance.now()/1000, x=target.x,y=target.y;
+  const alpha=Math.min(1,target.bleedTime*2.5);
+  // Thin, glossy blood rivulets across the body with small travelling droplets.
+  const streams=[[-8,-29,-6,-17,-7,-1],[3,-33,8,-15,6,4],[-1,-18,-3,-8,-1,9]];
+  for(let i=0;i<streams.length;i++){
+    const q=streams[i],pulse=.74+Math.sin(tt*7+i*1.9)*.16;
+    ctx.lineWidth=1.8;ctx.strokeStyle='rgba(201,18,46,'+(pulse*alpha)+')';
+    ctx.beginPath();ctx.moveTo(x+q[0],y+q[1]);
+    ctx.quadraticCurveTo(x+q[2]+Math.sin(tt*2+i)*2,y+q[3],x+q[4],y+q[5]);ctx.stroke();
+    ctx.lineWidth=.65;ctx.strokeStyle='rgba(255,136,145,'+(alpha*.73)+')';
+    ctx.beginPath();ctx.moveTo(x+q[0]-1,y+q[1]+2);
+    ctx.lineTo(x+q[2]-1,y+q[3]);ctx.stroke();
+    const dropPhase=(tt*.85+i*.27)%1;
+    ctx.fillStyle='rgba(249,65,88,'+(alpha*.86)+')';
+    ctx.fillRect(x+q[2]+Math.sin(tt*2+i)*1.5,y+q[1]+(q[5]-q[1])*dropPhase,1.5,3);
+  }
+  // Compact effect label follows the target and does not obscure the attack.
+  const label='HUYẾT TÍCH '+target.bleedTime.toFixed(1)+'s';
+  ctx.font='bold 8px system-ui,sans-serif';
+  const tw=ctx.measureText(label).width;
+  ctx.fillStyle='rgba(41,7,18,.82)';
+  ctx.fillRect(x-tw/2-5,y-73,tw+10,13);
+  ctx.fillStyle='#ff9da9';ctx.textAlign='center';ctx.fillText(label,x,y-63);ctx.textAlign='start';
+}
+function drawSeal(){const x=player.x,y=player.y-18;glow(x,y,28,'rgba(255,82,112,.16)');for(let i=0;i<2;i++){ctx.strokeStyle=`rgba(255,${100+i*30},${120+i*20},${0.3-i*0.08})`;ctx.lineWidth=1.3;ctx.beginPath();for(let a=0;a<=Math.PI*2+.2;a+=0.3){const rr=16+i*8+Math.sin(a*5+sealSpin*(i?-.8:1))*1.6;const px=x+Math.cos(a+sealSpin*(i?-.7:1))*rr,py=y+Math.sin(a+sealSpin*(i?-.7:1))*rr*.55;if(a===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);}ctx.stroke();}ctx.strokeStyle='rgba(255,180,190,.55)';ctx.beginPath();ctx.moveTo(x-12,y);ctx.lineTo(x+12,y);ctx.moveTo(x,y-10);ctx.lineTo(x,y+10);ctx.stroke();}
+function drawHand(h){
+ // HUYẾT THỦ V3: the hand is a grasping predator, not a flat palm.
+ // Flight: four hooked talons splay toward the enemy. Impact: joints bend into a fist.
+ const t=performance.now()*.001;
+ const grip=phase==='impact'?Math.min(1,Math.max(0,(.4-h.grab)/.21)):0;
+ const anticipation=phase==='hand'?Math.max(0,Math.min(1,(h.life-.32)/.26)):0;
+ const curl=Math.min(1,grip+anticipation*.18);
+ const rise=phase==='hand'?Math.min(1,(h.life+.15)/.26):1;
+ const S=(1.83+(phase==='impact'?.12:0))*rise;
+ ctx.save();ctx.translate(h.x,h.y);ctx.rotate(h.rot);
+ ctx.scale(S,S);
+ // Cavernous crimson vapor and pressure streams around the wrist.
+ glow(0,-7,48,'rgba(231,33,61,.18)','rgba(80,0,18,0)');
+ glow(0,-17,32,'rgba(255,84,101,.12)','rgba(80,0,18,0)');
+ for(let i=0;i<6;i++){
+   const dx=(i-2.5)*5.2,wiggle=Math.sin(t*4+i*1.7)*4;
+   ctx.strokeStyle=i%2?'rgba(110,7,27,.76)':'rgba(203,28,57,.62)';
+   ctx.lineWidth=1.6+i%3;ctx.lineCap='round';
+   ctx.beginPath();ctx.moveTo(dx*.6,15);
+   ctx.bezierCurveTo(dx+wiggle,29,dx*1.5-wiggle,43,dx+Math.sin(t*2.1+i)*7,53);ctx.stroke();
+ }
+ // Blood suspends on hooked claws and falls from the wrist.
+ for(let i=0;i<5;i++){
+   const a=t*(.8+i*.12)+i*1.6,dy=(a*11)%25,xx=-12+i*6.3+Math.sin(a)*1.8;
+   ctx.fillStyle=i%2?'rgba(255,127,143,.77)':'rgba(139,12,32,.82)';
+   ctx.beginPath();ctx.ellipse(xx,25+dy,1.2,2.2,0,0,Math.PI*2);ctx.fill();
+ }
+ // Forearm is visibly truncated into liquid rather than a human wrist.
+ const wr=ctx.createLinearGradient(-13,4,13,5);
+ wr.addColorStop(0,'#3e0614');wr.addColorStop(.28,'#791124');
+ wr.addColorStop(.55,'#d7334c');wr.addColorStop(.85,'#851027');wr.addColorStop(1,'#370611');
+ ctx.fillStyle=wr;ctx.strokeStyle='#330711';ctx.lineWidth=1.5;
+ ctx.beginPath();ctx.moveTo(-13,8);ctx.lineTo(13,8);ctx.quadraticCurveTo(13,24,10,32);
+ ctx.quadraticCurveTo(4,26,-3,34);ctx.quadraticCurveTo(-8,27,-11,33);
+ ctx.quadraticCurveTo(-11,19,-13,8);ctx.fill();ctx.stroke();
+ // Four physically curled, pointed fingers.
+ const digits=[
+   {x:-12.8,len:31.5,w:7.7,spread:-1.1},
+   {x:-4.2,len:42,w:8.3,spread:-.38},
+   {x:5.0,len:40,w:8.1,spread:.34},
+   {x:13.8,len:32.0,w:7.2,spread:1.02}
+ ];
+ const coords=[];
+ for(let i=0;i<digits.length;i++){
+   const f=digits[i], move=Math.sin(t*5.4+i*1.3)*.85*(1-grip);
+   const bx=f.x,by=-11.7;
+   const jx=bx+f.spread*7.5*(1-curl*.65)+move;
+   const jy=by-f.len*(.57-.08*curl);
+   const dx=bx+f.spread*10.3*(1-curl*.7)-bx*.23*curl;
+   const dy=by-f.len*(.96-.34*curl);
+   const tx=dx-Math.sign(f.x)*3.2+Math.sin(i*2)*1.0+(-bx*.34)*curl;
+   const ty=dy+5.3+curl*11.4;
+   coords.push([bx,by,jx,jy,dx,dy,tx,ty]);
+   // Ink silhouette to separate fingers from background and from one another.
+   ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#310713';
+   ctx.lineWidth=f.w+3;ctx.beginPath();ctx.moveTo(bx,by);
+   ctx.quadraticCurveTo(jx,jy,dx,dy);ctx.stroke();
+   ctx.strokeStyle=i%2?'#a91934':'#bd203b';ctx.lineWidth=f.w+.15;
+   ctx.beginPath();ctx.moveTo(bx,by);ctx.quadraticCurveTo(jx,jy,dx,dy);ctx.stroke();
+   ctx.strokeStyle='rgba(250,96,120,.44)';ctx.lineWidth=f.w*.34;
+   ctx.beginPath();ctx.moveTo(bx-1.2,by-1);ctx.quadraticCurveTo(jx-2,jy+2,dx-1.2,dy);ctx.stroke();
+   // The second joint is sharply bent back toward the prey: no straight fingers.
+   ctx.strokeStyle='#420814';ctx.lineWidth=f.w*.80+2;
+   ctx.beginPath();ctx.moveTo(dx,dy);ctx.quadraticCurveTo(tx+1.4,ty-5,tx,ty);ctx.stroke();
+   ctx.strokeStyle='#c72e45';ctx.lineWidth=f.w*.72;
+   ctx.beginPath();ctx.moveTo(dx,dy);ctx.quadraticCurveTo(tx+1.4,ty-5,tx,ty);ctx.stroke();
+   // Grooves, distinct bent knuckles, and dark joint sockets.
+   ctx.strokeStyle='rgba(51,4,18,.81)';ctx.lineWidth=1.25;
+   ctx.beginPath();ctx.moveTo(jx-3,jy-1);ctx.lineTo(jx+3,jy+1);ctx.stroke();
+   ctx.strokeStyle='rgba(255,179,183,.62)';ctx.lineWidth=.82;
+   ctx.beginPath();ctx.moveTo(jx-2,jy-3);ctx.lineTo(jx+2,jy-2);ctx.stroke();
+   // Inward-facing, pointed talon hooks as an actual silhouette.
+   const dxTip=-Math.sign(f.x||1)*(5.5+curl*1.3);
+   const dyTip=5.5+curl*2;
+   ctx.fillStyle=i===1?'#ffacb9':'#f7a2ad';
+   ctx.strokeStyle='#6b1024';ctx.lineWidth=.85;
+   ctx.beginPath();ctx.moveTo(tx-2.4,ty-2);
+   ctx.quadraticCurveTo(tx+2.2,ty-1,tx+dxTip,ty+dyTip);
+   ctx.quadraticCurveTo(tx-1.2,ty+1.3,tx-2.4,ty-2);
+   ctx.fill();ctx.stroke();
+   ctx.strokeStyle='rgba(255,245,232,.78)';ctx.lineWidth=.65;
+   ctx.beginPath();ctx.moveTo(tx,ty-1);ctx.lineTo(tx+dxTip*.7,ty+dyTip*.7);ctx.stroke();
+ }
+ // Palm: the back is ridged like muscle/armored blood, not a flat stop-hand symbol.
+ const skin=ctx.createLinearGradient(-21,-12,22,16);
+ skin.addColorStop(0,'#450616');skin.addColorStop(.19,'#7f1029');
+ skin.addColorStop(.45,'#bd213d');skin.addColorStop(.60,'#d3314b');
+ skin.addColorStop(.81,'#80112b');skin.addColorStop(1,'#300611');
+ ctx.fillStyle=skin;ctx.strokeStyle='#330712';ctx.lineWidth=2;
+ ctx.beginPath();ctx.moveTo(-17,-13);ctx.quadraticCurveTo(-22,-5,-18,7);
+ ctx.quadraticCurveTo(-14,20,-2,21);ctx.quadraticCurveTo(10,22,18,8);
+ ctx.quadraticCurveTo(22,-3,15,-15);ctx.quadraticCurveTo(0,-20,-17,-13);
+ ctx.closePath();ctx.fill();ctx.stroke();
+ // Four bony knuckle plates and branching vessels.
+ for(let i=0;i<4;i++){
+   const kx=-12+i*8.4;
+   ctx.fillStyle='rgba(255,111,130,.2)';ctx.beginPath();ctx.ellipse(kx,-13,4,3,0,0,Math.PI*2);ctx.fill();
+   ctx.strokeStyle='rgba(252,150,163,.48)';ctx.lineWidth=.8;
+   ctx.beginPath();ctx.arc(kx,-13,2.8,Math.PI*.9,Math.PI*1.85);ctx.stroke();
+ }
+ const pulse=.54+Math.sin(t*11)*.19;
+ ctx.strokeStyle=`rgba(255,132,160,${pulse})`;ctx.lineCap='round';ctx.lineWidth=1.35;
+ ctx.beginPath();ctx.moveTo(-2,17);ctx.bezierCurveTo(-4,8,-10,2,-12,-12);
+ ctx.moveTo(-2,17);ctx.bezierCurveTo(5,10,10,0,13,-12);
+ ctx.moveTo(-2,16);ctx.quadraticCurveTo(3,2,1,-12);ctx.stroke();
+ ctx.fillStyle='rgba(253,111,133,.19)';ctx.beginPath();ctx.ellipse(-7,-1,6,12,-.3,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle='rgba(255,214,211,.32)';ctx.lineWidth=.9;
+ ctx.beginPath();ctx.moveTo(-12,-9);ctx.quadraticCurveTo(-14,1,-10,9);ctx.stroke();
+ // Opposing thumb: SHORT, forward-curled, pins the prey during impact (no thumbs-up).
+ const baseX=-17,baseY=-3;
+ const midX=-22+grip*3,midY=-12+grip*2;
+ const tipX=-16+grip*7,tipY=-26+grip*13;
+ ctx.lineCap='round';ctx.lineJoin='round';
+ ctx.strokeStyle='#340710';ctx.lineWidth=10;
+ ctx.beginPath();ctx.moveTo(baseX,baseY);ctx.quadraticCurveTo(midX-5,midY,midX,midY);
+ ctx.quadraticCurveTo(midX+3,midY-9,tipX,tipY);ctx.stroke();
+ ctx.strokeStyle='#af2038';ctx.lineWidth=7.2;
+ ctx.beginPath();ctx.moveTo(baseX,baseY);ctx.quadraticCurveTo(midX-5,midY,midX,midY);
+ ctx.quadraticCurveTo(midX+3,midY-9,tipX,tipY);ctx.stroke();
+ ctx.strokeStyle='rgba(255,165,175,.44)';ctx.lineWidth=1.6;
+ ctx.beginPath();ctx.moveTo(baseX-1,baseY-2);ctx.quadraticCurveTo(midX-3,midY-3,midX,midY-2);ctx.stroke();
+ // Thumb has its own inward-facing claw, aimed across the hand.
+ ctx.fillStyle='#ffb5bd';ctx.strokeStyle='#601020';ctx.lineWidth=1;
+ ctx.beginPath();ctx.moveTo(tipX-2.4,tipY-2.2);
+ ctx.quadraticCurveTo(tipX+1,tipY-5,tipX+6+grip*4,tipY+1+grip*4);
+ ctx.lineTo(tipX+1,tipY+2);ctx.closePath();ctx.fill();ctx.stroke();
+ // Five thin liquid veins race along the talons.
+ for(let i=0;i<4;i++){
+   const c=coords[i];ctx.strokeStyle='rgba(255,198,201,.27)';ctx.lineWidth=.65;
+   ctx.beginPath();ctx.moveTo(c[0]-1.2,c[1]-2);ctx.quadraticCurveTo(c[2]-1.5,c[3],c[4],c[5]);ctx.stroke();
+ }
+ if(phase==='impact'){
+   const impactAlpha=.24+grip*.38;
+   ctx.strokeStyle=`rgba(255,181,190,${impactAlpha})`;ctx.lineWidth=1.3;
+   ctx.beginPath();ctx.arc(0,-14,31-grip*3,0,Math.PI*2);ctx.stroke();
+ }
+ ctx.restore();
+}
+function drawParticles(){particles.forEach(p=>{const a=Math.min(1,p.life/(p.max||1));if(p.type==='mist'){const col=p.col+a+')';glow(p.x,p.y,p.size,col,'rgba(255,0,0,0)');return;}ctx.fillStyle=hexA(p.col,a);ctx.fillRect(p.x,p.y,p.size,p.size);});}
+function drawDrops(){drops.forEach(d=>{const a=Math.min(1,d.life/(d.max||1));ctx.fillStyle='rgba(170,18,39,'+a+')';ctx.beginPath();ctx.moveTo(d.x,d.y-d.size*.9);ctx.quadraticCurveTo(d.x+d.size*.8,d.y-d.size*.25,d.x,d.y+d.size);ctx.quadraticCurveTo(d.x-d.size*.8,d.y-d.size*.25,d.x,d.y-d.size*.9);ctx.fill();});}
+function drawShock(){shock.forEach(s=>{const a=Math.min(1,s.life/s.max);ctx.strokeStyle=s.col+a+')';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(target.x,target.y-10,s.r*1.15,s.r*.55,0,0,Math.PI*2);ctx.stroke();});}
+function drawHud(){if(phase==='cooldown'){const x=player.x,y=player.y-56,w=66,h=5,p=1-cd/5;ctx.fillStyle='rgba(0,0,0,.32)';ctx.fillRect(x-w/2,y,w,h);ctx.fillStyle='#38151f';ctx.fillRect(x-w/2,y,w,h);ctx.fillStyle='#ff718a';ctx.fillRect(x-w/2,y,w*p,h);}else if(phase==='cast'||phase==='hand'){const x=player.x,y=player.y-56,w=66,h=5,p=phase==='cast'?Math.min(1,castTime/.7):1;ctx.fillStyle='rgba(0,0,0,.32)';ctx.fillRect(x-w/2,y,w,h);ctx.fillStyle='#38151f';ctx.fillRect(x-w/2,y,w,h);ctx.fillStyle='#c51d38';ctx.fillRect(x-w/2,y,w*p,h);}}
+function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}function shadow(cx,cy,rx,ry,c){ctx.fillStyle=c;ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);ctx.fill()}function glow(cx,cy,r,c1,c2='rgba(255,255,255,0)'){const g=ctx.createRadialGradient(cx,cy,1,cx,cy,r);g.addColorStop(0,c1);g.addColorStop(1,c2);ctx.fillStyle=g;ctx.fillRect(cx-r,cy-r,r*2,r*2)}function hexA(h,a){let s=h.replace('#','');if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];const r=parseInt(s.slice(0,2),16),g=parseInt(s.slice(2,4),16),b=parseInt(s.slice(4,6),16);return `rgba(${r},${g},${b},${a})`;}
+function loop(ts){const dt=Math.min(.033,(ts-last||16)/1000);last=ts;try{step(dt);draw();}catch(err){ui.error.textContent='Lỗi JavaScript: '+(err&&err.message||err);ui.error.classList.add('show');console.error(err)}requestAnimationFrame(loop)}ui.castBtn.addEventListener('click',cast);ui.moveBtn.addEventListener('click',moveTarget);ui.resetBtn.addEventListener('click',reset);ui.autoBtn.addEventListener('click',()=>{target.auto=!target.auto;ui.autoBtn.textContent='MỤC TIÊU TỰ ĐỘNG: '+(target.auto?'BẬT':'TẮT');msg(target.auto?'Mục tiêu sẽ tự di chuyển khi chưa bị trúng.':'Đã tắt di chuyển tự động của mục tiêu.')});reset();requestAnimationFrame(loop)})();</script></body></html>

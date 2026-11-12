@@ -1,0 +1,278 @@
+:root{--text:#eff7ff;--accent:#f0c686;--glass:rgba(8,20,37,.76);--stroke:rgba(192,223,255,.27)}*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#081523;color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}button,input,select{font:inherit}button{cursor:pointer;color:var(--text);-webkit-tap-highlight-color:transparent}button:focus-visible{outline:2px solid #e4bb75;outline-offset:2px}#game{position:fixed;inset:0;overflow:hidden;touch-action:none}#scene{position:absolute;width:100%;height:100%;display:block;image-rendering:auto} .hidden{display:none!important}.hud{position:absolute;inset:env(safe-area-inset-top) 0 auto 0;display:flex;align-items:center;gap:12px;min-height:42px;padding:5px max(12px,env(safe-area-inset-left));pointer-events:none;background:linear-gradient(#07121ed9,transparent);font-size:12px;text-shadow:0 1px 2px #000}.hud-brand{display:flex;align-items:baseline;gap:8px}.hud-brand b{font-size:14px;letter-spacing:.6px;color:#f3d19a}.hud-brand span{color:#c9d8e5;font-size:10px}.telemetry{margin-left:auto;display:flex;gap:10px;color:#f0f6ff;font-size:11px}.smallBtn{pointer-events:auto;background:#1c3349a8;border:1px solid #7f9ab974;border-radius:9px;padding:5px 12px;font-size:18px}.vitals{position:absolute;top:calc(env(safe-area-inset-top) + 40px);left:max(12px,env(safe-area-inset-left));display:grid;gap:6px;pointer-events:none;z-index:2}.vital{min-width:194px;padding:6px 9px 7px;border-radius:12px;border:1px solid rgba(210,225,245,.22);background:linear-gradient(180deg,rgba(5,18,30,.84),rgba(8,18,31,.68));box-shadow:0 7px 20px rgba(0,0,0,.24)}.vital-label{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px;font-size:10px;letter-spacing:.7px}.vital-label span{font-weight:800;color:#f1f6fb}.vital-label b{font-size:10px;color:#d6e5f4}.vital-track{position:relative;height:12px;border-radius:999px;overflow:hidden;background:rgba(6,13,20,.86);border:1px solid rgba(255,255,255,.10)}.vital-track i{display:block;height:100%;width:100%;border-radius:999px}.vital.hp .vital-track i{background:linear-gradient(90deg,#7f0b0b,#d92b23 46%,#ff6959 100%);box-shadow:0 0 12px rgba(248,58,58,.35)}.vital.mp .vital-track i{background:linear-gradient(90deg,#0d2f72,#1982ff 48%,#53d4ff 100%);box-shadow:0 0 12px rgba(45,143,255,.35)}.controls{position:absolute;bottom:max(10px,env(safe-area-inset-bottom));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));height:100px;display:flex;justify-content:space-between;align-items:end;gap:20px;pointer-events:none}.controls button{pointer-events:auto;border:1px solid #bad8ed80;background:rgba(15,42,65,.69);box-shadow:0 3px 13px #07121b8f;touch-action:none;display:flex;align-items:center;justify-content:center;flex-direction:column;line-height:1.05;font-weight:750;font-size:14px}.controls button:active,.controls button.pressed{background:#4e94a9cd;transform:scale(.96)}.controls .control-left,.controls .control-right{display:flex;align-items:end;gap:8px}.pad{width:69px;height:69px;border-radius:19px;font-size:25px!important}.action{width:65px;height:63px;border-radius:18px}.action.flight.on{background:rgba(45,124,122,.89);border-color:#8ff5df}.action.dig{width:76px;background:rgba(105,68,35,.78);border-color:#f1c391a1;font-size:12px}.action small{font-size:9px;color:#ffdaaa;letter-spacing:1.1px}.vertical-pad{display:flex;flex-direction:column;gap:4px}.vpad{width:42px;height:34px;border-radius:10px;font-size:17px!important}.hint{position:absolute;bottom:117px;left:50%;transform:translateX(-50%);background:rgba(7,21,36,.64);border-radius:8px;white-space:nowrap;padding:4px 12px;font-size:10px;color:#e8f1f9;pointer-events:none}.overlay{position:fixed;inset:0;width:100dvw;height:100dvh;display:flex;justify-content:center;align-items:center;background:linear-gradient(110deg,#061225e8,#081528b0 55%,#041325ce);z-index:5;padding:13px;overflow-y:auto}.menu-card{width:min(470px,94vw);max-height:96dvh;overflow-y:auto;padding:24px 27px 20px;border:1px solid rgba(238,203,143,.46);background:linear-gradient(130deg,rgba(10,31,54,.93),rgba(11,25,39,.91));border-radius:21px;box-shadow:0 25px 90px #010815c9;text-align:center;backdrop-filter:blur(8px)}#settings.menu-card{width:min(430px,90vw);padding:16px 18px 18px}.settings-head{position:sticky;top:-6px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 0 10px;background:linear-gradient(180deg,rgba(10,31,54,.98),rgba(10,31,54,.88),rgba(10,31,54,0))}.settings-head h2{margin:0!important}.icon-close{min-width:42px;height:42px;border-radius:12px;background:#17334b;border:1px solid #7d9cb88c;color:#fff;font-size:22px;line-height:1}.icon-close:active{transform:scale(.98)}#settings .setting{padding:9px 0;font-size:12px}#settings .setting select{max-width:48%;padding:6px 8px}#settings .helper{font-size:10px!important;line-height:1.5}#settings #backSettings{position:sticky;bottom:0;background:linear-gradient(180deg,#17334b,#10283d)}@media (max-height:420px),(max-width:600px){#settings.menu-card{max-height:90dvh;padding:12px 14px 14px}#settings .setting{padding:7px 0;font-size:11px}#settings .setting span{max-width:52%}#settings .setting select{font-size:11px;padding:5px 6px}#settings .helper{font-size:9px!important}}.brand-mark{font-size:33px;color:var(--accent);height:38px}.eyebrow{font-size:10px;letter-spacing:2.4px;color:#d5dbe7}.menu-card h1{font-size:clamp(27px,5vw,41px);letter-spacing:2.5px;margin:9px 0;color:#f7e0b7;text-shadow:0 3px 28px #facd6b2b}.menu-sub{margin:0 0 20px;color:#bdd0de;font-size:12px;letter-spacing:2px}.menu-actions{display:grid;gap:10px}.menu-actions button,.secondary>button{padding:12px 14px;background:#17334b;border:1px solid #7d9cb88c;border-radius:11px;font-weight:650}.menu-actions button.primary{color:#17222d;background:linear-gradient(90deg,#f2d9a5,#d9b573);border:none}.menu-actions button:active,.secondary>button:active{transform:scale(.98)}.footnote{color:#8aa2b6;font-size:11px;margin:14px 0 0}.menu-card h2{color:#f2d1a2;font-size:24px;margin:2px 0 18px}.menu-card p{color:#cad6e3;font-size:13px;line-height:1.65;text-align:left}.menu-card p b{color:#f0d4a1}.setting{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;color:#dbe8ef;font-size:13px;border-bottom:1px solid #ffffff17}.setting:first-of-type{flex-direction:column;align-items:stretch}.setting input[type=range]{width:100%;accent-color:#e6c88c}.setting select{background:#28415a;color:white;padding:7px 8px;border:1px solid #819cb7;border-radius:6px;max-width:55%}.setting input[type=checkbox]{accent-color:#deb977;width:19px;height:19px}.setting output{float:right;color:#f6dcab}.secondary>button{width:100%;margin-top:13px}.helper{font-size:11px!important;color:#a7bfd2!important}.notice{position:absolute;top:15%;left:50%;transform:translateX(-50%);z-index:9;border-radius:11px;padding:10px 17px;background:#13253bd9;border:1px solid #c8d5e67d;font-size:12px;max-width:88vw;text-align:center;pointer-events:none}@media(max-height:460px){.menu-card{width:min(435px,90vw);padding:14px 21px}.brand-mark{font-size:22px;height:28px}.menu-card h1{font-size:30px;margin:4px 0}.menu-sub{margin-bottom:11px}.menu-actions{gap:7px}.menu-actions button{padding:9px}.controls{height:82px}.pad{width:61px;height:61px}.action{width:58px;height:55px;font-size:12px!important}.action.dig{width:72px}.vpad{width:38px;height:27px}.hint{bottom:92px;font-size:9px}.hud{min-height:37px}.menu-card h2{font-size:21px;margin:4px 0 8px}.setting{padding:7px 0}}@media(max-width:680px){.hud-brand span{display:none}.telemetry{gap:6px;font-size:10px}.controls .control-left,.controls .control-right{gap:5px}.pad{width:58px;height:58px}.action{width:54px;height:53px;font-size:11px!important}.action.dig{width:70px}.vpad{width:34px;height:26px}.hint{display:none}}
+
+/* One touch joystick + independent action buttons (PK Loạn Chiến 0.1) */
+.controls{height:174px;bottom:max(5px,env(safe-area-inset-bottom));align-items:flex-end;gap:8px;z-index:3}
+.joystick-block{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:auto}
+.joystick{--joySize:126px;width:var(--joySize);height:var(--joySize);position:relative;flex-shrink:0;border-radius:50%;touch-action:none;user-select:none;-webkit-user-select:none;background:radial-gradient(circle at 50% 45%,rgba(44,78,112,.50),rgba(6,26,47,.69));border:2px solid rgba(174,214,248,.52);box-shadow:0 0 0 5px #071d2a21,inset 0 0 20px #75bde924,0 5px 23px #0006}
+.joystick .joy-ring{position:absolute;inset:18%;border-radius:50%;border:1px dashed #acdaf965;pointer-events:none}
+.joystick .joy-thumb{position:absolute;left:50%;top:50%;width:42%;height:42%;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 28%,rgba(120,184,231,.87),rgba(24,64,102,.93));border:2px solid #d8efffc6;box-shadow:0 3px 12px #051322a3,inset 0 1px 5px #d6efff77;display:flex;align-items:center;justify-content:center;pointer-events:none;will-change:left,top}
+.joystick.active{border-color:#b1e7fc;box-shadow:0 0 0 4px #63c1f62a,0 0 21px #53b5ed3d}
+.joy-mark{position:absolute;color:#a6cfe9a8;font-size:12px;font-weight:900;line-height:1;pointer-events:none}
+.joy-mark.top{top:7px;left:50%;transform:translateX(-50%)}.joy-mark.bottom{bottom:7px;left:50%;transform:translateX(-50%)}.joy-mark.left{left:7px;top:50%;transform:translateY(-50%)}.joy-mark.right{right:7px;top:50%;transform:translateY(-50%)}
+.joy-caption{color:#c7dff1c7;font-size:9px;font-weight:750;text-shadow:0 1px 2px #09141d;letter-spacing:.4px;white-space:nowrap}
+.controls .right-controls{display:flex;align-items:flex-end;gap:11px;pointer-events:none}
+.controls .action-stack{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:7px;pointer-events:none}
+.controls button.action{width:56px;height:52px;min-height:52px;border-radius:50%;font-size:12px!important;padding:4px;text-align:center}
+.controls button.action.jump{background:#2d6581d4}
+.controls button.action.flight{background:#1e6371d9}
+.controls button.action.flight.on{background:#2f9279ec;border-color:#a0ffe3;color:#fff9c8}
+.controls button.action.dig{width:67px;height:31px;min-height:31px;font-size:10px!important;border-radius:15px;background:#785639df;white-space:nowrap}
+.controls button.action.dig small{display:inline;font-size:8px;margin-left:2px}
+.hint{bottom:181px;font-size:10px;max-width:96vw;white-space:normal;text-align:center}
+@media(max-height:480px){.controls{height:142px;bottom:max(3px,env(safe-area-inset-bottom))}.joystick{--joySize:112px}.joy-caption{font-size:8px}.controls button.action{width:52px;height:46px;min-height:46px;font-size:11px!important}.controls button.action.dig{width:66px;height:28px;min-height:28px}.hint{bottom:147px}.right-controls{gap:8px!important}}
+@media(max-width:680px){.joystick{--joySize:94px}.controls .right-controls{gap:5px}.controls button.action{width:43px;height:42px;min-height:42px;font-size:9px!important}.controls button.action.dig{width:58px;height:25px;min-height:25px;font-size:8px!important}.joy-caption{font-size:7px}.controls{height:127px}.hint{bottom:132px}}
+#game.joy-small .joystick{--joySize:100px}
+#game.joy-large .joystick{--joySize:145px}
+@media(max-height:480px){#game.joy-large .joystick{--joySize:125px}}
+/* Action buttons stay at the lower-right without a secondary joystick. */
+.controls .right-controls{margin-left:auto;justify-content:flex-end}
+
+/* PixelFX QA buttons: hidden unless the player opens ✦ FX. One joystick unchanged. */
+.fx-demo{position:absolute;right:max(9px,env(safe-area-inset-right));top:43px;z-index:4;display:flex;gap:5px;align-items:center;padding:7px;border:1px solid #79b6d9a1;border-radius:12px;background:#092137e8;box-shadow:0 8px 22px #0009;pointer-events:auto}
+.fx-demo-title{font-size:9px;letter-spacing:.5px;color:#c5e9f5;white-space:nowrap}.fx-demo button{background:#234f6c;border:1px solid #87b7c1a3;border-radius:7px;padding:6px 8px;color:#e7f8fc;font-size:10px;font-weight:700;white-space:nowrap;touch-action:manipulation}
+.fx-demo button:active{background:#4a95b3}.hud .fxBtn{font-size:11px;white-space:nowrap;color:#b8ebff;border-color:#75bbd38a}
+@media(max-width:650px){.fx-demo{top:40px;gap:3px;padding:5px}.fx-demo-title{display:none}.fx-demo button{padding:6px;font-size:9px}.hud .fxBtn{padding:5px}}
+
+/* v0.1.10 dummy target testing button */
+.fx-demo{max-width:min(96vw,540px);flex-wrap:wrap;justify-content:flex-end}
+.fx-demo .dummy-test{border-color:#d2aa6b;color:#ffe0a5;background:#6c4a2c}
+@media(max-width:550px){.fx-demo{right:5px;max-width:calc(100vw - 12px)}}
+/* v0.1.3 version history */
+.changelog{text-align:left;margin-top:10px;border-top:1px solid #879daf65;padding-top:10px}.changelog h3{font-size:14px;text-align:left;color:#f6d59e;margin:4px 0}.changelog p{margin:8px 0;font-size:11px;line-height:1.48}
+
+/* v0.1.4 – manual screen-orientation fallback and zoom UI */
+#game.rotate-cw{inset:auto;top:0;left:100vw;width:100dvh;height:100dvw;transform-origin:top left;transform:rotate(90deg)}
+#game.rotate-ccw{inset:auto;top:100vh;left:0;width:100dvh;height:100dvw;transform-origin:top left;transform:rotate(-90deg)}
+.hud .orientBtn{font-size:10px;letter-spacing:.4px;font-weight:750;padding:7px 9px;min-width:58px;white-space:nowrap;border-color:#b4d6ed8a;background:#284f68b8}
+.hud .orientBtn:active{background:#4f849d}
+@media(max-width:580px){.hud{gap:5px;padding-left:7px;padding-right:7px}.hud-brand{gap:3px}.hud-brand b{font-size:11px}.hud .orientBtn{padding:6px;min-width:41px;font-size:9px}.hud .smallBtn{padding:5px 8px}.hud .telemetry{display:none}.vitals{top:calc(env(safe-area-inset-top) + 36px);left:max(8px,env(safe-area-inset-left));gap:4px}.vital{min-width:148px;padding:5px 7px 6px}.vital-label{font-size:9px;margin-bottom:3px}.vital-label b{font-size:9px}.vital-track{height:10px}}
+@media (orientation:portrait){.hud-brand span{display:none}.telemetry{display:none}.controls{height:155px}.joystick{--joySize:118px}.controls button.action{width:55px;height:51px;min-height:51px}.vitals{top:calc(env(safe-area-inset-top) + 38px)}}
+
+/* v0.1.6: responsive menu stays upright and accessible while the game canvas may rotate. */
+#overlay.overlay{position:fixed;inset:0;width:100dvw;height:100dvh;z-index:99;overflow-y:auto;overscroll-behavior:contain;padding:max(10px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));}
+#overlay .menu-card{max-width:calc(100dvw - 16px);max-height:calc(100dvh - 20px);overscroll-behavior:contain;}
+#settings .settings-head{position:sticky;top:-12px;z-index:6;background:#0e2338;padding:8px 0 10px;}
+#settings .settings-head .icon-close{flex:none;min-width:44px;height:44px;touch-action:manipulation;}
+#settings #backSettings{position:sticky;bottom:-13px;z-index:5;}
+@media(max-height:500px){#overlay .menu-card{max-height:calc(100dvh - 16px)}#settings.menu-card{width:min(540px,96vw);padding:10px 14px}#settings .helper{display:none}#settings .setting{padding:5px 0}}
+
+/* v0.1.34 — Bố cục 5 Kỹ năng Nhân vật (Skill 1: Hỏa Cầu, Skill 2: Lôi Bạo, Skill 3-5: Chờ mở) */
+.controls .charge-stack.skill-deck{display:flex;flex-direction:column;gap:7px;align-items:flex-end;margin-bottom:7px;pointer-events:auto}
+.controls .skill-row{display:flex;align-items:flex-end;gap:6px}
+.controls button.chargeBtn{position:relative;width:68px;height:50px;min-height:50px;border-radius:14px;font-size:10px!important;padding:5px 4px 4px;letter-spacing:.2px;gap:2px;transition:transform .1s ease,box-shadow .15s ease,border-color .15s ease}
+.controls button.chargeBtn b{font-weight:800;font-size:10px;line-height:1.05;letter-spacing:.3px}
+.controls button.chargeBtn small{font-size:8px;opacity:.88;font-weight:600;color:#f5efe2;letter-spacing:.3px;white-space:nowrap}
+.controls .skill-row-secondary button.chargeBtn{width:64px;height:44px;min-height:44px;border-radius:13px;padding:4px 3px 3px}
+.controls .skill-row-secondary button.chargeBtn b{font-size:8.5px;letter-spacing:.2px}
+.controls .skill-row-secondary button.chargeBtn small{font-size:7px;opacity:.90;font-weight:700}
+.controls .skill-slot-badge{position:absolute;top:-5px;left:-4px;min-width:16px;height:16px;padding:0 4px;border-radius:6px;background:#091826;border:1px solid rgba(235,210,160,.65);color:#ffe4a8;font-size:9px;font-weight:800;line-height:14px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.55);pointer-events:none}
+.controls button.chargeBtn.fire{border-color:#ffb16fc9;background:linear-gradient(180deg,#7a2417e0,#bd431fd9);color:#fff6ec;box-shadow:0 4px 14px rgba(190,55,22,.32)}
+.controls button.chargeBtn.lightning{border-color:#ffe066db;background:linear-gradient(180deg,#6b4b12e6,#b58218db);color:#fff9db;box-shadow:0 4px 16px rgba(239,183,27,.34)}
+.controls button.chargeBtn.lightning .skill-slot-badge{border-color:#ffe36e;color:#fff6b8;background:#261a06}
+.controls button.chargeBtn.earth{border-color:#d0a76fdb;background:linear-gradient(180deg,#56452be6,#967449db);color:#fff2ce;box-shadow:0 4px 15px rgba(157,117,68,.32)}
+.controls button.chargeBtn.earth .skill-slot-badge{border-color:#ead094;color:#fff2ce;background:#20180e}
+.controls button.chargeBtn.earth.active{background:linear-gradient(180deg,#826842,#403c29);border-color:#c7dfa3;color:#e2f7be;box-shadow:0 0 20px rgba(238,211,140,.52),inset 0 0 10px rgba(255,241,192,.32)}
+.controls button.chargeBtn.earth.active small{color:#d7f5a8;font-weight:800}
+
+/* Skill 4: Thủy Kiếm V2 (Tam Kiếm Giáng Lâm) */
+.controls button.chargeBtn.water{border-color:#74ecffcf;background:linear-gradient(180deg,#0d3d5ee8,#1777aadb);color:#e9fbff;box-shadow:0 4px 15px rgba(31,158,224,.34)}
+.controls button.chargeBtn.water .skill-slot-badge{border-color:#7ceeff;color:#c7f9ff;background:#072336}
+.controls button.chargeBtn.water small{color:#bef6ff}
+.controls button.chargeBtn.water.active{background:linear-gradient(180deg,#1a8cc4,#0c4a73);border-color:#ffffff;color:#ffffff;box-shadow:0 0 22px rgba(105,238,255,.72),inset 0 0 12px rgba(215,252,255,.42)}
+.controls button.chargeBtn.water.active small{color:#fff7a8;font-weight:800}
+.controls button.chargeBtn.water.cooldown{background:linear-gradient(180deg,rgba(12,34,52,.78),rgba(9,22,36,.84));border-color:rgba(116,192,224,.38);color:rgba(198,229,245,.72);box-shadow:inset 0 1px 5px rgba(0,0,0,.42)}
+.controls button.chargeBtn.water.cooldown small{color:#8ad8f5;font-weight:800}
+
+/* Skill 5: Ngũ Hành Diệt Sát Trận */
+.controls button.chargeBtn.five-elements{border-color:#f3cf7ade;background:linear-gradient(135deg,#3b1f54e8 0%,#6e264fe6 48%,#8c621fe0 100%);color:#fff7e6;box-shadow:0 4px 16px rgba(190,94,224,.34)}
+.controls button.chargeBtn.five-elements .skill-slot-badge{border-color:#ffd97d;color:#fff2bd;background:#24112e}
+.controls button.chargeBtn.five-elements small{color:#ffe6b0}
+.controls button.chargeBtn.five-elements.active{background:linear-gradient(135deg,#522778,#9e2d5c 50%,#b8821e);border-color:#98ffd9;color:#ffffff;box-shadow:0 0 22px rgba(152,255,217,.65),0 0 12px rgba(255,214,102,.52),inset 0 0 12px rgba(255,244,204,.35)}
+.controls button.chargeBtn.five-elements.active small{color:#a8ffdf;font-weight:800}
+.controls button.chargeBtn.five-elements.overload{background:linear-gradient(135deg,#7d1835,#c93b1e 52%,#e09b19);border-color:#ff9e80;box-shadow:0 0 24px rgba(255,94,77,.78),inset 0 0 14px rgba(255,230,179,.48)}
+.controls button.chargeBtn.five-elements.overload small{color:#ffe596;font-weight:800}
+
+.controls button.chargeBtn.locked{border-color:rgba(148,175,200,.28);background:linear-gradient(180deg,rgba(14,29,45,.66),rgba(9,20,33,.72));color:rgba(195,214,232,.56);box-shadow:inset 0 1px 4px rgba(0,0,0,.35)}
+.controls button.chargeBtn.locked .skill-slot-badge{border-color:rgba(148,175,200,.32);color:rgba(195,214,232,.62);background:#0a1623}
+.controls button.chargeBtn.charging{transform:scale(.95);box-shadow:0 0 19px currentColor,inset 0 0 12px #ffffff42;color:#fff}
+.controls button.chargeBtn.lightning.charging{background:linear-gradient(180deg,#e0af2b,#8a5d10);color:#171005;border-color:#fff6b3;box-shadow:0 0 24px #ffd43ecc,inset 0 0 12px #fff8c480}
+.controls button.chargeBtn.lightning.charging small{color:#231704;font-weight:800}
+
+/* v0.1.36 — Nút Thần Thức (Linh Nhãn 4x · Icon Con Mắt) */
+.controls .skill-row-secondary button.chargeBtn.divine-eye{width:68px;height:44px;min-height:44px;border-radius:13px;padding:4px 4px 3px;border-color:#7be3f5b8;background:linear-gradient(180deg,#11384de8,#1b5b73db);color:#e6fbff;box-shadow:0 4px 15px rgba(42,188,224,.30)}
+.controls .skill-row-secondary button.chargeBtn.divine-eye .eye-badge{border-color:#84ecff;color:#baf6ff;background:#07202e}
+.controls .divine-eye-head{display:flex;align-items:center;justify-content:center;gap:3px;line-height:1}
+.controls .divine-eye-head .eye-icon{width:14px;height:14px;flex-shrink:0;color:#8cf2ff;filter:drop-shadow(0 0 4px rgba(112,240,255,.45));transition:transform .2s ease,color .2s ease}
+.controls .divine-eye-head .eye-rays{opacity:.35;transition:opacity .2s ease}
+.controls .skill-row-secondary button.chargeBtn.divine-eye b{font-size:8.5px;letter-spacing:.2px;color:#ecfcff}
+.controls .skill-row-secondary button.chargeBtn.divine-eye small{font-size:7.5px;opacity:.92;color:#b8f2ff;font-weight:700}
+.controls .skill-row-secondary button.chargeBtn.divine-eye.on{border-color:#ffe799;background:linear-gradient(180deg,#1b6e82,#0f3c4c);color:#fffbe6;box-shadow:0 0 22px rgba(108,240,255,.62),0 0 10px rgba(255,224,130,.45),inset 0 0 12px rgba(162,248,255,.35)}
+.controls .skill-row-secondary button.chargeBtn.divine-eye.on .eye-icon{color:#ffe680;transform:scale(1.12);filter:drop-shadow(0 0 6px rgba(255,230,128,.85))}
+.controls .skill-row-secondary button.chargeBtn.divine-eye.on .eye-rays{opacity:1}
+.controls .skill-row-secondary button.chargeBtn.divine-eye.on small{color:#ffe88a;font-weight:800}
+
+.hud .eyeHudBtn{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:5px 9px;color:#bdf5ff;border-color:#72d8ec8f;background:#12384bb8;transition:box-shadow .18s ease,border-color .18s ease,background .18s ease}
+.hud .eyeHudBtn .eye-icon{width:15px;height:15px;color:#88efff}
+.hud .eyeHudBtn.on{color:#fff6c2;border-color:#ffe388;background:linear-gradient(180deg,#1c687a,#103b49);box-shadow:0 0 15px rgba(108,240,255,.55)}
+.hud .eyeHudBtn.on .eye-icon{color:#ffe47a;filter:drop-shadow(0 0 5px rgba(255,228,122,.8))}
+
+/* Nút đổi nhân vật HUD & Action */
+.hud .charHudBtn{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;padding:5px 9px;color:#bdf5ff;border-color:#68d0e588;background:#0e3042b8;letter-spacing:.3px;transition:all .18s ease}
+.hud .charHudBtn.huyet-du{color:#ffd0d5;border-color:#ff4255;background:linear-gradient(180deg,#611019,#2c080e);box-shadow:0 0 13px rgba(255,50,68,.62)}
+
+.controls button.action.char-switch{width:60px;height:44px;min-height:44px;border-radius:14px;background:linear-gradient(180deg,#163c52e8,#0d2538db);border-color:#7fe0ff8f;color:#e8f7ff;box-shadow:0 3px 12px rgba(16,42,65,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:3px 2px}
+.controls button.action.char-switch b{font-size:8.5px;letter-spacing:.3px;line-height:1}
+.controls button.action.char-switch .char-pill{font-size:7px;font-weight:800;padding:1px 4px;border-radius:5px;line-height:1;letter-spacing:0}
+.controls button.action.char-switch .char-pill.tao{background:#072433;color:#80ecff;border:1px solid #57d4eb88}
+.controls button.action.char-switch .char-pill.blood{background:#38090f;color:#ff8792;border:1px solid #ff475988}
+
+.controls button.action.char-switch.huyet-du{background:linear-gradient(180deg,#66101ce8,#27070cdb);border-color:#ff384bb8;color:#ffebee;box-shadow:0 0 15px rgba(255,46,62,.48),inset 0 0 8px rgba(255,100,115,.22)}
+
+@media(max-width:680px){.controls .charge-stack.skill-deck{gap:5px}.controls .skill-row{gap:4px}.controls button.chargeBtn{width:56px;height:42px;min-height:42px;font-size:8.5px!important;padding:3px 2px}.controls button.chargeBtn b{font-size:8.5px}.controls button.chargeBtn small{font-size:7px}.controls .skill-row-secondary button.chargeBtn{width:54px;height:36px;min-height:36px}.controls .skill-row-secondary button.chargeBtn b{font-size:7.5px}.controls .skill-row-secondary button.chargeBtn small{font-size:6.5px}.controls .skill-row-secondary button.chargeBtn.divine-eye{width:58px;height:36px;min-height:36px}.controls .skill-row-secondary button.chargeBtn.divine-eye b{font-size:7.5px}.controls .skill-row-secondary button.chargeBtn.divine-eye small{font-size:6.5px}.controls .divine-eye-head .eye-icon{width:11px;height:11px}.controls .skill-slot-badge{min-width:14px;height:14px;font-size:8px;line-height:12px;top:-4px;left:-3px}.hud .eyeHudBtn{padding:5px 7px;font-size:10px}.hud .charHudBtn{padding:5px 6px;font-size:9px}.controls button.action.char-switch{width:46px;height:38px;min-height:38px}.controls button.action.char-switch b{font-size:7.5px}.controls button.action.char-switch .char-pill{font-size:6.5px;padding:0 3px}}
+@media(max-height:480px){.controls .charge-stack.skill-deck{gap:4px}.controls button.chargeBtn{height:40px;min-height:40px}.controls .skill-row-secondary button.chargeBtn{height:35px;min-height:35px}.controls .skill-row-secondary button.chargeBtn.divine-eye{height:35px;min-height:35px}.controls button.action.char-switch{height:38px;min-height:38px}}
+.hint{display:none!important}
+
+/* ==========================================================================
+   BOSS PK VÒNG 1: HUYẾT DỰ · TRÚC CƠ KỲ
+   ========================================================================== */
+
+/* Nút VÒNG 1 trên HUD */
+.hud .bossHudBtn{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;padding:5px 9px;color:#ffd9dd;border-color:#ff33488f;background:linear-gradient(180deg,#4d1016,#26070b);letter-spacing:.3px;box-shadow:0 0 11px rgba(255,45,65,.52);transition:all .18s ease}
+.hud .bossHudBtn:active{transform:scale(.96);background:#6b1420}
+
+/* Thanh máu Boss dài trên màn hình */
+.boss-hud{position:absolute;top:calc(env(safe-area-inset-top) + 38px);left:50%;transform:translateX(-50%);z-index:7;width:min(660px,88vw);pointer-events:none;user-select:none;transition:opacity .25s ease,transform .25s ease}
+.boss-bar-shell{display:flex;align-items:center;gap:9px;background:linear-gradient(180deg,rgba(24,7,10,.94),rgba(12,3,5,.96));border:1.5px solid rgba(255,55,70,.68);border-radius:13px;padding:6px 12px 7px;box-shadow:0 6px 26px rgba(255,20,40,.38),inset 0 0 14px rgba(255,55,70,.18);backdrop-filter:blur(8px)}
+.boss-portrait-box{width:36px;height:36px;border-radius:10px;background:radial-gradient(circle at 45% 45%,#8b1320,#32060b);border:1.5px solid #ff4458;display:flex;align-items:center;justify-content:center;box-shadow:0 0 13px rgba(255,45,65,.62);flex-shrink:0}
+.boss-avatar-crest .crest-symbol{font-size:13px;font-weight:900;color:#fff0f2;text-shadow:0 0 7px #ff2a40;line-height:1}
+.boss-bar-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.boss-meta-row{display:flex;align-items:center;justify-content:space-between;gap:6px;line-height:1}
+.boss-name-group{display:flex;align-items:center;gap:5px;min-width:0}
+.boss-round-tag{background:linear-gradient(90deg,#ffd54f,#ffca28);color:#2b1602;font-size:8.5px;font-weight:900;padding:1.5px 5px;border-radius:4px;letter-spacing:.4px;box-shadow:0 0 7px rgba(255,213,79,.6);flex-shrink:0}
+.boss-name-text{font-size:12.5px;font-weight:900;color:#fff2f4;letter-spacing:.8px;text-shadow:0 0 10px #ff2a40;white-space:nowrap}
+.boss-epithet-tag{font-size:8px;color:#ff8591;opacity:.88;font-weight:700;white-space:nowrap}
+.boss-realm-group{display:flex;align-items:center;gap:3px;flex-shrink:0}
+.boss-realm-group .realm-prefix{font-size:8px;color:#ffe9ad;opacity:.82;font-weight:700}
+.boss-realm-group .realm-badge{font-size:10px;font-weight:900;color:#ffd54f;background:rgba(70,35,7,.75);border:1px solid rgba(255,213,79,.72);padding:1px 5px;border-radius:5px;letter-spacing:.5px;box-shadow:0 0 8px rgba(255,213,79,.38);text-shadow:0 0 4px #ffb300}
+.boss-hp-counter{display:flex;align-items:baseline;gap:4px;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.boss-hp-counter b{color:#fff5f6;letter-spacing:.3px}
+.boss-hp-counter .boss-pct{font-size:9.5px;color:#ff7584;font-weight:900}
+.boss-hp-frame{width:100%}
+.boss-hp-trough{position:relative;width:100%;height:13px;background:#140306;border:1px solid #7d1c26;border-radius:6px;overflow:hidden;box-shadow:inset 0 1px 4px rgba(0,0,0,.85)}
+.boss-hp-ghost{position:absolute;top:0;left:0;height:100%;width:100%;background:linear-gradient(90deg,#d97706,#f59e0b);opacity:.75;transition:width .08s linear}
+.boss-hp-fill{position:absolute;top:0;left:0;height:100%;width:100%;background:linear-gradient(90deg,#991515,#dc2626 50%,#ff4d5a);box-shadow:0 0 11px rgba(255,60,80,.68);transition:width .05s linear}
+.boss-hp-segments{position:absolute;inset:0;display:flex;justify-content:space-between;pointer-events:none;z-index:2}
+.boss-hp-segments span{width:1px;height:100%;background:rgba(255,255,255,.24)}
+
+/* Màn hình thông báo Vòng 1 */
+.round-notice{position:fixed;inset:0;z-index:98;display:flex;align-items:center;justify-content:center;pointer-events:auto;user-select:none}
+.round-notice-backdrop{position:absolute;inset:0;background:radial-gradient(circle,rgba(20,4,7,.75) 0%,rgba(6,1,2,.92) 100%);backdrop-filter:blur(6px);opacity:0;transition:opacity .35s ease}
+.round-notice-card{position:relative;z-index:2;width:min(440px,90vw);background:linear-gradient(135deg,rgba(30,8,12,.97) 0%,rgba(14,3,5,.98) 100%);border:2px solid #ff3b4e;border-radius:22px;padding:26px 26px 22px;text-align:center;box-shadow:0 10px 55px rgba(255,30,50,.52),inset 0 0 30px rgba(255,50,70,.22);transform:scale(.82);opacity:0;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .35s ease}
+.round-notice.play-anim .round-notice-backdrop{opacity:1}
+.round-notice.play-anim .round-notice-card{transform:scale(1);opacity:1}
+.round-notice.fade-out{opacity:0;transition:opacity .45s ease;pointer-events:none}
+.round-filigree-top{font-size:13px;color:#ff8591;letter-spacing:6px;opacity:.8}
+.round-phase-tag{display:inline-block;font-size:12.5px;font-weight:900;color:#261603;background:linear-gradient(90deg,#ffe082,#ffd54f);padding:3.5px 14px;border-radius:20px;letter-spacing:1.8px;margin:8px 0 10px;box-shadow:0 0 16px rgba(255,213,79,.62)}
+.round-boss-title{font-size:clamp(23px,5vw,33px);font-weight:900;color:#fff0f2;margin:4px 0 10px;letter-spacing:2px;text-shadow:0 0 18px rgba(255,45,65,.8)}
+.round-realm-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(56,14,20,.7);border:1px solid rgba(255,215,100,.65);padding:4px 13px;border-radius:25px;margin-bottom:10px;box-shadow:0 0 12px rgba(255,215,100,.25)}
+.realm-label-sub{font-size:9.5px;font-weight:700;color:#ffe6a3;letter-spacing:1px}
+.realm-value-main{font-size:13.5px;font-weight:900;color:#ffd54f;letter-spacing:1.5px;text-shadow:0 0 8px rgba(255,213,79,.7)}
+.round-flavor-text{font-size:11px;color:#ffccd2;font-style:italic;margin:4px 0 16px;opacity:.9}
+.round-filigree-bot{font-size:11px;color:#ff8591;letter-spacing:6px;opacity:.6;margin-bottom:14px}
+.round-close-btn{display:inline-block;width:100%;max-width:220px;padding:9px 16px;font-size:11.5px;font-weight:900;color:#fff;background:linear-gradient(90deg,#c62828,#ff3348);border:1px solid #ff7a88;border-radius:12px;letter-spacing:1.2px;cursor:pointer;box-shadow:0 4px 18px rgba(255,51,72,.5);touch-action:manipulation;transition:transform .15s ease,box-shadow .15s ease}
+.round-close-btn:active{transform:scale(.96)}
+
+@media(max-width:680px){
+  .boss-hud{top:calc(env(safe-area-inset-top) + 36px);width:94vw}
+  .boss-bar-shell{padding:4px 8px 5px;gap:6px}
+  .boss-portrait-box{width:28px;height:28px;border-radius:8px}
+  .boss-avatar-crest .crest-symbol{font-size:11px}
+  .boss-name-text{font-size:11px}
+  .boss-epithet-tag{display:none}
+  .boss-hp-counter b{font-size:9.5px}
+  .boss-realm-group .realm-prefix{display:none}
+  .boss-realm-group .realm-badge{font-size:9px;padding:1px 4px}
+  .boss-hp-trough{height:10px}
+  .round-notice-card{padding:20px 18px 16px}
+  .round-boss-title{font-size:22px}
+}
+
+/* ==========================================================================
+   CẢNH GIỚI NGƯỜI CHƠI & TÙY CHỈNH HUD GÓC PHẢI
+   ========================================================================== */
+
+/* Top right HUD: Chỉ giữ nút NGANG/DỌC và nút 3 gạch ☰ ở góc phải trên */
+.hud.top-right-hud{position:absolute!important;top:max(8px,env(safe-area-inset-top))!important;right:max(12px,env(safe-area-inset-right))!important;left:auto!important;inset:auto!important;display:flex!important;align-items:center!important;gap:7px!important;min-height:unset!important;padding:0!important;background:transparent!important;z-index:9!important;pointer-events:auto!important}
+
+/* Cảnh giới người chơi trên thanh máu */
+.vitals{top:max(8px,env(safe-area-inset-top))!important;left:max(12px,env(safe-area-inset-left))!important;gap:5px!important}
+.player-realm-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:3px 8px 4px;background:linear-gradient(90deg,rgba(11,28,48,.92),rgba(15,44,70,.88));border:1px solid rgba(138,206,255,.55);border-radius:8px;box-shadow:0 2px 10px rgba(7,20,35,.6);line-height:1;margin-bottom:1px}
+.player-char-name{font-size:11px;font-weight:900;color:#c9edff;letter-spacing:.8px;text-shadow:0 0 8px rgba(110,210,255,.6)}
+.player-realm-badge{font-size:9.5px;font-weight:900;color:#ffd866;background:rgba(53,35,8,.85);border:1px solid rgba(255,216,102,.65);padding:2px 6px;border-radius:4px;letter-spacing:.5px;text-shadow:0 0 6px rgba(255,216,102,.4)}
+
+/* Thanh Boss ở top center */
+.boss-hud{top:max(8px,env(safe-area-inset-top))!important}
+
+@media(max-width:680px){
+  .hud.top-right-hud{top:max(6px,env(safe-area-inset-top))!important;right:max(8px,env(safe-area-inset-right))!important;gap:5px!important}
+  .vitals{top:max(6px,env(safe-area-inset-top))!important;left:max(8px,env(safe-area-inset-left))!important}
+  .player-realm-header{padding:2.5px 6px 3px}
+  .player-char-name{font-size:10px}
+  .player-realm-badge{font-size:8.5px;padding:1px 5px}
+  .boss-hud{top:max(6px,env(safe-area-inset-top))!important}
+}
+
+/* Kỹ năng 1 Huyết Thủ Trảo Hồn & Kỹ năng 2 Huyết Kim Tuyến (Huyết Dự) */
+.controls button.chargeBtn.blood-hand{border-color:#ff526ece!important;background:linear-gradient(180deg,#5a0f1d,#961830)!important;color:#ffe9ee!important;box-shadow:0 4px 16px rgba(180,24,48,.45)!important}
+.controls button.chargeBtn.blood-hand .skill-slot-badge{border-color:#ff798e!important;color:#ffe9ee!important;background:#26060c!important}
+.controls button.chargeBtn.blood-hand.active{background:linear-gradient(180deg,#c22a45,#6b0d1e)!important;border-color:#ffb6c1!important;box-shadow:0 0 22px rgba(255,80,105,.75),inset 0 0 10px rgba(255,200,210,.4)!important}
+.controls button.chargeBtn.blood-hand.cooldown{background:linear-gradient(180deg,#2d0d14,#18070b)!important;border-color:#6c2834!important;color:#a8747d!important;box-shadow:none!important}
+
+.controls button.chargeBtn.blood-thread{border-color:#ff7396ce!important;background:linear-gradient(180deg,#4d122b,#8c1d48)!important;color:#fff0f3!important;box-shadow:0 4px 16px rgba(160,20,70,.45)!important}
+.controls button.chargeBtn.blood-thread .skill-slot-badge{border-color:#ffa3b8!important;color:#fff0f3!important;background:#260a17!important}
+.controls button.chargeBtn.blood-thread.active{background:linear-gradient(180deg,#e03868,#7d1238)!important;border-color:#ffd1dc!important;box-shadow:0 0 24px rgba(255,75,125,.8),inset 0 0 12px rgba(255,210,225,.4)!important}
+.controls button.chargeBtn.blood-thread.cooldown{background:linear-gradient(180deg,#240d18,#14070e)!important;border-color:#5c2438!important;color:#9d6e7f!important;box-shadow:none!important}
+
+/* Kỹ năng 5 Huyết Thuẫn (Huyết Dự - Ma Đạo Hộ Thể) */
+.controls button.chargeBtn.blood-shield{border-color:#ff4d6dce!important;background:linear-gradient(180deg,#520e1e,#8e1832)!important;color:#fff0f3!important;box-shadow:0 4px 16px rgba(180,20,50,.45)!important}
+.controls button.chargeBtn.blood-shield .skill-slot-badge{border-color:#ff85a1!important;color:#fff0f3!important;background:#29050e!important}
+.controls button.chargeBtn.blood-shield.active{background:linear-gradient(180deg,#a31d3c,#5e0d1f)!important;border-color:#ffb3c1!important;box-shadow:0 0 22px rgba(255,77,109,.78),inset 0 0 10px rgba(255,200,215,.42)!important}
+.controls button.chargeBtn.blood-shield.active small{color:#ffd1dc!important;font-weight:800}
+
+/* Kỹ năng 3 Thôn Linh Huyết (Huyết Dự - Hút HP & MP) */
+.controls button.chargeBtn.blood-drain{border-color:#ff5e7ece!important;background:linear-gradient(180deg,#420f1c,#78152e)!important;color:#ffeef2!important;box-shadow:0 4px 16px rgba(180,24,60,.45)!important}
+.controls button.chargeBtn.blood-drain .skill-slot-badge{border-color:#58d0ff!important;color:#ffeef2!important;background:#1a0810!important}
+.controls button.chargeBtn.blood-drain.active{background:linear-gradient(180deg,#b31d3f,#520b1a)!important;border-color:#5ce1ff!important;box-shadow:0 0 24px rgba(90,225,255,.6),0 0 16px rgba(255,75,110,.7)!important}
+.controls button.chargeBtn.blood-drain.cooldown{background:linear-gradient(180deg,#240c14,#12060a)!important;border-color:#5c2432!important;color:#9d6e79!important;box-shadow:none!important}
+
+/* Kỹ năng 4 Huyết Bạo · Tự Hủy (Huyết Dự - Cấm Thuật) */
+.controls button.chargeBtn.blood-blast{border-color:#991b32!important;background:linear-gradient(180deg,#290812,#4a0c1b)!important;color:#ffccd5!important;box-shadow:0 4px 16px rgba(100,10,25,.4)!important}
+.controls button.chargeBtn.blood-blast .skill-slot-badge{border-color:#ff3355!important;color:#fff!important;background:#24040a!important}
+.controls button.chargeBtn.blood-blast.ready-to-blow{border-color:#ff3b60!important;background:linear-gradient(180deg,#8c142c,#d9254c)!important;color:#ffffff!important;animation:bloodPulse 1.2s infinite ease-in-out;box-shadow:0 0 24px rgba(255,50,90,.85),inset 0 0 10px rgba(255,220,230,.5)!important}
+.controls button.chargeBtn.blood-blast.active{background:linear-gradient(180deg,#ff4268,#990f2b)!important;border-color:#ffffff!important;box-shadow:0 0 32px rgba(255,255,255,.9),0 0 45px rgba(255,40,80,.9)!important}
+.controls button.chargeBtn.blood-blast.used{background:#120508!important;border-color:#40121a!important;color:#734b52!important;opacity:0.6!important;box-shadow:none!important;cursor:not-allowed!important}
+
+@keyframes bloodPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 16px rgba(255,50,80,.6); }
+  50% { transform: scale(1.04); box-shadow: 0 0 26px rgba(255,80,110,.95), inset 0 0 8px rgba(255,255,255,.6); }
+}
+
+
+
+
+
+
+
+/* Vòng 1: chọn nhân vật và giới thiệu boss */
+.character-choice{display:flex;align-items:center;justify-content:center;gap:15px;margin:8px auto 16px;padding:10px 18px;border:1px solid #72d6ed;border-radius:14px;background:rgba(13,45,62,.78);max-width:310px;text-align:left;box-shadow:0 0 16px #42bdd044}.character-portrait{width:90px;height:112px;background-size:896px 112px;background-repeat:no-repeat;image-rendering:pixelated;flex-shrink:0}.character-choice strong,.character-choice small,.character-choice span{display:block}.character-choice strong{font-size:19px;color:#f9edd2}.character-choice small{margin:5px 0;color:#a6c8d9}.character-choice span{font-size:11px;color:#86e0cf;font-weight:800}.battle-intro{position:absolute;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:none;text-align:center;text-shadow:0 3px 8px #000,0 0 18px #b91c38}.intro-round{font-size:clamp(34px,8vw,64px);font-weight:900;color:#fff2dc;letter-spacing:.12em}.intro-boss{display:flex;flex-direction:column;gap:5px;margin-top:12px;color:#ffced2}.intro-boss b{font-size:clamp(28px,6vw,48px);letter-spacing:.1em}.intro-boss span{font-weight:800;color:#ffcb80;letter-spacing:.12em}.intro-cue{font-size:clamp(30px,7vw,58px);font-weight:900;color:#fff2d1}.battle-intro .hidden{display:none!important}@media(max-height:500px){.character-portrait{width:70px;height:86px;background-size:688px 86px}.character-choice{margin:4px auto 8px;padding:4px 10px}.character-choice strong{font-size:16px}}
+
+/* Avatar 0.1.43: ảnh vuông nguyên vẹn trong màn chọn và phần giới thiệu boss. */
+.character-choice img.character-portrait{display:block;width:104px;height:104px;object-fit:contain;image-rendering:auto;background:none;border:1px solid #98d3dc;border-radius:10px;box-shadow:0 3px 14px #020a13aa}
+.boss-portrait-box{overflow:hidden;padding:0}
+.boss-portrait-box .boss-avatar{display:block;width:100%;height:100%;object-fit:contain;image-rendering:auto}
+.battle-intro .intro-boss{position:absolute;left:50%;bottom:clamp(16px,7vh,54px);transform:translateX(-50%);margin:0;display:flex;flex-direction:row;align-items:center;gap:14px;padding:8px 16px 8px 8px;white-space:nowrap;text-align:left;border:1px solid #d34450aa;border-radius:16px;background:linear-gradient(100deg,rgba(31,4,10,.88),rgba(15,3,8,.7));box-shadow:0 4px 24px #25010bcc;animation:bossAvatarIn .3s ease-out}
+.intro-boss-avatar{display:block;width:clamp(74px,14vh,112px);height:clamp(74px,14vh,112px);object-fit:contain;border:1px solid #ff6d79;border-radius:11px;box-shadow:0 0 16px #ec273a88}
+.intro-boss-info{display:flex;flex-direction:column;gap:5px}
+.intro-boss-info b{font-size:clamp(20px,4vw,36px)}
+@keyframes bossAvatarIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-height:500px){.character-choice img.character-portrait{width:72px;height:72px}.battle-intro .intro-boss{bottom:12px;padding:5px 11px 5px 5px;gap:9px}.intro-boss-avatar{width:65px;height:65px}.intro-boss-info b{font-size:20px}.intro-boss-info span{font-size:11px}}

@@ -1,0 +1,941 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="dark"><title>Thổ Thuẫn — Skill 03 · PixelFX Offline</title>
+<style>
+:root{color-scheme:dark;--ink:#151916;--soil:#795b37;--gold:#ead094;--muted:#a59c89}*{box-sizing:border-box}html{background:#111514}body{margin:0;padding:14px 10px 30px;min-height:100dvh;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#e9e6dc;background:radial-gradient(ellipse at 50% -7%,#554830 0,#242724 37%,#101419 78%)}.wrap{max-width:850px;margin:auto}.top{text-align:center;margin:4px auto 14px}.eyebrow{font-size:10px;font-weight:800;letter-spacing:.24em;color:#d0ac73}.top h1{font-size:clamp(29px,7vw,49px);line-height:1.14;letter-spacing:.16em;margin:4px 0 6px;background:linear-gradient(#fff5d1,#e6c17a 44%,#9e7950);-webkit-background-clip:text;background-clip:text;color:transparent}.subtitle{color:#b5aa97;font-size:12px;margin:0}.frame{border:1px solid #766145;border-radius:12px;overflow:hidden;background:#11161b;position:relative;box-shadow:0 12px 34px #0009,0 0 20px #ab82451a}.screen{width:100%;height:auto;aspect-ratio:480/270;display:block;image-rendering:pixelated}.badge{position:absolute;right:9px;top:8px;border:1px solid #8e7953;border-radius:12px;background:#171c1cc7;padding:3px 8px;font-size:9px;font-weight:800;color:#edda9d;letter-spacing:.06em}.badge.left{left:9px;right:auto;color:#b3a98e}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:10px}.stat{min-width:0;border:1px solid #484337;border-radius:10px;background:linear-gradient(165deg,#29291f,#171d22);padding:9px 5px;text-align:center}.stat .k{font-size:10px;color:#a7a394;margin-bottom:5px;white-space:nowrap}.stat .v{font-size:clamp(14px,2.9vw,20px);font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#ffe4aa}.stat .v.live{color:#c5f2aa}.stat .v.off{color:#d7a38a}.bars{margin:10px 0 5px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.bar-wrap{font-size:10px;font-weight:700;color:#beb6a7}.bar{height:7px;background:#323431;margin-top:4px;border-radius:9px;overflow:hidden}.fill{height:100%;width:100%;transition:width .12s linear;background:linear-gradient(90deg,#5868b6,#80b4fd)}.fill.hp{background:linear-gradient(90deg,#7b2d24,#e67a57)}.msg{font-size:12px;color:#edce97;font-weight:700;text-align:center;min-height:38px;display:flex;align-items:center;justify-content:center;padding:7px 5px}.controls{display:grid;grid-template-columns:1.1fr repeat(3,1fr);gap:7px}.controls button{min-width:0;min-height:55px;padding:7px 5px;border-radius:10px;border:1px solid #9d8357;background:linear-gradient(#403b2d,#292b28);color:#f0deb2;font-size:clamp(11px,2.5vw,15px);font-weight:800;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}.controls button:active{transform:translateY(1px);filter:brightness(1.2)}.controls button.primary{background:linear-gradient(#967449,#56452b);border-color:#d0a76f;color:#fff2ce}.controls button.primary.active{background:linear-gradient(#826842,#403c29);border-color:#c7dfa3;color:#e2f7be}.controls button.heavy{border-color:#935b4a;color:#efb2a1}.controls button:disabled{opacity:.55}.tools{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}.tools button{height:36px;border:1px solid #57554a;border-radius:9px;background:#252c2c;color:#cbc6b4;font:700 12px system-ui;cursor:pointer}.description{margin-top:12px;padding:10px 12px;background:#191f20;border:1px solid #3a3d37;border-radius:10px;color:#aea99b;font-size:12px;line-height:1.7}.description b{color:#f4d8a1}.error{display:none;border:1px solid #b84949;background:#541e24;color:#fff;padding:9px;border-radius:8px;margin-top:8px;font-size:11px}.error.show{display:block}footer{text-align:center;font-size:10px;color:#817f77;margin-top:13px}@media(max-width:540px){body{padding:9px 6px 25px}.top{margin-bottom:11px}.grid{grid-template-columns:repeat(2,1fr)}.stat{padding:7px 4px}.stat .v{font-size:18px}.controls{grid-template-columns:repeat(3,1fr)}.controls button.primary{grid-column:span 3;min-height:52px;font-size:16px}.bars{gap:6px}}
+</style></head><body><main class="wrap"><header class="top"><div class="eyebrow">PIXELFX · DIỆP TU · KỸ NĂNG 03</div><h1>THỔ THUẪN</h1><p class="subtitle">Thổ linh lực hộ thể · Vạn kích bất xâm · Cạn linh lực, thuẫn tự vỡ</p></header>
+<section class="frame"><canvas class="screen" id="arena" width="480" height="270" aria-label="Demo Thổ Thuẫn bao bọc nhân vật, hấp thụ sát thương bằng mana"></canvas><span class="badge left">DEMO PHÒNG THỦ</span><span class="badge">OFFLINE · 100% CODE</span></section>
+<section class="grid"><div class="stat"><div class="k">TRẠNG THÁI</div><div class="v off" id="state">CHƯA BẬT</div></div><div class="stat"><div class="k">MANA</div><div class="v" id="mana">1000 / 1000</div></div><div class="stat"><div class="k">SÁT THƯƠNG ĐÃ ĐỠ</div><div class="v" id="blocked">0</div></div><div class="stat"><div class="k">SỐ ĐÒN ĐỠ</div><div class="v" id="blocks">0</div></div></section>
+<div class="bars"><div class="bar-wrap">LINH LỰC <div class="bar"><div class="fill" id="manabar"></div></div></div><div class="bar-wrap">SINH MỆNH <div class="bar"><div class="fill hp" id="hpbar"></div></div></div></div>
+<div class="msg" id="message" role="status">BẬT THỔ THUẪN RỒI CHỌN MỨC TẤN CÔNG ĐỂ THỬ</div>
+<div class="controls"><button class="primary" id="toggle" type="button">KÍCH HOẠT THỔ THUẪN</button><button id="atk100" type="button">ĐÒN NHẸ<br>100 DMG</button><button id="atk300" type="button">ĐÒN MẠNH<br>300 DMG</button><button class="heavy" id="atk700" type="button">ĐẠI KÍCH<br>700 DMG</button></div>
+<div class="tools"><button id="auto" type="button">TỰ ĐỘNG TẤN CÔNG: TẮT</button><button id="restore" type="button">HỒI ĐẦY MANA & MÁU</button></div>
+<div class="error" id="error"></div><div class="description"><b>Nguyên lý:</b> Khi thuẫn còn hoạt động, <b>100% sát thương được chặn</b>; thay vì trừ máu, người chơi mất mana theo sức mạnh đòn đánh. Thuẫn luôn tiêu hao <b>2 mana/giây</b> để duy trì. Mỗi đòn trúng thuẫn hao thêm <b>25 + 65% sát thương</b> mana (thông số demo, có thể chỉnh). Nếu đòn đánh làm cạn mana, <b>đòn đó vẫn được đỡ</b>, sau đó thuẫn tan vỡ và đòn tiếp theo mới trừ máu. Nhấn <b>kích hoạt</b> để bật/tắt; các nút tấn công mô phỏng đạn bay từ phải sang trái. Không sử dụng hình ảnh, API hay tài nguyên ngoài.</div><footer>PixelFX v0.3.0 · Thổ linh lực, hạt đá, bụi, sóng chấn, vỡ thuẫn: vẽ bằng PixelFX · File HTML độc lập</footer></main>
+<script>
+(()=>{'use strict';
+const __modules={
+"/src/core/color.js":function(module,exports,require){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PATCH = exports.INK = exports.BLACK = exports.WHITE = exports.RAMP = exports.PAL = exports.at = exports.ramp = exports.luma = exports.scale = exports.toHex = exports.blue = exports.green = exports.red = exports.rgb = void 0;
+exports.hex = hex;
+exports.mix = mix;
+exports.fit = fit;
+exports.blend = blend;
+const math_js_1 = require("./math.js");
+const rgb = (r, g, b) => (255 << 24) | ((b & 255) << 16) | ((g & 255) << 8) | (r & 255);
+exports.rgb = rgb;
+const red = (c) => c & 255;
+exports.red = red;
+const green = (c) => (c >>> 8) & 255;
+exports.green = green;
+const blue = (c) => (c >>> 16) & 255;
+exports.blue = blue;
+function hex(h) {
+    if (typeof h === "number")
+        return h;
+    let s = h.replace("#", "");
+    if (s.length === 3)
+        s = s[0] + s[0] + s[1] + s[1] + s[2] + s[2];
+    const v = parseInt(s.slice(0, 6), 16);
+    return (0, exports.rgb)((v >> 16) & 255, (v >> 8) & 255, v & 255);
+}
+const toHex = (c) => "#" + [(0, exports.red)(c), (0, exports.green)(c), (0, exports.blue)(c)].map((v) => v.toString(16).padStart(2, "0")).join("");
+exports.toHex = toHex;
+function mix(a, b, t) {
+    t = (0, math_js_1.clamp)(t);
+    return (0, exports.rgb)((0, exports.red)(a) + ((0, exports.red)(b) - (0, exports.red)(a)) * t, (0, exports.green)(a) + ((0, exports.green)(b) - (0, exports.green)(a)) * t, (0, exports.blue)(a) + ((0, exports.blue)(b) - (0, exports.blue)(a)) * t);
+}
+const scale = (c, k) => (0, exports.rgb)(Math.min(255, (0, exports.red)(c) * k), Math.min(255, (0, exports.green)(c) * k), Math.min(255, (0, exports.blue)(c) * k));
+exports.scale = scale;
+const luma = (c) => (0.299 * (0, exports.red)(c) + 0.587 * (0, exports.green)(c) + 0.114 * (0, exports.blue)(c)) / 255;
+exports.luma = luma;
+const ramp = (list) => list.map(hex);
+exports.ramp = ramp;
+function fit(r, n) {
+    r = r.map(hex);
+    if (r.length === n)
+        return r;
+    return Array.from({ length: n }, (_, i) => r[Math.round((i * (r.length - 1)) / Math.max(1, n - 1))]);
+}
+const at = (r, t) => r[(0, math_js_1.clamp)(Math.floor(t * r.length), 0, r.length - 1)];
+exports.at = at;
+function blend(r, t) {
+    const x = (0, math_js_1.clamp)(t) * (r.length - 1), i = Math.min(r.length - 2, Math.floor(x));
+    return mix(r[i], r[i + 1], x - i);
+}
+exports.PAL = {
+    fire: ["#1f0b10", "#4a1118", "#8c1d1c", "#cc3a1a", "#f2701f", "#ffae35", "#ffe27a", "#fff8d6"],
+    ember: ["#1a0a0e", "#3d1012", "#701a14", "#a8301a", "#e0561e", "#ff8a2a", "#ffc46a"],
+    lava: ["#14060a", "#380a10", "#6e1210", "#ac2410", "#e8501a", "#ff8c2a", "#ffd25a"],
+    smoke: ["#0e0c12", "#1d1a22", "#2e2a35", "#433e4b", "#5c5664", "#7b7484", "#a39cab"],
+    dust: ["#1c1610", "#33281c", "#4f3f2c", "#6e5a40", "#927a58", "#b89f78", "#dcc8a2"],
+    ice: ["#0c1430", "#162c5c", "#1f4f94", "#2f7fcc", "#58b4ec", "#9bdcff", "#d8f4ff", "#ffffff"],
+    water: ["#081830", "#0e2e5a", "#14508c", "#1c76bc", "#36a2e0", "#78ccf4", "#c4ecff", "#ffffff"],
+    electric: ["#0a0f2e", "#172a78", "#2550d0", "#3f8cff", "#7cc8ff", "#c8f0ff", "#ffffff"],
+    volt: ["#24160a", "#5e3a0c", "#a8680f", "#e8a218", "#ffd23c", "#fff08a", "#ffffff"],
+    poison: ["#0d1a0c", "#173a14", "#265e18", "#3f8a1e", "#6cb82a", "#a8e04a", "#e0ff8a"],
+    holy: ["#2a1c08", "#5a3e10", "#9a6c18", "#d8a428", "#ffd84a", "#fff09a", "#fffbe6", "#ffffff"],
+    heal: ["#08201a", "#0f3f2c", "#17663e", "#24924e", "#3ec466", "#7ee88a", "#c8ffc4", "#ffffff"],
+    arcane: ["#140a26", "#2b1252", "#481c88", "#6b2cc0", "#9a48ec", "#c684ff", "#ecc8ff", "#ffffff"],
+    shadow: ["#050308", "#0f0a18", "#1c1230", "#2c1a4a", "#432468", "#5e3290", "#8048b8", "#a970e0"],
+    blood: ["#14040a", "#3a0a14", "#6a101c", "#a01824", "#d42a30", "#ff5a50", "#ff9a8a"],
+    earth: ["#140e0a", "#2a1e14", "#47321e", "#69492a", "#8e6638", "#b88a52", "#dcb47c"],
+    stone: ["#0e0e12", "#1c1c24", "#2c2c38", "#42424f", "#5c5c6b", "#7d7d8c", "#a4a4b2", "#d0d0da"],
+    gold: ["#1e1206", "#4a2c08", "#86520c", "#c48412", "#f0b424", "#ffe066", "#fff6c4", "#ffffff"],
+    leaf: ["#0c1a0e", "#163418", "#225224", "#357530", "#4f9a3a", "#7cc048", "#b4e070", "#e4ffb0"],
+    wood: ["#160c06", "#2e1a0c", "#4a2c14", "#6a421e", "#8e5c2c", "#b47c40", "#d8a464"],
+    metal: ["#0c0e14", "#1c2230", "#2e3648", "#4a5468", "#6e7a90", "#9aa6ba", "#d0d8e6", "#ffffff"],
+    bone: ["#1a1814", "#3a352c", "#5e5648", "#8a806c", "#b8ad96", "#e4dcc8", "#fffaf0"],
+    neon: ["#1a0516", "#3d0a33", "#701560", "#b0228f", "#f53cd1", "#ff86e6", "#ffd2f6", "#ffffff"],
+    cyber: ["#041418", "#08303a", "#0c5260", "#108088", "#18b4b0", "#4ce8d8", "#b4fff0", "#ffffff"],
+    matrix: ["#020a04", "#05200c", "#0a3c16", "#106624", "#1a9a34", "#3cd650", "#a4ffa8", "#e8ffe8"],
+    candy: ["#ff4a5a", "#ff9a2a", "#ffe03c", "#5ad84a", "#3cc8ff", "#7a6cff", "#f53cd1"],
+    night: ["#07060d", "#0c0a18", "#131026", "#1b1734", "#241f44", "#2f2956"],
+};
+exports.RAMP = Object.fromEntries(Object.entries(exports.PAL).map(([k, v]) => [k, (0, exports.ramp)(v)]));
+exports.WHITE = hex("#ffffff");
+exports.BLACK = hex("#000000");
+exports.INK = hex("#0b0a10");
+exports.PATCH = hex("#f53cd1");
+
+},
+"/src/core/font.js":function(module,exports,require){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FONTS = void 0;
+exports.textWidth = textWidth;
+exports.rasterText = rasterText;
+const MINI = {
+    A: ".#.|#.#|###|#.#|#.#", B: "##.|#.#|##.|#.#|##.", C: ".##|#..|#..|#..|.##", D: "##.|#.#|#.#|#.#|##.",
+    E: "###|#..|##.|#..|###", F: "###|#..|##.|#..|#..", G: ".##|#..|#.#|#.#|.##", H: "#.#|#.#|###|#.#|#.#",
+    I: "###|.#.|.#.|.#.|###", J: "..#|..#|..#|#.#|.#.", K: "#.#|#.#|##.|#.#|#.#", L: "#..|#..|#..|#..|###",
+    M: "#.#|###|###|#.#|#.#", N: "##.|#.#|#.#|#.#|#.#", O: ".#.|#.#|#.#|#.#|.#.", P: "##.|#.#|##.|#..|#..",
+    Q: ".#.|#.#|#.#|##.|.##", R: "##.|#.#|##.|#.#|#.#", S: ".##|#..|.#.|..#|##.", T: "###|.#.|.#.|.#.|.#.",
+    U: "#.#|#.#|#.#|#.#|###", V: "#.#|#.#|#.#|#.#|.#.", W: "#.#|#.#|###|###|#.#", X: "#.#|#.#|.#.|#.#|#.#",
+    Y: "#.#|#.#|.#.|.#.|.#.", Z: "###|..#|.#.|#..|###",
+    0: "###|#.#|#.#|#.#|###", 1: ".#.|##.|.#.|.#.|###", 2: "##.|..#|.#.|#..|###", 3: "##.|..#|.#.|..#|##.",
+    4: "#.#|#.#|###|..#|..#", 5: "###|#..|##.|..#|##.", 6: ".##|#..|###|#.#|###", 7: "###|..#|.#.|.#.|.#.",
+    8: "###|#.#|###|#.#|###", 9: "###|#.#|###|..#|##.",
+    "+": "...|.#.|###|.#.|...", "-": "...|...|###|...|...", "!": "#|#|#|.|#", "?": "##.|..#|.#.|...|.#.",
+    ".": ".|.|.|.|#", ",": "..|..|..|.#|#.", ":": ".|#|.|#|.", "/": "..#|..#|.#.|#..|#..",
+    "%": "#.#|..#|.#.|#..|#.#", x: "...|#.#|.#.|#.#|...", "*": "#.#|.#.|#.#|...|...", "'": "#|#|.|.|.",
+    "(": ".#|#.|#.|#.|.#", ")": "#.|.#|.#|.#|#.", "<": "..#|.#.|#..|.#.|..#", ">": "#..|.#.|..#|.#.|#..",
+    "=": "...|###|...|###|...", _: "...|...|...|...|###", "#": "#.#|###|#.#|###|#.#",
+};
+const BIG = {
+    A: ".###.|#...#|#...#|#####|#...#|#...#|#...#", B: "####.|#...#|#...#|####.|#...#|#...#|####.",
+    C: ".###.|#...#|#....|#....|#....|#...#|.###.", D: "####.|#...#|#...#|#...#|#...#|#...#|####.",
+    E: "#####|#....|#....|####.|#....|#....|#####", F: "#####|#....|#....|####.|#....|#....|#....",
+    G: ".###.|#...#|#....|#.###|#...#|#...#|.####", H: "#...#|#...#|#...#|#####|#...#|#...#|#...#",
+    I: "###|.#.|.#.|.#.|.#.|.#.|###", J: "..###|...#.|...#.|...#.|...#.|#..#.|.##..",
+    K: "#...#|#..#.|#.#..|##...|#.#..|#..#.|#...#", L: "#....|#....|#....|#....|#....|#....|#####",
+    M: "#...#|##.##|#.#.#|#.#.#|#...#|#...#|#...#", N: "#...#|#...#|##..#|#.#.#|#..##|#...#|#...#",
+    O: ".###.|#...#|#...#|#...#|#...#|#...#|.###.", P: "####.|#...#|#...#|####.|#....|#....|#....",
+    Q: ".###.|#...#|#...#|#...#|#.#.#|#..#.|.##.#", R: "####.|#...#|#...#|####.|#.#..|#..#.|#...#",
+    S: ".####|#....|#....|.###.|....#|....#|####.", T: "#####|..#..|..#..|..#..|..#..|..#..|..#..",
+    U: "#...#|#...#|#...#|#...#|#...#|#...#|.###.", V: "#...#|#...#|#...#|#...#|#...#|.#.#.|..#..",
+    W: "#...#|#...#|#...#|#.#.#|#.#.#|#.#.#|.#.#.", X: "#...#|#...#|.#.#.|..#..|.#.#.|#...#|#...#",
+    Y: "#...#|#...#|.#.#.|..#..|..#..|..#..|..#..", Z: "#####|....#|...#.|..#..|.#...|#....|#####",
+    0: ".###.|#...#|#..##|#.#.#|##..#|#...#|.###.", 1: ".#.|##.|.#.|.#.|.#.|.#.|###",
+    2: ".###.|#...#|....#|...#.|..#..|.#...|#####", 3: "#####|...#.|..#..|...#.|....#|#...#|.###.",
+    4: "...#.|..##.|.#.#.|#..#.|#####|...#.|...#.", 5: "#####|#....|####.|....#|....#|#...#|.###.",
+    6: "..##.|.#...|#....|####.|#...#|#...#|.###.", 7: "#####|....#|...#.|..#..|.#...|.#...|.#...",
+    8: ".###.|#...#|#...#|.###.|#...#|#...#|.###.", 9: ".###.|#...#|#...#|.####|....#|...#.|.##..",
+    "!": "#|#|#|#|#|.|#", "?": ".###.|#...#|....#|...#.|..#..|.....|..#..", "+": ".....|..#..|..#..|#####|..#..|..#..|.....",
+    "-": "....|....|....|####|....|....|....", ".": ".|.|.|.|.|.|#", ",": "..|..|..|..|..|.#|#.", ":": ".|.|#|.|.|#|.",
+    "/": "....#|....#|...#.|..#..|.#...|#....|#....", "%": "##...|##..#|...#.|..#..|.#...|#..##|...##",
+    x: ".....|.....|#...#|.#.#.|..#..|.#.#.|#...#", "*": ".....|..#..|#.#.#|.###.|#.#.#|..#..|.....", "'": "#|#|.|.|.|.|.",
+    "<": "...#|..#.|.#..|#...|.#..|..#.|...#", ">": "#...|.#..|..#.|...#|..#.|.#..|#...", "=": "....|....|####|....|####|....|....",
+    "(": "..#|.#.|#..|#..|#..|.#.|..#", ")": "#..|.#.|..#|..#|..#|.#.|#..", "#": ".#.#.|.#.#.|#####|.#.#.|#####|.#.#.|.#.#.",
+};
+function build(table, h) {
+    const out = {};
+    for (const [ch, src] of Object.entries(table)) {
+        const rows = src.split("|");
+        out[ch] = { w: rows[0].length, rows: rows.map((r) => [...r].map((c) => c === "#")) };
+        if (rows.length !== h)
+            throw new Error(`glyph ${ch} has ${rows.length} rows, expected ${h}`);
+    }
+    return out;
+}
+exports.FONTS = {
+    mini: { h: 5, space: 2, gap: 1, glyphs: build(MINI, 5) },
+    big: { h: 7, space: 3, gap: 1, glyphs: build(BIG, 7) },
+};
+function textWidth(str, font = "mini") {
+    const F = exports.FONTS[font];
+    let w = 0;
+    for (const ch of String(str)) {
+        const g = F.glyphs[ch] ?? F.glyphs[ch.toUpperCase()];
+        w += (g ? g.w : F.space) + F.gap;
+    }
+    return Math.max(0, w - F.gap);
+}
+function rasterText(str, font, plot) {
+    const F = exports.FONTS[font];
+    let x = 0;
+    for (const ch of String(str)) {
+        const g = F.glyphs[ch] ?? F.glyphs[ch.toUpperCase()];
+        if (!g) {
+            x += F.space + F.gap;
+            continue;
+        }
+        for (let r = 0; r < F.h; r++)
+            for (let c = 0; c < g.w; c++)
+                if (g.rows[r][c])
+                    plot(x + c, r);
+        x += g.w + F.gap;
+    }
+}
+
+},
+"/src/core/fx.js":function(module,exports,require){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createFrame = createFrame;
+exports.clearFrame = clearFrame;
+exports.painterFor = painterFor;
+exports.composite = composite;
+const painter_js_1 = require("./painter.js");
+function createFrame(w, h, ox = 0, oy = 0) {
+    return { w, h, ox, oy, color: new Uint32Array(w * h), light: new Uint32Array(w * h) };
+}
+function clearFrame(f) {
+    f.color.fill(0);
+    f.light.fill(0);
+    return f;
+}
+const painters = new WeakMap();
+function painterFor(frame) {
+    let p = painters.get(frame);
+    if (!p)
+        painters.set(frame, (p = new painter_js_1.Painter(frame)));
+    return p.reset();
+}
+function composite(f, out, bg = null, lightK = 1) {
+    const n = f.w * f.h, C = f.color, L = f.light, flat = typeof bg === "number";
+    for (let i = 0; i < n; i++) {
+        const c = C[i], l = L[i] & 0xffffff;
+        let r, g, b, a;
+        const ca = c >>> 24;
+        if (ca === 255) {
+            r = c & 255;
+            g = (c >>> 8) & 255;
+            b = (c >>> 16) & 255;
+            a = 255;
+        }
+        else if (bg === null) {
+            r = c & 255;
+            g = (c >>> 8) & 255;
+            b = (c >>> 16) & 255;
+            a = ca;
+        }
+        else {
+            const k = flat ? bg : bg[i], f = ca / 255;
+            r = (c & 255) * f + (k & 255) * (1 - f);
+            g = ((c >>> 8) & 255) * f + ((k >>> 8) & 255) * (1 - f);
+            b = ((c >>> 16) & 255) * f + ((k >>> 16) & 255) * (1 - f);
+            a = 255;
+        }
+        if (l) {
+            const lr = (l & 255) * lightK, lg = ((l >>> 8) & 255) * lightK, lb = ((l >>> 16) & 255) * lightK;
+            if (a < 255) {
+                const pa = a / 255, pr = r * pa + lr, pg = g * pa + lg, pb = b * pa + lb;
+                const na = Math.min(1, Math.max(pa, Math.max(lr, lg, lb) / 255));
+                if (na > 0) {
+                    r = Math.min(255, pr / na);
+                    g = Math.min(255, pg / na);
+                    b = Math.min(255, pb / na);
+                    a = na * 255;
+                }
+            }
+            else {
+                r = Math.min(255, r + lr);
+                g = Math.min(255, g + lg);
+                b = Math.min(255, b + lb);
+            }
+        }
+        const j = i * 4;
+        out[j] = r;
+        out[j + 1] = g;
+        out[j + 2] = b;
+        out[j + 3] = a;
+    }
+    return out;
+}
+
+},
+"/src/core/math.js":function(module,exports,require){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rng = exports.Rng = exports.rand = exports.ease = exports.angleTo = exports.dist = exports.pingpong = exports.bump = exports.smooth = exports.seg = exports.wrap = exports.fract = exports.remap = exports.invLerp = exports.lerp = exports.clamp = exports.TAU = void 0;
+exports.hash = hash;
+exports.noise = noise;
+exports.noise2 = noise2;
+exports.fbm = fbm;
+exports.tileNoise = tileNoise;
+exports.tileFbm = tileFbm;
+exports.loopNoise = loopNoise;
+exports.TAU = Math.PI * 2;
+const clamp = (x, a = 0, b = 1) => (x < a ? a : x > b ? b : x);
+exports.clamp = clamp;
+const lerp = (a, b, t) => a + (b - a) * t;
+exports.lerp = lerp;
+const invLerp = (a, b, x) => (b === a ? 0 : (x - a) / (b - a));
+exports.invLerp = invLerp;
+const remap = (x, a0, a1, b0, b1) => (0, exports.lerp)(b0, b1, (0, exports.invLerp)(a0, a1, x));
+exports.remap = remap;
+const fract = (x) => x - Math.floor(x);
+exports.fract = fract;
+const wrap = (x, m) => ((x % m) + m) % m;
+exports.wrap = wrap;
+const seg = (t, t0, t1) => (0, exports.clamp)((t - t0) / (t1 - t0));
+exports.seg = seg;
+const smooth = (e0, e1, x) => {
+    const t = (0, exports.seg)(x, e0, e1);
+    return t * t * (3 - 2 * t);
+};
+exports.smooth = smooth;
+const bump = (t, t0, t1) => (t <= t0 || t >= t1 ? 0 : Math.sin(Math.PI * (0, exports.seg)(t, t0, t1)));
+exports.bump = bump;
+const pingpong = (x) => 1 - Math.abs((0, exports.wrap)(x, 2) - 1);
+exports.pingpong = pingpong;
+const dist = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
+exports.dist = dist;
+const angleTo = (x0, y0, x1, y1) => Math.atan2(y1 - y0, x1 - x0);
+exports.angleTo = angleTo;
+exports.ease = {
+    linear: (t) => t,
+    inQuad: (t) => t * t,
+    outQuad: (t) => 1 - (1 - t) * (1 - t),
+    inOutQuad: (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2),
+    inCubic: (t) => t * t * t,
+    outCubic: (t) => 1 - Math.pow(1 - t, 3),
+    inOutCubic: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+    inQuart: (t) => t * t * t * t,
+    outQuart: (t) => 1 - Math.pow(1 - t, 4),
+    inExpo: (t) => (t <= 0 ? 0 : Math.pow(2, 10 * t - 10)),
+    outExpo: (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+    inSine: (t) => 1 - Math.cos((t * Math.PI) / 2),
+    outSine: (t) => Math.sin((t * Math.PI) / 2),
+    inOutSine: (t) => -(Math.cos(Math.PI * t) - 1) / 2,
+    inBack: (t, s = 1.70158) => (t <= 0 ? 0 : t >= 1 ? 1 : (s + 1) * t * t * t - s * t * t),
+    outBack: (t, s = 1.70158) => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2)),
+    outElastic: (t) => (t <= 0 ? 0 : t >= 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * ((2 * Math.PI) / 3)) + 1),
+    outBounce: (t) => {
+        const n = 7.5625, d = 2.75;
+        if (t < 1 / d)
+            return n * t * t;
+        if (t < 2 / d)
+            return n * (t -= 1.5 / d) * t + 0.75;
+        if (t < 2.5 / d)
+            return n * (t -= 2.25 / d) * t + 0.9375;
+        return n * (t -= 2.625 / d) * t + 0.984375;
+    },
+};
+function hash(...ns) {
+    let h = 0x9e3779b9;
+    for (const n of ns) {
+        h = Math.imul(h ^ (n | 0), 0x85ebca6b);
+        h ^= h >>> 13;
+        h = Math.imul(h, 0xc2b2ae35);
+        h ^= h >>> 16;
+    }
+    return h >>> 0;
+}
+const rand = (...ns) => hash(...ns) / 4294967296;
+exports.rand = rand;
+class Rng {
+    constructor(seed = 1) {
+        this.s = seed >>> 0 || 1;
+    }
+    next() {
+        let t = (this.s = (this.s + 0x6d2b79f5) >>> 0);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    range(a, b) {
+        return a + (b - a) * this.next();
+    }
+    int(a, b) {
+        return Math.floor(this.range(a, b + 1));
+    }
+    chance(p) {
+        return this.next() < p;
+    }
+    sign() {
+        return this.next() < 0.5 ? -1 : 1;
+    }
+    pick(list) {
+        return list[Math.floor(this.next() * list.length)];
+    }
+    gauss() {
+        return (this.next() + this.next() + this.next() + this.next() - 2) * 1.732;
+    }
+}
+exports.Rng = Rng;
+const rng = (...ns) => new Rng(hash(...ns));
+exports.rng = rng;
+function noise(x, seed = 0) {
+    const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f);
+    return (0, exports.lerp)((0, exports.rand)(i, seed), (0, exports.rand)(i + 1, seed), u) * 2 - 1;
+}
+function noise2(x, y, seed = 0) {
+    const ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+    const ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
+    const a = (0, exports.rand)(ix, iy, seed), b = (0, exports.rand)(ix + 1, iy, seed), c = (0, exports.rand)(ix, iy + 1, seed), d = (0, exports.rand)(ix + 1, iy + 1, seed);
+    return (0, exports.lerp)((0, exports.lerp)(a, b, ux), (0, exports.lerp)(c, d, ux), uy) * 2 - 1;
+}
+function fbm(x, y, seed = 0, octaves = 3) {
+    let s = 0, a = 0.5, n = 0;
+    for (let o = 0; o < octaves; o++) {
+        s += noise2(x, y, seed + o * 101) * a;
+        n += a;
+        x *= 2.03;
+        y *= 2.03;
+        a *= 0.5;
+    }
+    return s / n;
+}
+function tileNoise(x, y, px = 0, py = 0, seed = 0) {
+    const ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+    const ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
+    const x0 = px ? (0, exports.wrap)(ix, px) : ix, x1 = px ? (0, exports.wrap)(ix + 1, px) : ix + 1;
+    const y0 = py ? (0, exports.wrap)(iy, py) : iy, y1 = py ? (0, exports.wrap)(iy + 1, py) : iy + 1;
+    const a = (0, exports.rand)(x0, y0, seed), b = (0, exports.rand)(x1, y0, seed), c = (0, exports.rand)(x0, y1, seed), d = (0, exports.rand)(x1, y1, seed);
+    return (0, exports.lerp)((0, exports.lerp)(a, b, ux), (0, exports.lerp)(c, d, ux), uy) * 2 - 1;
+}
+function tileFbm(x, y, px = 0, py = 0, seed = 0, octaves = 3) {
+    let s = 0, a = 0.5, n = 0, k = 1;
+    for (let o = 0; o < octaves; o++) {
+        s += tileNoise(x * k, y * k, px * k, py * k, seed + o * 101) * a;
+        n += a;
+        a *= 0.5;
+        k *= 2;
+    }
+    return s / n;
+}
+function loopNoise(phase, radius = 1, seed = 0) {
+    const a = phase * exports.TAU;
+    return noise2(Math.cos(a) * radius + 50, Math.sin(a) * radius + 50, seed);
+}
+
+},
+"/src/core/painter.js":function(module,exports,require){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Painter = void 0;
+const math_js_1 = require("./math.js");
+const color_js_1 = require("./color.js");
+const font_js_1 = require("./font.js");
+const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);
+const OUT = { c: 0, a: 1, l: 0, k: 0 };
+const sprites = new WeakMap();
+const call = (v, ...args) => (typeof v === "function" ? v(...args) : v);
+class Painter {
+    constructor(frame) {
+        this.frame = frame;
+        this.reset();
+    }
+    reset() {
+        const f = this.frame;
+        this.w = f.w;
+        this.h = f.h;
+        this.ox = f.ox | 0;
+        this.oy = f.oy | 0;
+        this.C = f.color;
+        this.L = f.light;
+        this.tx = 0;
+        this.ty = 0;
+        this.fx = 1;
+        this.cs = 1;
+        this.sn = 0;
+        this.fade = 1;
+        this.lightK = 1;
+        this.layer = "front";
+        return this;
+    }
+    place(x, y, flip = false, angle = 0) {
+        this.tx = x;
+        this.ty = y;
+        this.fx = flip ? -1 : 1;
+        this.cs = Math.cos(angle);
+        this.sn = Math.sin(angle);
+        return this;
+    }
+    toX(x, y) { return this.tx + x * this.fx * this.cs - y * this.sn; }
+    toY(x, y) { return this.ty + x * this.fx * this.sn + y * this.cs; }
+    fromX(sx, sy) { const dx = sx - this.tx, dy = sy - this.ty; return (dx * this.cs + dy * this.sn) * this.fx; }
+    fromY(sx, sy) { const dx = sx - this.tx, dy = sy - this.ty; return -dx * this.sn + dy * this.cs; }
+    cellX(x, y) { return Math.floor(this.toX(Math.floor(x) + 0.5, Math.floor(y) + 0.5)); }
+    cellY(x, y) { return Math.floor(this.toY(Math.floor(x) + 0.5, Math.floor(y) + 0.5)); }
+    put(sx, sy, c, a = 1) {
+        if (!c)
+            return;
+        a *= this.fade;
+        if (a < 1 && a <= BAYER[((sy & 3) << 2) | (sx & 3)])
+            return;
+        const x = sx - this.ox, y = sy - this.oy;
+        if (x < 0 || y < 0 || x >= this.w || y >= this.h)
+            return;
+        this.C[y * this.w + x] = c;
+    }
+    add(sx, sy, c, k = 1) {
+        k *= this.fade * this.lightK;
+        if (k <= 0.004)
+            return;
+        const x = sx - this.ox, y = sy - this.oy;
+        if (x < 0 || y < 0 || x >= this.w || y >= this.h)
+            return;
+        const i = y * this.w + x, d = this.L[i];
+        const r = Math.min(255, (d & 255) + (c & 255) * k) | 0;
+        const g = Math.min(255, ((d >>> 8) & 255) + ((c >>> 8) & 255) * k) | 0;
+        const b = Math.min(255, ((d >>> 16) & 255) + ((c >>> 16) & 255) * k) | 0;
+        this.L[i] = (255 << 24) | (b << 16) | (g << 8) | r;
+    }
+    blendPx(sx, sy, c, a) {
+        a *= this.fade;
+        if (!c || a <= 0.004)
+            return;
+        const x = sx - this.ox, y = sy - this.oy;
+        if (x < 0 || y < 0 || x >= this.w || y >= this.h)
+            return;
+        const i = y * this.w + x, d = this.C[i], da = (d >>> 24) / 255, oa = a + da * (1 - a), k = a / oa;
+        const ch = (s) => ((((c >>> s) & 255) * k + ((d >>> s) & 255) * (1 - k)) & 255);
+        this.C[i] = (((oa * 255) & 255) << 24) | (ch(16) << 16) | (ch(8) << 8) | ch(0);
+    }
+    blend(x, y, c, a) { this.blendPx(this.cellX(x, y), this.cellY(x, y), c, a); }
+    disc(cx, cy, r, c, a) {
+        if (r < 0.5)
+            return this.blend(cx, cy, call(c, 0, 0), call(a, 0, 0));
+        this.each(cx - r, cy - r, cx + r, cy + r, (x, y, sx, sy) => {
+            const dx = x - cx, dy = y - cy, d2 = dx * dx + dy * dy;
+            if (d2 > r * r)
+                return;
+            const d = Math.sqrt(d2) / r, ang = Math.atan2(dy, dx);
+            this.blendPx(sx, sy, call(c, d, ang), call(a, d, ang));
+        });
+    }
+    get(x, y) {
+        const sx = this.cellX(x, y) - this.ox, sy = this.cellY(x, y) - this.oy;
+        return sx < 0 || sy < 0 || sx >= this.w || sy >= this.h ? 0 : this.C[sy * this.w + sx];
+    }
+    px(x, y, c) { this.put(this.cellX(x, y), this.cellY(x, y), c, 1); }
+    dot(x, y, c, a = 1) { if (a > 0)
+        this.put(this.cellX(x, y), this.cellY(x, y), c, a); }
+    light(x, y, c, k = 1) { this.add(this.cellX(x, y), this.cellY(x, y), c, k); }
+    each(x0, y0, x1, y1, fn) {
+        let ax = Infinity, bx = -Infinity, ay = Infinity, by = -Infinity;
+        for (let k = 0; k < 4; k++) {
+            const x = k & 1 ? x1 : x0, y = k & 2 ? y1 : y0, sx = this.toX(x, y), sy = this.toY(x, y);
+            if (sx < ax)
+                ax = sx;
+            if (sx > bx)
+                bx = sx;
+            if (sy < ay)
+                ay = sy;
+            if (sy > by)
+                by = sy;
+        }
+        const sx0 = Math.max(Math.floor(ax), this.ox), sx1 = Math.min(Math.ceil(bx), this.ox + this.w - 1);
+        const sy0 = Math.max(Math.floor(ay), this.oy), sy1 = Math.min(Math.ceil(by), this.oy + this.h - 1);
+        for (let sy = sy0; sy <= sy1; sy++)
+            for (let sx = sx0; sx <= sx1; sx++) {
+                const cx = sx + 0.5, cy = sy + 0.5;
+                fn(this.fromX(cx, cy), this.fromY(cx, cy), sx, sy);
+            }
+    }
+    shade(x0, y0, x1, y1, fn) {
+        const o = OUT;
+        this.each(x0, y0, x1, y1, (lx, ly, sx, sy) => {
+            o.c = 0;
+            o.a = 1;
+            o.l = 0;
+            o.k = 0;
+            const c = fn(lx, ly, o) || o.c;
+            if (c)
+                this.put(sx, sy, c, o.a);
+            if (o.k > 0)
+                this.add(sx, sy, o.l || c, o.k);
+        });
+    }
+    line(x0, y0, x1, y1, c, a = 1) {
+        let sx = this.cellX(x0, y0), sy = this.cellY(x0, y0);
+        const ex = this.cellX(x1, y1), ey = this.cellY(x1, y1);
+        const dx = Math.abs(ex - sx), dy = -Math.abs(ey - sy), stepx = sx < ex ? 1 : -1, stepy = sy < ey ? 1 : -1;
+        const n = Math.max(dx, -dy) || 1, fc = typeof c === "function", fa = typeof a === "function";
+        let err = dx + dy, i = 0;
+        for (;;) {
+            const u = i++ / n;
+            this.put(sx, sy, fc ? c(u) : c, fa ? a(u) : a);
+            if (sx === ex && sy === ey)
+                break;
+            const e2 = 2 * err;
+            if (e2 >= dy) {
+                err += dy;
+                sx += stepx;
+            }
+            if (e2 <= dx) {
+                err += dx;
+                sy += stepy;
+            }
+        }
+    }
+    polyline(pts, c, a = 1) {
+        for (let i = 1; i < pts.length; i++)
+            this.line(pts[i - 1][0], pts[i - 1][1], pts[i][0], pts[i][1], c, a);
+    }
+    beam(x0, y0, x1, y1, width, c, a = 1) {
+        const r = width / 2, dx = x1 - x0, dy = y1 - y0, L2 = dx * dx + dy * dy || 1e-9;
+        this.shade(Math.min(x0, x1) - r, Math.min(y0, y1) - r, Math.max(x0, x1) + r, Math.max(y0, y1) + r, (x, y, o) => {
+            const u = (0, math_js_1.clamp)(((x - x0) * dx + (y - y0) * dy) / L2), px = x0 + dx * u - x, py = y0 + dy * u - y;
+            const d2 = px * px + py * py;
+            if (d2 > r * r)
+                return;
+            const v = Math.sqrt(d2) / r;
+            o.c = call(c, u, v);
+            o.a = call(a, u, v);
+        });
+    }
+    circle(cx, cy, r, c, a = 1) {
+        if (r < 0.6)
+            return this.dot(cx, cy, call(c, 0, 0), call(a, 0, 0));
+        this.shade(cx - r, cy - r, cx + r, cy + r, (x, y, o) => {
+            const dx = x - cx, dy = y - cy, d2 = dx * dx + dy * dy;
+            if (d2 > r * r)
+                return;
+            const d = Math.sqrt(d2) / r, ang = Math.atan2(dy, dx);
+            o.c = call(c, d, ang);
+            o.a = call(a, d, ang);
+        });
+    }
+    ellipse(cx, cy, rx, ry, c, a = 1) {
+        if (rx <= 0 || ry <= 0)
+            return;
+        this.shade(cx - rx, cy - ry, cx + rx, cy + ry, (x, y, o) => {
+            const dx = (x - cx) / rx, dy = (y - cy) / ry, d2 = dx * dx + dy * dy;
+            if (d2 > 1)
+                return;
+            const d = Math.sqrt(d2), ang = Math.atan2(dy, dx);
+            o.c = call(c, d, ang);
+            o.a = call(a, d, ang);
+        });
+    }
+    ring(cx, cy, r, w, c, a = 1) {
+        const r0 = Math.max(0, r - w);
+        this.shade(cx - r, cy - r, cx + r, cy + r, (x, y, o) => {
+            const dx = x - cx, dy = y - cy, d2 = dx * dx + dy * dy;
+            if (d2 > r * r || d2 < r0 * r0)
+                return;
+            const v = w > 0 ? (Math.sqrt(d2) - r0) / (r - r0 || 1) : 1, ang = Math.atan2(dy, dx);
+            o.c = call(c, v, ang);
+            o.a = call(a, v, ang);
+        });
+    }
+    arc(cx, cy, r, w, a0, a1, c, a = 1) {
+        const span = a1 - a0, wf = typeof w === "function";
+        this.shade(cx - r, cy - r, cx + r, cy + r, (x, y, o) => {
+            const dx = x - cx, dy = y - cy, d = Math.sqrt(dx * dx + dy * dy);
+            if (d > r)
+                return;
+            let ang = Math.atan2(dy, dx) - a0;
+            ang -= Math.floor(ang / (Math.PI * 2)) * Math.PI * 2;
+            if (ang > span)
+                return;
+            const u = ang / span, ww = wf ? w(u) : w;
+            if (ww <= 0 || d < r - ww)
+                return;
+            const v = (d - (r - ww)) / ww;
+            o.c = call(c, u, v);
+            o.a = call(a, u, v);
+        });
+    }
+    rect(x, y, w, h, c, a = 1) {
+        if (this.sn === 0) {
+            const X0 = Math.round(x), Y0 = Math.round(y), X1 = Math.round(x + w), Y1 = Math.round(y + h);
+            for (let yy = Y0; yy < Y1; yy++)
+                for (let xx = X0; xx < X1; xx++)
+                    this.put(this.cellX(xx, yy), this.cellY(xx, yy), c, a);
+            return;
+        }
+        this.shade(x, y, x + w, y + h, (lx, ly, o) => {
+            if (lx < x || ly < y || lx >= x + w || ly >= y + h)
+                return;
+            o.c = c;
+            o.a = a;
+        });
+    }
+    poly(pts, c, a = 1) {
+        let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+        for (const [x, y] of pts) {
+            if (x < x0)
+                x0 = x;
+            if (x > x1)
+                x1 = x;
+            if (y < y0)
+                y0 = y;
+            if (y > y1)
+                y1 = y;
+        }
+        const n = pts.length;
+        this.shade(x0, y0, x1, y1, (x, y, o) => {
+            let inside = false;
+            for (let i = 0, j = n - 1; i < n; j = i++) {
+                const [xi, yi] = pts[i], [xj, yj] = pts[j];
+                if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi)
+                    inside = !inside;
+            }
+            if (!inside)
+                return;
+            o.c = call(c, x, y);
+            o.a = call(a, x, y);
+        });
+    }
+    tri(x0, y0, x1, y1, x2, y2, c, a = 1) { this.poly([[x0, y0], [x1, y1], [x2, y2]], c, a); }
+    glow(x, y, r, c, k = 0.5) {
+        if (r < 1 || k <= 0.004)
+            return;
+        const cx = this.toX(x, y), cy = this.toY(x, y);
+        const x0 = Math.floor(cx - r), x1 = Math.ceil(cx + r), y0 = Math.floor(cy - r), y1 = Math.ceil(cy + r);
+        for (let sy = y0; sy <= y1; sy++) {
+            const dy = (sy + 0.5 - cy) / r;
+            for (let sx = x0; sx <= x1; sx++) {
+                const dx = (sx + 0.5 - cx) / r, d = dx * dx + dy * dy;
+                if (d >= 1)
+                    continue;
+                const f = 1 - Math.sqrt(d);
+                this.add(sx, sy, c, f * f * k);
+            }
+        }
+    }
+    glowLine(x0, y0, x1, y1, r, c, k = 0.5) {
+        if (r < 1 || k <= 0.004)
+            return;
+        const ax = this.toX(x0, y0), ay = this.toY(x0, y0), bx = this.toX(x1, y1), by = this.toY(x1, y1);
+        const dx = bx - ax, dy = by - ay, L2 = dx * dx + dy * dy || 1e-9;
+        const X0 = Math.floor(Math.min(ax, bx) - r), X1 = Math.ceil(Math.max(ax, bx) + r);
+        const Y0 = Math.floor(Math.min(ay, by) - r), Y1 = Math.ceil(Math.max(ay, by) + r);
+        for (let sy = Y0; sy <= Y1; sy++)
+            for (let sx = X0; sx <= X1; sx++) {
+                const px = sx + 0.5, py = sy + 0.5, u = (0, math_js_1.clamp)(((px - ax) * dx + (py - ay) * dy) / L2);
+                const ex = ax + dx * u - px, ey = ay + dy * u - py, d = Math.sqrt(ex * ex + ey * ey) / r;
+                if (d >= 1)
+                    continue;
+                const f = 1 - d;
+                this.add(sx, sy, c, f * f * k);
+            }
+    }
+    glowRing(x, y, R, r, c, k = 0.5) {
+        if (r < 1 || k <= 0.004)
+            return;
+        const cx = this.toX(x, y), cy = this.toY(x, y), E = R + r;
+        for (let sy = Math.floor(cy - E); sy <= Math.ceil(cy + E); sy++)
+            for (let sx = Math.floor(cx - E); sx <= Math.ceil(cx + E); sx++) {
+                const d = Math.abs(Math.hypot(sx + 0.5 - cx, sy + 0.5 - cy) - R) / r;
+                if (d >= 1)
+                    continue;
+                const f = 1 - d;
+                this.add(sx, sy, c, f * f * k);
+            }
+    }
+    sprite(rows, pal, x, y, opts = {}) {
+        let s = sprites.get(rows);
+        if (!s)
+            sprites.set(rows, (s = rows.map((r) => [...r])));
+        const k = opts.scale ?? 1, a = opts.a ?? 1, W = s[0]?.length ?? 0, cache = {};
+        for (let r = 0; r < s.length; r++)
+            for (let q = 0; q < s[r].length; q++) {
+                const ch = s[r][q];
+                if (ch === "." || ch === " ")
+                    continue;
+                let c = opts.tint;
+                if (c === undefined) {
+                    c = cache[ch];
+                    if (c === undefined)
+                        c = cache[ch] = pal[ch] === undefined ? 0 : (0, color_js_1.hex)(pal[ch]);
+                }
+                if (!c)
+                    continue;
+                const col = opts.flip ? W - 1 - q : q, row = opts.flipY ? s.length - 1 - r : r;
+                if (k === 1)
+                    this.dot(x + col, y + row, c, a);
+                else
+                    this.rect(x + col * k, y + row * k, k, k, c, a);
+            }
+    }
+    text(str, x, y, c, opts = {}) {
+        const font = opts.font ?? "mini", k = opts.scale ?? 1, a = opts.a ?? 1, w = (0, font_js_1.textWidth)(str, font) * k;
+        const left = Math.round(opts.align === "center" ? x - w / 2 : opts.align === "right" ? x - w : x), top = Math.round(y);
+        const ol = opts.outline, sh = opts.shadow;
+        if (ol !== undefined)
+            (0, font_js_1.rasterText)(str, font, (gx, gy) => this.rect(left + gx * k - 1, top + gy * k - 1, k + 2, k + 2, ol, a));
+        if (sh !== undefined)
+            (0, font_js_1.rasterText)(str, font, (gx, gy) => this.rect(left + gx * k + 1, top + gy * k + 1, k, k, sh, a));
+        (0, font_js_1.rasterText)(str, font, (gx, gy) => this.rect(left + gx * k, top + gy * k, k, k, call(c, gx, gy), a));
+    }
+    measure(str, opts = {}) {
+        const k = opts.scale ?? 1;
+        return [(0, font_js_1.textWidth)(str, opts.font ?? "mini") * k, font_js_1.FONTS[opts.font ?? "mini"].h * k];
+    }
+    mask(m, x, y, c, a = 1) {
+        for (let my = 0; my < m.h; my++)
+            for (let mx = 0; mx < m.w; mx++)
+                if (m.data[my * m.w + mx])
+                    this.dot(x + mx, y + my, call(c, mx, my), call(a, mx, my));
+    }
+    outline(m, x, y, c, a = 1) {
+        const at = (mx, my) => mx >= 0 && my >= 0 && mx < m.w && my < m.h && m.data[my * m.w + mx];
+        for (let my = -1; my <= m.h; my++)
+            for (let mx = -1; mx <= m.w; mx++)
+                if (!at(mx, my) && (at(mx - 1, my) || at(mx + 1, my) || at(mx, my - 1) || at(mx, my + 1)))
+                    this.dot(x + mx, y + my, call(c, mx, my), call(a, mx, my));
+    }
+}
+exports.Painter = Painter;
+
+}
+};
+const __cache=Object.create(null);
+function __norm(x){let s=[];for(const p of x.split('/')){if(p==='..')s.pop();else if(p&&p!=='.')s.push(p)}return '/'+s.join('/')}
+function __require(id,parent=''){const resolved=__norm(id.startsWith('.')?parent.slice(0,parent.lastIndexOf('/')+1)+id:id);let key=resolved;if(!__modules[key]&&__modules[key+'.js'])key+='.js';if(!__modules[key])throw Error('Missing '+key+' ('+parent+')');if(__cache[key])return __cache[key].exports;const mod={exports:{}};__cache[key]=mod;__modules[key](mod,mod.exports,function(x){return __require(x,key)});return mod.exports}
+
+
+const {createFrame,clearFrame,painterFor,composite}=__require('/src/core/fx.js');
+const {hex}=__require('/src/core/color.js');
+const {noise}=__require('/src/core/math.js');
+const W=480,H=270,TAU=Math.PI*2;
+const CONFIG=Object.freeze({maxHP:1500,maxMana:1000,upkeepPerSecond:2,hitFlatCost:25,hitManaFactor:0.65,projectileSpeed:350});
+const C={night:hex('#201c18'),dirt:hex('#403321'),dark:hex('#634327'),stone:hex('#765638'),earth:hex('#9d7544'),amber:hex('#c69b5b'),bright:hex('#eed38c'),light:hex('#fff1c0'),dust:hex('#baa078'),dust2:hex('#d7c19a'),spark:hex('#fff8d4'),hit:hex('#f3a171'),enemy:hex('#e86e52'),flare:hex('#ffcf96'),smoke:hex('#675b50')};
+const $=id=>document.getElementById(id),canvas=$('arena'),ctx=canvas.getContext('2d',{alpha:false}),screen=document.createElement('canvas'),sctx=screen.getContext('2d');screen.width=W;screen.height=H;
+const fx=createFrame(W,H),data=new Uint8ClampedArray(W*H*4),image=sctx.createImageData(W,H);
+const HC={x:215,y:139,rx:58,ry:83,feet:223};
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+let t=0,last=performance.now(),lastVisual=0,auto=false,autoClock=0,shotId=0,msgClock=0,impact=null,shatter=null,shots=[],dustMotes=[],warped=0;
+const state={hp:CONFIG.maxHP,mana:CONFIG.maxMana,shield:false,blockedDamage:0,blockedHits:0,damageTaken:0,absorbedMana:0};
+function msg(s){$('message').textContent=s;msgClock=3.5}
+function spawnShatter(violet=false){shatter={age:0,kind:violet?'disperse':'break',rocks:Array.from({length:45},(_,i)=>{const a=i*2.39996,rr=.4+((i*17)%17)/30;return{x:HC.x+Math.cos(a)*HC.rx*rr,y:HC.y+Math.sin(a)*HC.ry*rr,vx:Math.cos(a)*(60+(i%7)*19),vy:Math.sin(a)*(62+(i%11)*15)-35,size:1+i%4,spin:i*1.9}})} }
+function activate(){if(state.shield){state.shield=false;spawnShatter(true);msg('ĐÃ THU HỒI THỔ THUẪN');return false}
+ if(state.mana<=0){msg('KHÔNG ĐỦ MANA · HÃY HỒI LINH LỰC');return false}
+ state.shield=true;shatter=null;msg('THỔ THUẪN KHỞI ĐỘNG · TOÀN THÂN ĐƯỢC BẢO VỆ');return true}
+function breakShield(){if(!state.shield)return;state.shield=false;state.mana=0;spawnShatter();msg('LINH LỰC ĐÃ CẠN! THỔ THUẪN TAN VỠ')}
+function receiveDamage(amount){amount=Math.max(0,Math.round(Number(amount)||0));if(amount===0)return{blocked:0,hpLost:0,manaSpent:0,broken:false};
+ if(state.shield&&state.mana>0){const cost=Math.ceil(CONFIG.hitFlatCost+CONFIG.hitManaFactor*amount),spent=Math.min(cost,state.mana);state.mana=Math.max(0,state.mana-spent);state.blockedDamage+=amount;state.blockedHits++;state.absorbedMana+=spent;const broken=state.mana===0;if(broken)breakShield();return{blocked:amount,hpLost:0,manaSpent:spent,broken}}
+ const lost=Math.min(state.hp,amount);state.hp=Math.max(0,state.hp-lost);state.damageTaken+=lost;return{blocked:0,hpLost:lost,manaSpent:0,broken:false};}
+function refresh(){state.hp=CONFIG.maxHP;state.mana=CONFIG.maxMana;state.blockedDamage=0;state.blockedHits=0;state.damageTaken=0;state.absorbedMana=0;state.shield=false;shots=[];shatter=null;impact=null;msg('ĐÃ HỒI PHỤC · BẬT THỔ THUẪN ĐỂ THỬ')}
+function fireAttack(d){if(shots.length>=6)return;shotId++;shots.push({x:500,y:HC.y+(shotId%3-1)*20,damage:d,age:0,seed:shotId,trail:[]});msg('ĐÒN TẤN CÔNG '+d+' SÁT THƯƠNG ĐANG BAY TỚI')}
+function hit(shot){const answer=receiveDamage(shot.damage),isBlocked=answer.blocked>0;impact={x:isBlocked?HC.x+HC.rx*.9:HC.x+13,y:shot.y,age:0,damage:shot.damage,blocked:isBlocked,seed:shot.seed};warped=isBlocked?1:2;
+ if(isBlocked){if(!answer.broken)msg('ĐÃ ĐỠ '+shot.damage+' SÁT THƯƠNG · MẤT '+answer.manaSpent+' MANA')}
+ else msg('THUẪN KHÔNG HOẠT ĐỘNG · MẤT '+answer.hpLost+' MÁU');}
+function update(dt){t+=dt;if(state.shield){state.mana=Math.max(0,state.mana-dt*CONFIG.upkeepPerSecond);if(state.mana<=0.0001)breakShield()}
+ for(let i=shots.length-1;i>=0;i--){const s=shots[i];s.age+=dt;s.x-=CONFIG.projectileSpeed*dt;const limit=state.shield?HC.x+HC.rx*.93:HC.x+11;if(s.x<=limit){hit(s);shots.splice(i,1)}}
+ if(impact){impact.age+=dt;if(impact.age>1.05)impact=null}if(shatter){shatter.age+=dt;if(shatter.age>1.65)shatter=null}
+ warped=Math.max(0,warped-3*dt);if(msgClock>0){msgClock-=dt;if(msgClock<=0){$('message').textContent=state.shield?'THỔ THUẪN ĐANG HỘ THỂ · THỬ CÁC ĐÒN ĐÁNH':'THUẪN ĐÃ TẮT · ĐÒN TẤN CÔNG SẼ TRỪ MÁU'}}
+ if(auto){autoClock-=dt;if(autoClock<=0){fireAttack([100,300,700,300,100][shotId%5]);autoClock=1.48}}
+}
+// All scenery and the character are code-rendered. Every spell visual below uses PixelFX painter.
+const stage=document.createElement('canvas');stage.width=W;stage.height=H;const bg=stage.getContext('2d',{alpha:false});
+function poly(ctx,pts,col){ctx.fillStyle=col;ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill()}
+function terrain(){let grd=bg.createLinearGradient(0,0,0,H);grd.addColorStop(0,'#15212a');grd.addColorStop(.6,'#2d2926');grd.addColorStop(1,'#171d23');bg.fillStyle=grd;bg.fillRect(0,0,W,H);
+ const halo=bg.createRadialGradient(217,80,3,217,80,190);halo.addColorStop(0,'#c3a56829');halo.addColorStop(.5,'#bca15a11');halo.addColorStop(1,'#0000');bg.fillStyle=halo;bg.fillRect(0,0,W,H);
+ poly(bg,[[0,161],[40,128],[70,148],[104,105],[163,152],[202,123],[243,146],[294,95],[334,143],[369,115],[418,144],[458,118],[480,139],[480,218],[0,218]],'#33383a');
+ poly(bg,[[0,193],[32,165],[70,181],[115,153],[164,194],[208,170],[248,186],[304,152],[348,183],[401,155],[443,189],[480,168],[480,230],[0,230]],'#252c31');
+ // distant broken shrine
+ bg.fillStyle='#1b2327';bg.fillRect(37,137,9,78);bg.fillRect(80,142,9,71);bg.fillRect(27,131,73,8);poly(bg,[[25,131],[62,119],[102,131]],'#313737');bg.fillStyle='#574c3b';bg.fillRect(28,132,70,2);
+ bg.fillStyle='#2f2926';bg.fillRect(0,215,W,55);bg.fillStyle='#72583c';bg.fillRect(0,216,W,2);bg.fillStyle='#4c4133';for(let i=0;i<46;i++){const x=(i*71+11)%W,y=225+(i*17)%41;bg.fillRect(x,y,5+i%6*2,1);if(i%5===0)bg.fillRect(x+8,y+7,3,1)}
+ // village stone rubble
+ poly(bg,[[3,217],[25,202],[47,217]],'#4c4338');poly(bg,[[14,217],[31,207],[41,217]],'#75644d');poly(bg,[[427,217],[440,203],[454,217]],'#51493b');poly(bg,[[444,217],[466,195],[480,218]],'#655542');
+ bg.fillStyle='#c0aa7266';for(let i=0;i<23;i++){const x=(i*157+37)%W,y=20+(i*43)%125;bg.fillRect(x,y,1,1)}
+}terrain();
+function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
+function hero(){const xx=HC.x, y=222,shift=state.shield?Math.sin(t*4.1)*.5:0;ctx.save();ctx.translate(xx,shift);
+ ctx.fillStyle='#0a101385';ctx.beginPath();ctx.ellipse(0,y+1,28,6,0,0,TAU);ctx.fill();
+ // layered cloth and armor, kept visible through shield
+ poly(ctx,[[-16,y-72],[-22,y-56],[-26,y-13],[-16,y-7],[-11,y-22],[15,y-21],[22,y-7],[25,y-55],[11,y-74]],'#262d34');
+ poly(ctx,[[-15,y-67],[-20,y-52],[-17,y-22],[13,y-22],[20,y-51],[10,y-70]],'#424c54');
+ poly(ctx,[[-11,y-69],[-13,y-35],[8,y-31],[13,y-67]],'#586368');
+ rect(-14,y-26,12,25,'#1a2630');rect(3,y-25,12,24,'#24323b');rect(-16,y-3,15,4,'#141b21');rect(2,y-3,16,4,'#151f25');
+ rect(-19,y-61,7,25,'#36434c');rect(12,y-59,7,25,'#353f48');rect(-18,y-36,8,7,'#ac8966');rect(13,y-35,8,7,'#ac8966');
+ rect(-12,y-86,25,19,'#bd9774');rect(-13,y-91,28,10,'#171c23');rect(-10,y-96,11,8,'#20232d');rect(1,y-98,10,10,'#1a1e2b');rect(-14,y-85,4,11,'#25252a');rect(12,y-84,3,9,'#272733');rect(-7,y-79,3,2,'#f4ddbb');rect(6,y-79,3,2,'#edcfb3');
+ rect(-17,y-44,35,5,'#1f2931');rect(-2,y-43,6,4,'#d4ad73');rect(-22,y-58,4,43,'#313b42');
+ if(state.shield){rect(-17,y-52,4,5,'#d0b17b');rect(15,y-55,4,5,'#d0b17b')}
+ ctx.restore()}
+function drawGameHUD(){ctx.save();ctx.textAlign='center';ctx.font='bold 9px system-ui';ctx.fillStyle='#c6b898';ctx.fillText('DIỆP TU · MÔ PHỎNG',HC.x,248);ctx.fillStyle='#cab1a8';ctx.textAlign='right';ctx.fillText('MỤC TIÊU TẤN CÔNG  →  →',460,247);
+ ctx.textAlign='left';ctx.fillStyle='#0b1114b0';ctx.fillRect(15,54,132,24);ctx.fillStyle='#e8d8ad';ctx.fillText('HP '+Math.round(state.hp)+' / '+CONFIG.maxHP,20,64);ctx.fillStyle='#594036';ctx.fillRect(20,69,120,4);ctx.fillStyle='#ca7157';ctx.fillRect(20,69,120*state.hp/CONFIG.maxHP,4);
+ ctx.fillStyle='#0b1114b0';ctx.fillRect(334,54,132,24);ctx.textAlign='right';ctx.fillStyle='#e9d9aa';ctx.fillText('MP '+Math.floor(state.mana)+' / '+CONFIG.maxMana,459,64);ctx.fillStyle='#3b405e';ctx.fillRect(340,69,120,4);ctx.fillStyle='#78b2e6';ctx.fillRect(340,69,120*state.mana/CONFIG.maxMana,4);
+ if(state.shield){ctx.textAlign='center';ctx.fillStyle='#f9e3aa';ctx.font='bold 10px system-ui';ctx.fillText('THỔ LINH · HỘ THỂ',HC.x,37)}ctx.restore()}
+// Origin and colors are controlled by PixelFX v0.3.0's Painter and compositing functions.
+function moteFX(p,z){if(!state.shield)return;for(let i=0;i<42;i++){const a=i*2.39996+t*(.85+(i%4)*.08),v=(i*19)%97/97,xx=HC.x+Math.cos(a)*(HC.rx+7+i%10),yy=HC.y+Math.sin(a*1.7+i)*HC.ry*.72;
+ p.dot(xx,yy,i%5===0?C.bright:i%3===0?C.amber:C.dust,(.25+.4*Math.sin(t*2+i)**2));if(i%7===0)p.glow(xx,yy,3,C.amber,.10)}}
+function shieldFX(p,t){if(!state.shield)return;
+ const cx=HC.x,cy=HC.y,rx=HC.rx+Math.sin(t*2.9)*.9,ry=HC.ry,osc=Math.sin(t*2.5),rot=t*.95;
+ p.glow(cx,cy,89,C.earth,.16);p.glow(cx,cy,56,C.bright,.07);
+ // Terracotta translucent volume and luminous rim: PixelFX color + additive glow, never an opaque plate.
+ for(let yy=Math.floor(cy-ry-2);yy<=cy+ry+2;yy+=1){const vn=(yy-cy)/ry;if(Math.abs(vn)>1.01)continue;
+ const w=rx*Math.sqrt(Math.max(0,1-vn*vn));const x0=Math.floor(cx-w),x1=Math.ceil(cx+w);
+ for(let xx=x0;xx<=x1;xx+=1){const dx=(xx-cx)/rx,d=Math.sqrt(dx*dx+vn*vn);if(d>1.015)continue;
+ const band=Math.sin((xx-cx)*.21+(yy-cy)*.12+rot*2.4),haze=.023+.042*(.5+.5*band);
+ if(d<.96){if(((xx+yy)&1)===0)p.blend(xx,yy,band>.15?C.amber:C.stone,haze);}
+ else{const rr=Math.round((d-.96)*100);p.blend(xx,yy,rr>3?C.bright:C.earth,.36+.22*Math.sin(t*5+(yy-cy)*.09)**2);if((xx+yy)%4===0)p.light(xx,yy,C.amber,.26)}}}
+ // rotating rings running around the whole body, not just above the head
+ for(let belt=0;belt<3;belt++){let old=null;
+ for(let j=0;j<=144;j++){const u=j/144*1.88-.94,turn=rot*(belt%2?-1:1)+u*(3.4+belt*.26)+belt*TAU/3;
+ const rr=rx*Math.sqrt(Math.max(0,1-u*u));let x=cx+rr*Math.cos(turn),y=cy+ry*u;
+ const front=Math.sin(turn)>0,brightness=.28+.56*Math.pow(Math.max(0,Math.sin(turn)),2);
+ if(old){p.line(old[0],old[1],x,y,front?(belt===1?C.bright:C.amber):C.dark,front?brightness:.26);if(front&&j%4===0){p.glow(x,y,3.3,C.amber,.13);p.light(x,y,C.bright,.38)}}old=[x,y];}}
+ // fragments of compacted earth hover along the shell
+ for(let i=0;i<18;i++){const a=i*TAU/18+rot*(i%2?-.24:.35),x=cx+(rx+1+2*Math.sin(i*3+t))*Math.cos(a),y=cy+(ry+1)*Math.sin(a);
+ const r=i%4===0?4.2:2.7,ang=a+1.2;
+ p.poly([[x-r*Math.cos(ang),y-r*Math.sin(ang)],[x+r*.2,y-r],[x+r,y+r*.1],[x-r*.15,y+r]],i%3===0?C.earth:i%2?C.stone:C.dark,.65);
+ p.line(x-r*.5,y-r*.3,x+r*.35,y-r*.8,i%3?C.amber:C.bright,.65);
+ }
+ // bright winding tendrils rising from ground and contouring the body
+ for(let k=0;k<9;k++){const phase=k*TAU/9+rot*.58,u=(t*(.21+k%3*.04)+k/9)%1;
+ const y=HC.feet-148*u,x=cx+Math.cos(phase+u*5.3)*rx*Math.sqrt(Math.max(.08,1-(y-cy)**2/(ry*ry)));if(Math.abs(y-cy)<ry){p.glow(x,y,3.5,C.amber,.2);p.dot(x,y,k%2?C.bright:C.dust2,.8)}}
+ // Streaks of earthen spirit energy sweep around the circumference.
+ for(let k=0;k<4;k++){const off=rot*(k%2?-.8:1.1)+k*TAU/4;
+ for(let j=0;j<27;j++){const a=off+j*.054,ww=rx+6+2*Math.sin(a*7+t*2),x=cx+Math.cos(a)*ww,y=cy+Math.sin(a)*ry*1.07;
+ p.dot(x,y,j%5===0?C.light:C.bright,.35+.38*(j/27));if(j%9===0)p.glow(x,y,4,C.bright,.13)}}
+ // grounded earth-magic seal and rotating pebbles at the character's feet
+ for(let j=0;j<75;j++){const a=j*TAU/75,xx=cx+Math.cos(a)*51,yy=HC.feet+Math.sin(a)*10;p.dot(xx,yy,j%4===0?C.bright:C.earth,.35)}
+ p.glow(cx,HC.feet,62,C.amber,.17);moteFX(p,t);
+ }
+function projectileFX(p,s){const x=s.x,y=s.y,k=Math.min(1,s.damage/500);p.glow(x,y,20+11*k,C.enemy,.34);p.glow(x,y,9+6*k,C.flare,.36);
+ for(let j=0;j<8;j++){const a=j*TAU/8+t*3,r=8+4*k;p.line(x+Math.cos(a)*r,y+Math.sin(a)*r,x+Math.cos(a)*r*1.6,y+Math.sin(a)*r*1.5,j%2?C.enemy:C.flare,.65)}
+ p.circle(x,y,5+k*3,C.hit,.85);p.circle(x-1,y-1,2+k*2,C.flare,.9);
+ for(let j=0;j<15;j++){const off=j*6+Math.sin(j*3+t*17)*3;const yy=y+Math.sin(t*14+j*1.7)*7;p.beam(x+8+off,y+(yy-y)*.4,x+off+2,yy,1.1+j%3*.4,j%4===0?C.flare:C.enemy,.17+.38*(1-j/15));}}
+function impactFX(p,b){if(!b)return;const age=b.age,d=clamp(1-age/.92,0,1),x=b.x,y=b.y,m=Math.min(1.8,.7+b.damage/650);
+ p.glow(x,y,Math.min(52,25+age*26)*m,b.blocked?C.bright:C.enemy,.30*d);
+ if(age<.6){const radius=4+age*69*m;
+ for(let i=0;i<44;i++){const a=i*TAU/44,x1=x+Math.cos(a)*radius*.68,y1=y+Math.sin(a)*radius;
+ if(i%2===0)p.dot(x1,y1,b.blocked?C.bright:C.enemy,d*.7);
+ if(i%6===0)p.line(x+Math.cos(a)*(radius-7),y+Math.sin(a)*(radius-7),x1,y1,b.blocked?C.amber:C.hit,d)} }
+ // crumbling earthen impact with an inward compression ripple
+ for(let i=0;i<36;i++){const a=i*2.39996+(b.seed%3)*.23,v=(12+i%7*4+age*(43+i%4*8))*m;
+ const xx=x+Math.cos(a)*v,yy=y+Math.sin(a)*v-age*age*22,r=Math.max(1,(1-age)*((i%3)+1));
+ if(age<.85){p.dot(xx,yy,b.blocked?(i%5?C.dust:C.bright):C.enemy,d*.85);if(i%4===0)p.glow(xx,yy,r+2,b.blocked?C.amber:C.enemy,.10*d)}}
+ if(b.blocked&&age<.55){for(let k=0;k<9;k++){const a=-1.3+k*.32+t*.4,len=(17+k%4*8)*(1-age/.6),mx=x+Math.cos(a)*len,my=y+Math.sin(a)*len;p.line(x,y,mx,my,k%3?C.bright:C.light,d*.6)}}
+}
+function shatterFX(p,b){if(!b)return;const u=b.age,fade=clamp(1-u/1.65,0,1),disperse=b.kind==='disperse';
+ if(!disperse){p.glow(HC.x,HC.y,100,C.amber,.36*fade);for(let k=0;k<54;k++){const a=k*TAU/54,r=u*140;const xx=HC.x+Math.cos(a)*r*.72,yy=HC.y+Math.sin(a)*r;
+ if(u<1.3&&k%2===0)p.dot(xx,yy,k%4?C.bright:C.light,fade*.85)}}
+ for(let i=0;i<b.rocks.length;i++){const s=b.rocks[i],x=s.x+s.vx*u,y=s.y+s.vy*u+82*u*u,size=Math.max(.4,s.size*(1-u/1.6));if(size<.6)continue;
+ p.poly([[x-size,y-size],[x+size*.5,y-size*1.2],[x+size,y+size*.4],[x-size*.5,y+size]],disperse?C.amber:i%3?C.earth:C.bright,fade*.9);
+ if(i%5===0)p.glow(x,y,4,C.dust,.15*fade)}
+}
+function compositeFX(){clearFrame(fx);const p=painterFor(fx);
+ if(state.shield)shieldFX(p,t);
+ for(const s of shots)projectileFX(p,s);
+ if(impact)impactFX(p,impact);
+ if(shatter)shatterFX(p,shatter);
+ composite(fx,data);image.data.set(data);sctx.putImageData(image,0,0);ctx.drawImage(screen,0,0)}
+function paint(){ctx.drawImage(stage,0,0);hero();compositeFX();drawGameHUD();}
+function ui(){const live=state.shield;$('state').textContent=live?'ĐANG BẬT':'ĐÃ TẮT';$('state').className='v '+(live?'live':'off');$('mana').textContent=Math.floor(state.mana)+' / '+CONFIG.maxMana;$('blocked').textContent=state.blockedDamage.toLocaleString('vi-VN');$('blocks').textContent=state.blockedHits;
+ $('manabar').style.width=100*state.mana/CONFIG.maxMana+'%';$('hpbar').style.width=100*state.hp/CONFIG.maxHP+'%';$('toggle').classList.toggle('active',live);$('toggle').textContent=live?'THU HỒI THỔ THUẪN':'KÍCH HOẠT THỔ THUẪN';$('auto').textContent='TỰ ĐỘNG TẤN CÔNG: '+(auto?'BẬT':'TẮT');}
+function tick(now){const dt=clamp((now-last)/1000,0,.085);last=now;update(dt);if(now-lastVisual>=32){paint();ui();lastVisual=now}requestAnimationFrame(tick)}
+$('toggle').addEventListener('click',activate);$('atk100').addEventListener('click',()=>fireAttack(100));$('atk300').addEventListener('click',()=>fireAttack(300));$('atk700').addEventListener('click',()=>fireAttack(700));$('restore').addEventListener('click',refresh);$('auto').addEventListener('click',()=>{auto=!auto;autoClock=.8;msg('TỰ ĐỘNG TẤN CÔNG '+(auto?'ĐÃ BẬT':'ĐÃ TẮT'))});
+window.addEventListener('keydown',e=>{if(e.repeat||e.target?.tagName==='BUTTON')return;const keys={Digit1:100,Digit2:300,Digit3:700};if(keys[e.code]){fireAttack(keys[e.code]);e.preventDefault()}else if(e.code==='KeyQ'){activate();e.preventDefault()}else if(e.code==='KeyR'){refresh();e.preventDefault()}});
+window.addEventListener('error',e=>{$('error').classList.add('show');$('error').textContent='Lỗi JavaScript: '+e.message});
+// Standalone interface for game integration/tests. Visual FX use the same isolated PixelFX painter.
+window.ThoThuanSkill={CONFIG,activate,receiveDamage,getState:()=>({...state}),refresh,step:dt=>update(dt),attack:fireAttack};
+paint();ui();requestAnimationFrame(tick);
+})();</script></body></html>

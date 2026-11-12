@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {beginSkillCollisionFrame as begin, endSkillCollisionFrame as end, trackSkillSegment as track, queueSkillImpact as impact, skillCollisionRatio as ratio, resetSkillCollisions as reset, segmentCircleTOI} from '../src/game/va-cham-ky-nang.js';
+const seg=(ref,side,power,kind='fireball',x0=0,x1=100,y=0,onDestroy=()=>{})=>({ref,side,power,kind,x0,y0:y,x1,y1:y,radius:1,onDestroy});
+const test=(name,fn)=>{reset();fn();console.log('PASS '+name)};
+test('bay nhanh, trừ lực và không tính lặp',()=>{let a={},b={},destroy=0;begin();track(seg(a,'player',200));track(seg(a,'player',200));track(seg(b,'boss',120,'blood_hand',100,0,0,()=>destroy++));end();assert.equal(destroy,1);assert.equal(ratio(a),.4);assert.equal(segmentCircleTOI(0,0,1000,0,500,0,2),.498)});
+test('bằng lực cùng tan',()=>{let a={},b={},n=0;begin();track(seg(a,'player',150,'fireball',0,100,0,()=>n++));track(seg(b,'boss',150,'blood_hand',100,0,0,()=>n++));end();assert.equal(n,2)});
+test('các sợi kim tuyến riêng biệt',()=>{let a={},b={},c={},n=0;begin();track(seg(a,'player',200));for(const x of [b,c])track(seg(x,'boss',12,'blood_thread',100,0,0,()=>n++));end();assert.equal(n,2);assert.equal(ratio(a),.88)});
+test('không va chạm nếu bay lệch hoặc cùng phe',()=>{let a={},b={},n=0;begin();track(seg(a,'player',200));track(seg(b,'boss',120,'blood_hand',100,0,10,()=>n++));end();assert.equal(n,0);assert.equal(ratio(a),1)});
+test('thời điểm trúng mục tiêu trước va chạm',()=>{let a={},b={},n=0;begin();track(seg(a,'player',200));track(seg(b,'boss',120,'blood_hand',100,0));impact(a,.1,()=>n++);end();assert.equal(n,1);assert.equal(ratio(b),1)});
+test('Thủy Kiếm không chặn sợi kim tuyến',()=>{let a={},b={};begin();track(seg(a,'player',110,'water_sword'));track(seg(b,'boss',12,'blood_thread',100,0));end();assert.equal(ratio(a),1)});
